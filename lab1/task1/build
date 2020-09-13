@@ -1,7 +1,0 @@
-#! /bin/bash
-
-files=`find . -name "*.cpp" -not -name main.cpp`
-
-echo $files;
-
-g++ $files main.cpp -o main
