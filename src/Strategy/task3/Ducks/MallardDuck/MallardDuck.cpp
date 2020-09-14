@@ -8,3 +8,8 @@ MallardDuck::MallardDuck(): Duck(
 )
 {
 }
+
+void MallardDuck::Display() const
+{
+    std::cout << "I'm mallard duck" << std::endl;
+}

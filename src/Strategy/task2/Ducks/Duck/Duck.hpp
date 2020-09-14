@@ -11,6 +11,7 @@ public:
     void Fly();
     void Dance(int speed);
     void SetFlyCounter(std::unique_ptr<IFlyCounter> && flyCounter);
+    virtual void Display() const = 0;
 
 private:
     std::unique_ptr<IFlyBehavior> m_flyBehavior;

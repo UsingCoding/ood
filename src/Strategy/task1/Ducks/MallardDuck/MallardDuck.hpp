@@ -6,4 +6,5 @@ class MallardDuck: public Duck
 {
 public:
     MallardDuck();
+    void Display() const override;
 };

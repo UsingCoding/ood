@@ -9,6 +9,8 @@ public:
     Duck(std::unique_ptr<IFlyBehavior> && flyBehavior, std::unique_ptr<IDanceBehavior> && danceBehavior);
     void Fly();
     void Dance(int speed);
+    virtual void Display() const = 0;
+    virtual ~Duck();
 
 private:
     std::unique_ptr<IFlyBehavior> m_flyBehavior;

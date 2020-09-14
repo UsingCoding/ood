@@ -9,6 +9,7 @@ int main()
 
         duck.Fly();
         duck.Dance(20);
+        duck.Display();
     }
 
     {
@@ -16,6 +17,7 @@ int main()
 
         duck.Fly();
         duck.Dance(30);
+        duck.Display();
     }
 
     {
@@ -23,6 +25,7 @@ int main()
 
         duck.Fly();
         duck.Dance(100);
+        duck.Display();
     }
 
     return 0;

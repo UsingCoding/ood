@@ -9,6 +9,7 @@ public:
     void Fly();
     void Dance(int speed);
     void SetFlyCounter(std::function<void(void)> && flyCounter);
+    virtual void Display() const = 0;
 
 private:
     std::function<void(void)> m_flyBehavior;

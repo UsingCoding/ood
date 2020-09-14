@@ -8,3 +8,8 @@ ReadHeadDuck::ReadHeadDuck(): Duck(
 )
 {
 }
+
+void ReadHeadDuck::Display() const
+{
+    std::cout << "I'm redhead duck" << std::endl;
+}

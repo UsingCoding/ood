@@ -17,3 +17,8 @@ void Duck::Dance(int speed)
 {
     m_danceBehavior->Dance(speed);
 }
+
+Duck::~Duck()
+{
+
+}
