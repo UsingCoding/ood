@@ -40,5 +40,5 @@ add_executable(
         src/Strategy/task3/Ducks/MallardDuck/MallardDuck.cpp
         src/Strategy/task3/Ducks/ReadHeadDuck/ReadHeadDuck.cpp
 )
-add_executable(observer src/Observer/main.cpp)
+add_executable(observer src/Observer/main.cpp src/Observer/Observer/IObserver.hpp src/Observer/Observer/Observable.hpp src/Observer/Observer/CObserverable.cpp src/Observer/Observer/CObserverable.hpp src/Observer/Display/Display/Display.cpp src/Observer/Display/Display/Display.hpp src/Observer/WeatherData/WeatherData.cpp src/Observer/WeatherData/WeatherData.hpp src/Observer/Display/StatsDisplay/StatsDisplay.cpp src/Observer/Display/StatsDisplay/StatsDisplay.hpp src/Observer/Sensor/AverageSensor.cpp src/Observer/Sensor/AverageSensor.hpp)
 include_directories(src/Catch2)
