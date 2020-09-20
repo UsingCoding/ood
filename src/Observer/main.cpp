@@ -1,22 +1,26 @@
 #include "WeatherData/WeatherData.hpp"
 #include "Display/Display/Display.hpp"
 #include "Display/StatsDisplay/StatsDisplay.hpp"
+#include "Display/ExpensiveDisplay/ExpensiveDisplay.hpp"
 
 int main()
 {
-    WeatherData weatherData;
+    WeatherData weatherDataIn(WeatherDataSource::IN);
+    WeatherData weatherDataOut(WeatherDataSource::OUT);
 
     Display display;
     StatsDisplay statsDisplay;
+    ExpensiveDisplay expensiveDisplay(weatherDataIn);
 
-    weatherData.RegisterObserver(1, display);
-    weatherData.RegisterObserver(2, statsDisplay);
+    weatherDataIn.RegisterObserver(1, display);
+    weatherDataIn.RegisterObserver(2, statsDisplay);
+    weatherDataIn.RegisterObserver(0, expensiveDisplay);
 
-    weatherData.SetMeasurements(3, 0.7, 760);
+    weatherDataIn.SetMeasurements(3, 0.7, 760);
 
-    weatherData.RemoveObserver(display);
-    weatherData.RemoveObserver(statsDisplay);
-    weatherData.SetMeasurements(5, 0.5, 767);
+    weatherDataIn.RemoveObserver(display);
+    weatherDataIn.RemoveObserver(statsDisplay);
+    weatherDataIn.SetMeasurements(5, 0.5, 767);
 
     return 0;
 }

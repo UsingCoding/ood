@@ -3,14 +3,14 @@
 #include <iostream>
 #include "../../Observer/IObserver.hpp"
 #include "../../WeatherData/WeatherData.hpp"
-#include "../../Sensor/AverageSensor.hpp"
+#include "../../Counter/AverageCounter.hpp"
 
 class StatsDisplay: public IObserver<WeatherInfo>
 {
 private:
     void Update(const WeatherInfo & data) override;
 
-    AverageSensor temperature;
-    AverageSensor humidity;
-    AverageSensor pressure;
+    AverageCounter m_temperature;
+    AverageCounter m_humidity;
+    AverageCounter m_pressure;
 };

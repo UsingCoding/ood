@@ -2,28 +2,35 @@
 
 #include "../Observer/CObserverable.hpp"
 
+enum WeatherDataSource
+{
+    IN, OUT
+};
+
 struct WeatherInfo
 {
-    double temperature = 0;
-    double humidity = 0;
-    double pressure = 0;
-
+    WeatherDataSource m_source;
+    double m_temperature = 0;
+    double m_humidity = 0;
+    double m_pressure = 0;
 };
 
 class WeatherData: public CObservable<WeatherInfo>
 {
 public:
-    double GetTemperature()const
+    WeatherData(WeatherDataSource type);
+
+    double GetTemperature() const
     {
         return m_temperature;
     }
 
-    double GetHumidity()const
+    double GetHumidity() const
     {
         return m_humidity;
     }
 
-    double GetPressure()const
+    double GetPressure() const
     {
         return m_pressure;
     }
@@ -46,6 +53,7 @@ protected:
     WeatherInfo GetChangedData() const override;
 
 private:
+    WeatherDataSource m_type;
     double m_temperature = 0.0;
     double m_humidity = 0.0;
     double m_pressure = 760.0;

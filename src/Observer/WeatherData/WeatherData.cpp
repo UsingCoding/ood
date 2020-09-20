@@ -1,10 +1,8 @@
-//
-// Created by supernotuser on 14.09.2020.
-//
-
 #include "WeatherData.hpp"
+
+WeatherData::WeatherData(WeatherDataSource type) : m_type(type) {}
 
 WeatherInfo WeatherData::GetChangedData() const
 {
-    return WeatherInfo{GetTemperature(), GetHumidity(), GetPressure()};
+    return WeatherInfo{m_type, GetTemperature(), GetHumidity(), GetPressure()};
 }

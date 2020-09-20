@@ -2,6 +2,7 @@
 
 #include <set>
 #include <map>
+#include <iostream>
 #include "Observable.hpp"
 
 template <class T>
@@ -27,7 +28,7 @@ public:
     void RemoveObserver(ObserverType & observer) override
     {
         typename std::multimap<int, ObserverType *>::iterator iteratorToRemove = m_observers.end();
-        for (auto it = m_observers.begin(); it != m_observers.end() ; it++)
+        for (auto it = m_observers.begin(); it != m_observers.end(); it++)
         {
             if (it->second == &observer)
             {

@@ -2,7 +2,7 @@
 
 #include <limits>
 
-class AverageSensor
+class AverageCounter
 {
 public:
     double GetMin() const;

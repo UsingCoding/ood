@@ -1,6 +1,6 @@
-#include "AverageSensor.hpp"
+#include "AverageCounter.hpp"
 
-void AverageSensor::AddIndex(double index)
+void AverageCounter::AddIndex(double index)
 {
     if (m_minIndex > index)
     {
@@ -14,17 +14,17 @@ void AverageSensor::AddIndex(double index)
     ++m_countIndex;
 }
 
-double AverageSensor::GetMin() const
+double AverageCounter::GetMin() const
 {
     return m_minIndex;
 }
 
-double AverageSensor::GetMax() const
+double AverageCounter::GetMax() const
 {
     return m_maxIndex;
 }
 
-double AverageSensor::GetAverage() const
+double AverageCounter::GetAverage() const
 {
     return (m_accIndex / m_countIndex);
 }
