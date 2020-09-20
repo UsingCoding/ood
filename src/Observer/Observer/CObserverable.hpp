@@ -32,16 +32,9 @@ public:
         {
             if (it->second == &observer)
             {
-                iteratorToRemove = it;
+                m_observers.erase(it);
             }
         }
-
-        if (iteratorToRemove == m_observers.end())
-        {
-            return;
-        }
-
-        m_observers.erase(iteratorToRemove);
     }
 
 protected:
