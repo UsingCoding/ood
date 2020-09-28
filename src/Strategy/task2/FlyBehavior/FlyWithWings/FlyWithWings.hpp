@@ -7,4 +7,7 @@ public:
     FlyWithWings();
     void Fly() override;
     ~FlyWithWings();
+
+private:
+    int m_flyCount;
 };

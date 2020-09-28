@@ -1,7 +1,6 @@
 #include "Ducks/ReadHeadDuck/ReadHeadDuck.hpp"
 #include "Ducks/DecoyDuck/DecoyDuck.hpp"
 #include "Ducks/MallardDuck/MallardDuck.hpp"
-#include "FlyCounter/NoFlyCounter/NoFlyCounter.hpp"
 
 int main()
 {
@@ -26,7 +25,6 @@ int main()
 
         duck.Fly();
         duck.Dance(100);
-        duck.SetFlyCounter(std::make_unique<NoFlyCounter>());
         duck.Fly();
         duck.Display();
     }

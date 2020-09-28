@@ -26,11 +26,6 @@ add_executable(
         src/Strategy/task2/Ducks/ReadHeadDuck/ReadHeadDuck.cpp
         src/Strategy/task2/FlyBehavior/FlyWithWings/FlyWithWings.cpp
         src/Strategy/task2/FlyBehavior/NoFly/NoFly.cpp
-        src/Strategy/task2/FlyCounter/IFlyCounter.hpp
-        src/Strategy/task2/FlyCounter/NoFlyCounter/NoFlyCounter.cpp
-        src/Strategy/task2/FlyCounter/NoFlyCounter/NoFlyCounter.hpp
-        src/Strategy/task2/FlyCounter/FlyCounter/FlyCounter.cpp
-        src/Strategy/task2/FlyCounter/FlyCounter/FlyCounter.hpp
 )
 
 add_executable(
