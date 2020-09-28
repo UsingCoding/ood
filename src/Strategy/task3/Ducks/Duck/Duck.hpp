@@ -5,10 +5,9 @@
 class Duck
 {
 public:
-    Duck(std::function<void(void)> && flyBehavior, std::function<void(int)> && danceBehavior, std::function<void(void)> && flyCounter);
+    Duck(std::function<void(void)> && flyBehavior, std::function<void(int)> && danceBehavior);
     void Fly();
     void Dance(int speed);
-    void SetFlyCounter(std::function<void(void)> && flyCounter);
     virtual void Display() const = 0;
 
 private:

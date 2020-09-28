@@ -2,23 +2,16 @@
 
 #include <memory>
 
-Duck::Duck(std::function<void(void)> && flyBehavior, std::function<void(int)> && danceBehavior, std::function<void(void)> && flyCounter):
+Duck::Duck(std::function<void(void)> && flyBehavior, std::function<void(int)> && danceBehavior):
     m_flyBehavior(std::move(flyBehavior)),
-    m_danceBehavior(std::move(danceBehavior)),
-    m_flyCounter(std::move(flyCounter))
+    m_danceBehavior(std::move(danceBehavior))
 {
 
-}
-
-void Duck::SetFlyCounter(std::function<void(void)> && flyCounter)
-{
-    m_flyCounter = std::move(flyCounter);
 }
 
 void Duck::Fly()
 {
     m_flyBehavior();
-    m_flyCounter();
 }
 
 void Duck::Dance(int speed)

@@ -4,6 +4,8 @@
 
 #include "../../DanceBehavior/MinuetDance/MinuetDance.hpp"
 #include "../../FlyBehavior/FlyWithWings/FlyWithWings.hpp"
+#include "../../../task3/Ducks/ReadHeadDuck/ReadHeadDuck.hpp"
+
 
 ReadHeadDuck::ReadHeadDuck(): Duck(std::make_unique<FlyWithWings>(), std::make_unique<MinuetDance>())
 {

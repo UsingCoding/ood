@@ -6,7 +6,12 @@
 int main()
 {
     {
-        auto duck = ReadHeadDuck();
+        int counter = 0;
+
+        auto duck = ReadHeadDuck([&counter](){
+            ++counter;
+            std::cout << "Flying with wings, number: " << counter << std::endl;
+        });
 
         duck.Fly();
         duck.Dance(20);
@@ -22,18 +27,16 @@ int main()
     }
 
     {
-        auto duck = MallardDuck();
+        int counter = 0;
+
+        auto duck = MallardDuck([&counter](){
+            ++counter;
+            std::cout << "Flying with wings, number: " << counter << std::endl;
+        });
 
         duck.Fly();
         duck.Dance(100);
         duck.Fly();
-
-        int counter = 0;
-
-        duck.SetFlyCounter([&counter](){
-            ++counter;
-            std::cout << "Flight number " << counter << std::endl;
-        });
 
         duck.Fly();
         duck.Fly();

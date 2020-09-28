@@ -5,7 +5,6 @@
 class ReadHeadDuck: public Duck
 {
 public:
-    ReadHeadDuck();
-
+    ReadHeadDuck(std::function<void(void)> && flyBehavior);
     void Display() const override;
 };

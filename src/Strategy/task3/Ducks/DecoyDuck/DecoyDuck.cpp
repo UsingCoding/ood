@@ -1,7 +1,7 @@
 #include <iostream>
 #include "DecoyDuck.hpp"
 
-DecoyDuck::DecoyDuck(): Duck([](){}, [](int speed){}, [](){})
+DecoyDuck::DecoyDuck(): Duck([](){}, [](int speed){})
 {
 
 }
