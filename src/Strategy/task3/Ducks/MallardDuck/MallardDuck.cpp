@@ -1,10 +1,13 @@
 #include "MallardDuck.hpp"
+#include "../../DanceBehavior/DanceBehavior.hpp"
+#include "../../FlyBehavior/FlyBehavior.hpp"
 #include <iostream>
 
-MallardDuck::MallardDuck(std::function<void(void)> && flyBehavior): Duck(
-        std::move(flyBehavior),
-        [](int speed){ std::cout << "Dancing waltz with speed: " << speed << std::endl; }
-)
+MallardDuck::MallardDuck()
+    : Duck(
+        std::move(FlyBehavior::GetFlyBehavior()),
+        std::move(DanceBehavior::GetDanceWaltzBehavior())
+    )
 {
 }
 

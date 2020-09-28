@@ -5,6 +5,6 @@
 class MallardDuck: public Duck
 {
 public:
-    MallardDuck(std::function<void(void)> && flyBehavior);
+    MallardDuck();
     void Display() const override;
 };

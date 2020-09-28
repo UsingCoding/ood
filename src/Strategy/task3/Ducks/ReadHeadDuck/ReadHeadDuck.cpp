@@ -1,10 +1,13 @@
 #include "ReadHeadDuck.hpp"
+#include "../../DanceBehavior/DanceBehavior.hpp"
+#include "../../FlyBehavior/FlyBehavior.hpp"
 #include <iostream>
 
-ReadHeadDuck::ReadHeadDuck(std::function<void(void)> && flyBehavior): Duck(
-        std::move(flyBehavior),
-        [](int speed){ std::cout << "Dancing minuet with speed: " << speed << std::endl; }
-)
+ReadHeadDuck::ReadHeadDuck()
+    : Duck(
+        std::move(FlyBehavior::GetFlyBehavior()),
+        std::move(DanceBehavior::GetDanceMinuetBehavior())
+    )
 {
 
 }

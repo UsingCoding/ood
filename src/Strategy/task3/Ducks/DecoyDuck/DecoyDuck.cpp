@@ -1,7 +1,13 @@
 #include <iostream>
 #include "DecoyDuck.hpp"
+#include "../../FlyBehavior/FlyBehavior.hpp"
+#include "../../DanceBehavior/DanceBehavior.hpp"
 
-DecoyDuck::DecoyDuck(): Duck([](){}, [](int speed){})
+DecoyDuck::DecoyDuck()
+    : Duck(
+        std::move(FlyBehavior::GetNoFlyBehavior()),
+        std::move(DanceBehavior::GetNoDanceBehavior())
+    )
 {
 
 }

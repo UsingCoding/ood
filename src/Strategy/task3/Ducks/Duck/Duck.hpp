@@ -13,5 +13,4 @@ public:
 private:
     std::function<void(void)> m_flyBehavior;
     std::function<void(int)> m_danceBehavior;
-    std::function<void(void)> m_flyCounter;
 };
