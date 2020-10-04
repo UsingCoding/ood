@@ -40,4 +40,11 @@ add_executable(
         src/Strategy/task3/FlyBehavior/FlyBehavior.hpp
 )
 add_executable(observer src/Observer/main.cpp src/Observer/Observer/IObserver.hpp src/Observer/Observer/Observable.hpp src/Observer/Observer/CObserverable.cpp src/Observer/Observer/CObserverable.hpp src/Observer/Display/Display/Display.cpp src/Observer/Display/Display/Display.hpp src/Observer/WeatherData/WeatherData.cpp src/Observer/WeatherData/WeatherData.hpp src/Observer/Display/StatsDisplay/StatsDisplay.cpp src/Observer/Display/StatsDisplay/StatsDisplay.hpp src/Observer/Counter/AverageCounter.cpp src/Observer/Counter/AverageCounter.hpp src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.cpp src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.hpp)
+
+add_executable(observer_test
+        src/Observer_test/main.cpp
+        src/Observer_test/Observerable/MockObservable.cpp
+        src/Observer_test/Observer/MockObserver.cpp
+)
+
 include_directories(src/Catch2)
