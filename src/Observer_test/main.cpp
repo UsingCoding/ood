@@ -13,8 +13,11 @@ SCENARIO("Checking priority of observers")
 
         std::shared_ptr<std::stack<std::string>> callStack = std::make_shared<std::stack<std::string>>();
 
-        MockObserver mockObserver1("First", callStack);
-        MockObserver mockObserver2("Second", callStack);
+        std::string first = "First";
+        std::string second = "Second";
+
+        MockObserver mockObserver1(std::move(first), callStack);
+        MockObserver mockObserver2(std::move(second), callStack);
 
         AND_GIVEN("Observers subscribed to observable to call in priority that declared by their names and finalCallStack")
         {
@@ -23,8 +26,8 @@ SCENARIO("Checking priority of observers")
 
             std::shared_ptr<std::stack<std::string>> finalCallStack = std::make_shared<std::stack<std::string>>();
 
-            finalCallStack->push("First");
-            finalCallStack->push("Second");
+            finalCallStack->push(std::move(first));
+            finalCallStack->push(std::move(second));
 
             WHEN("We notify observers")
             {
@@ -68,9 +71,13 @@ SCENARIO("Observers subscribed in one priority")
 
         std::shared_ptr<std::stack<std::string>> callStack = std::make_shared<std::stack<std::string>>();
 
-        MockObserver mockObserver1("First", callStack);
-        MockObserver mockObserver2("Second", callStack);
-        MockObserver mockObserver3("Third", callStack);
+        std::string first = "First";
+        std::string second = "Second";
+        std::string third = "Third";
+
+        MockObserver mockObserver1(std::move(first), callStack);
+        MockObserver mockObserver2(std::move(second), callStack);
+        MockObserver mockObserver3(std::move(third), callStack);
 
         AND_GIVEN("Observers subscribed to observable in same priority and third observer in higher priority")
         {
@@ -80,9 +87,9 @@ SCENARIO("Observers subscribed in one priority")
 
             std::shared_ptr<std::stack<std::string>> finalCallStack = std::make_shared<std::stack<std::string>>();
 
-            finalCallStack->push("Third");
-            finalCallStack->push("Second");
-            finalCallStack->push("First");
+            finalCallStack->push(std::move(third));
+            finalCallStack->push(std::move(second));
+            finalCallStack->push(std::move(first));
 
             WHEN("We notify observers")
             {
