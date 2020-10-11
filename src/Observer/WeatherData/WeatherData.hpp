@@ -20,7 +20,8 @@ enum EventType
 struct WeatherInfo
 {
     WeatherDataSource m_source;
-    double m_changedMeasurement;
+    EventType m_eventType;
+    double m_measurement;
 };
 
 class WeatherData: public CObservable<WeatherInfo, EventType>
