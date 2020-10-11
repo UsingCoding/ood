@@ -53,6 +53,8 @@ add_executable(observer
         src/Observer/Display/StatsDisplay/StatsDisplay.hpp
         src/Observer/Counter/AverageCounter.cpp
         src/Observer/Counter/AverageCounter.hpp
+        src/Observer/Counter/AverageWindDirectionMeter.cpp
+        src/Observer/Counter/AverageWindDirectionMeter.hpp
         src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.cpp
         src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.hpp
 )
