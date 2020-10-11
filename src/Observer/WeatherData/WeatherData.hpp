@@ -7,6 +7,11 @@ enum WeatherDataSource
     IN, OUT
 };
 
+enum EventType
+{
+    TEMPERATURE_CHANGED
+};
+
 struct WeatherInfo
 {
     WeatherDataSource m_source;
@@ -17,7 +22,7 @@ struct WeatherInfo
     size_t m_windDirection;
 };
 
-class WeatherData: public CObservable<WeatherInfo>
+class WeatherData: public CObservable<WeatherInfo, EventType>
 {
 public:
     WeatherData(WeatherDataSource type);

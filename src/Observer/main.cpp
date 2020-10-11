@@ -5,33 +5,21 @@
 
 int main()
 {
-#if 0
+
     WeatherData weatherDataIn(WeatherDataSource::IN);
-    WeatherData weatherDataOut(WeatherDataSource::OUT);
+//    WeatherData weatherDataOut(WeatherDataSource::OUT);
 
     Display display;
-    StatsDisplay statsDisplay;
-    ExpensiveDisplay expensiveDisplay(weatherDataIn);
+//    StatsDisplay statsDisplay;
+//    ExpensiveDisplay expensiveDisplay(weatherDataIn);
 
-    weatherDataIn.RegisterObserver(1, display);
-    weatherDataIn.RegisterObserver(2, statsDisplay);
-    weatherDataIn.RegisterObserver(0, expensiveDisplay);
+    weatherDataIn.RegisterObserver(EventType::TEMPERATURE_CHANGED, display);
+//    weatherDataIn.RegisterObserver(2, statsDisplay);
+//    weatherDataIn.RegisterObserver(0, expensiveDisplay);
+//
+//    weatherDataIn.SetMeasurements(3, 0.7, 760, 3, 90);
 
-    weatherDataIn.SetMeasurements(3, 0.7, 760);
-
-    weatherDataIn.RemoveObserver(display);
-    weatherDataIn.RemoveObserver(statsDisplay);
-    weatherDataIn.SetMeasurements(5, 0.5, 767);
-#endif
-
-    WeatherData weatherDataIn(WeatherDataSource::IN);
-
-    StatsDisplay statsDisplay;
-    weatherDataIn.RegisterObserver(1, statsDisplay);
-
-    weatherDataIn.SetMeasurements(5, 0.5, 767, 3, 40);
-
-//    weatherDataIn.SetMeasurements(5, 0.5, 767, 2, 20);
+    weatherDataIn.RemoveObserver(EventType::TEMPERATURE_CHANGED, display);
 
     return 0;
 }

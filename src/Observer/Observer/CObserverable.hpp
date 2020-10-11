@@ -1,19 +1,24 @@
 #pragma once
 
-#include <set>
 #include <map>
 #include <iostream>
 #include "Observable.hpp"
 
-template <class T>
-class CObservable : public IObservable<T>
+template <class T, class Y>
+class CObservable : public IObservable<T, Y>
 {
 public:
     typedef IObserver<T> ObserverType;
 
-    void RegisterObserver(int priority, IObserver<T> & observer) override
+    struct Record
     {
-        m_observers.insert(std::make_pair<int, ObserverType *>(std::move(priority), &observer));
+        Y m_eventType;
+        ObserverType* m_observer;
+    };
+
+    void RegisterObserver(Y eventType, IObserver<T> & observer, int priority = 0) override
+    {
+        m_observers.insert(std::make_pair<int, Record>(std::move(priority), Record{eventType, &observer}));
     }
 
     void NotifyObservers() override
@@ -21,16 +26,15 @@ public:
         T data = GetChangedData();
         for (auto it = m_observers.rbegin(); it != m_observers.rend(); ++it)
         {
-            it->second->Update(data);
+//            it->second->Update(data);
         }
     }
 
-    void RemoveObserver(ObserverType & observer) override
+    void RemoveObserver(Y eventType, ObserverType & observer) override
     {
-        typename std::multimap<int, ObserverType *>::iterator iteratorToRemove = m_observers.end();
         for (auto it = m_observers.begin(); it != m_observers.end(); it++)
         {
-            if (it->second == &observer)
+            if (it->second.m_eventType == eventType && it->second.m_observer == &observer)
             {
                 m_observers.erase(it);
             }
@@ -41,5 +45,5 @@ protected:
     virtual T GetChangedData()const = 0;
 
 private:
-    std::multimap<int, ObserverType *> m_observers;
+    std::multimap<int, Record> m_observers;
 };
