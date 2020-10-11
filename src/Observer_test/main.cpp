@@ -5,6 +5,8 @@
 #include "PriorityTest/Observer/MockObserver.hpp"
 #include "../Observer/WeatherData/WeatherData.hpp"
 #include "FewObservableTest/Observer/MockObserver.hpp"
+#include "SafeObserversRemoving/Observable/MockObservable.hpp"
+#include "SafeObserversRemoving/Observer/MockObserver.hpp"
 
 SCENARIO("Checking priority of observers")
 {
@@ -137,6 +139,26 @@ SCENARIO("Getting know about from which station message received")
                 {
                     REQUIRE(observer.GetSource() == WeatherDataSource::OUT);
                 }
+            }
+        }
+    }
+}
+
+SCENARIO("Check safe observers removing from Update method")
+{
+    GIVEN("Observable and observers, one will delete himself from Update method, other - not")
+    {
+        SafeObserversRemoving::MockObservable observable;
+
+
+        SafeObserversRemoving::MockObserver observer1(false, observable);
+        SafeObserversRemoving::MockObserver observer2(true, observable);
+
+        WHEN("We notify observers")
+        {
+            THEN("No exception thrown")
+            {
+                REQUIRE_NOTHROW(observable.NotifyObservers());
             }
         }
     }

@@ -24,6 +24,12 @@ public:
     void NotifyObservers() override
     {
         std::map<Y, T> data = GetChangedData();
+
+        if (data.size() == 0)
+        {
+            return;
+        }
+
         for (auto it = m_observers.rbegin(); it != m_observers.rend(); ++it)
         {
             if (data.find(it->second.m_eventType) != data.end())

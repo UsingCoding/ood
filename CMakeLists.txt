@@ -67,6 +67,6 @@ add_executable(observer_test
         src/Observer_test/FewObservableTest/Observer/MockObserver.hpp
         src/Observer/WeatherData/WeatherData.cpp
         src/Observer/WeatherData/WeatherData.hpp
-)
+        src/Observer_test/SafeObserversRemoving/Observer/MockObserver.cpp src/Observer_test/SafeObserversRemoving/Observer/MockObserver.hpp src/Observer_test/SafeObserversRemoving/Observable/MockObservable.cpp src/Observer_test/SafeObserversRemoving/Observable/MockObservable.hpp)
 
 include_directories(src/Catch2)
