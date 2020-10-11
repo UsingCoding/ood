@@ -22,8 +22,8 @@ SCENARIO("Checking priority of observers")
 
         AND_GIVEN("Observers subscribed to observable to call in priority that declared by their names and finalCallStack")
         {
-            mockObservable.RegisterObserver(2, mockObserver1);
-            mockObservable.RegisterObserver(1, mockObserver2);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver1, 2);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver2, 1);
 
             std::shared_ptr<std::stack<std::string>> finalCallStack = std::make_shared<std::stack<std::string>>();
 
@@ -43,8 +43,8 @@ SCENARIO("Checking priority of observers")
 
         AND_GIVEN("Observers subscribed in reverse order to observable to call in priority that declared by their names and finalCallStack")
         {
-            mockObservable.RegisterObserver(1, mockObserver1);
-            mockObservable.RegisterObserver(2, mockObserver2);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver1, 1);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver2, 2);
 
             std::shared_ptr<std::stack<std::string>> finalCallStack = std::make_shared<std::stack<std::string>>();
 
@@ -82,9 +82,9 @@ SCENARIO("Observers subscribed in one priority")
 
         AND_GIVEN("Observers subscribed to observable in same priority and third observer in higher priority")
         {
-            mockObservable.RegisterObserver(1, mockObserver1);
-            mockObservable.RegisterObserver(1, mockObserver2);
-            mockObservable.RegisterObserver(2, mockObserver3);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver1, 1);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver2, 1);
+            mockObservable.RegisterObserver(PriorityTest::MockEventType::MOCK_EVENT_TYPE, mockObserver3, 2);
 
             std::shared_ptr<std::stack<std::string>> finalCallStack = std::make_shared<std::stack<std::string>>();
 
@@ -105,7 +105,7 @@ SCENARIO("Observers subscribed in one priority")
     }
 }
 
-SCENARIO("Getting know about from what station message received")
+SCENARIO("Getting know about from which station message received")
 {
     GIVEN("Two weather stations, Inner and Outer")
     {
@@ -116,12 +116,12 @@ SCENARIO("Getting know about from what station message received")
         {
             FewObservableTest::MockObserver observer;
 
-            weatherDataIn.RegisterObserver(0, observer);
-            weatherDataOut.RegisterObserver(0, observer);
+            weatherDataIn.RegisterObserver(EventType::TEMPERATURE_CHANGED, observer);
+            weatherDataOut.RegisterObserver(EventType::TEMPERATURE_CHANGED, observer);
 
             WHEN("Inner weather station start event")
             {
-                weatherDataIn.SetMeasurements(30, 2, 4);
+                weatherDataIn.SetMeasurements(30, 2, 4, 3, 10);
 
                 THEN("In observer saved from what station received message and it equals to inner station")
                 {
@@ -131,7 +131,7 @@ SCENARIO("Getting know about from what station message received")
 
             WHEN("Outer weather station start event")
             {
-                weatherDataOut.SetMeasurements(30, 2, 4);
+                weatherDataOut.SetMeasurements(30, 2, 4, 3, 10);
 
                 THEN("In observer saved from what station received message and it equals to inner station")
                 {

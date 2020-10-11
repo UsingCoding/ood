@@ -1,6 +1,8 @@
 #include "MockObservable.hpp"
 
-PriorityTest::MockInfo PriorityTest::MockObservable::GetChangedData() const
+std::map<PriorityTest::MockEventType, PriorityTest::MockInfo> PriorityTest::MockObservable::GetChangedData() const
 {
-    return MockInfo();
+    return std::map<PriorityTest::MockEventType, PriorityTest::MockInfo>{
+        std::make_pair<PriorityTest::MockEventType, PriorityTest::MockInfo>(MockEventType::MOCK_EVENT_TYPE, MockInfo())
+    };
 }

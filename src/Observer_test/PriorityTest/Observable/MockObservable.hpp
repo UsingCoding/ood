@@ -3,14 +3,19 @@
 #include "../../../Observer/Observer/CObserverable.hpp"
 
 namespace PriorityTest {
+    enum MockEventType
+    {
+        MOCK_EVENT_TYPE
+    };
+
     struct MockInfo
     {
 
     };
 
-    class MockObservable: public CObservable<MockInfo>
+    class MockObservable: public CObservable<MockInfo, MockEventType>
     {
     protected:
-        MockInfo GetChangedData() const override;
+        std::map<MockEventType, MockInfo> GetChangedData() const override;
     };
 }
