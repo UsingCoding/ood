@@ -16,11 +16,11 @@ void PrintAverageWindDirectionMeterMeasurement(const AverageWindDirectionMeter &
 
 void StatsDisplay::Update(const WeatherInfo & data)
 {
-    m_temperature.AddIndex(data.m_temperature);
-    m_humidity.AddIndex(data.m_humidity);
-    m_pressure.AddIndex(data.m_pressure);
-    m_windSpeed.AddIndex(data.m_windSpeed);
-    m_windDirectionMeter.AddIndex(data.m_windSpeed, data.m_windDirection);
+//    m_temperature.AddIndex(data.m_temperature);
+//    m_humidity.AddIndex(data.m_humidity);
+//    m_pressure.AddIndex(data.m_pressure);
+//    m_windSpeed.AddIndex(data.m_windSpeed);
+//    m_windDirectionMeter.AddIndex(data.m_windSpeed, data.m_windDirection);
 
     std::cout << (data.m_source == WeatherDataSource::IN ? "Inter sensor" : "Outer sensor") << std::endl;
 

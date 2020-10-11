@@ -23,10 +23,13 @@ public:
 
     void NotifyObservers() override
     {
-        T data = GetChangedData();
+        std::map<Y, T> data = GetChangedData();
         for (auto it = m_observers.rbegin(); it != m_observers.rend(); ++it)
         {
-//            it->second->Update(data);
+            if (data.find(it->second.m_eventType) != data.end())
+            {
+                it->second.m_observer->Update(data.at(it->second.m_eventType));
+            }
         }
     }
 
@@ -42,7 +45,7 @@ public:
     }
 
 protected:
-    virtual T GetChangedData()const = 0;
+    virtual std::map<Y, T> GetChangedData() const = 0;
 
 private:
     std::multimap<int, Record> m_observers;

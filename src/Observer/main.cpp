@@ -14,10 +14,11 @@ int main()
 //    ExpensiveDisplay expensiveDisplay(weatherDataIn);
 
     weatherDataIn.RegisterObserver(EventType::TEMPERATURE_CHANGED, display);
+    weatherDataIn.RegisterObserver(EventType::PRESSURE_CHANGED, display);
 //    weatherDataIn.RegisterObserver(2, statsDisplay);
 //    weatherDataIn.RegisterObserver(0, expensiveDisplay);
 //
-//    weatherDataIn.SetMeasurements(3, 0.7, 760, 3, 90);
+    weatherDataIn.SetMeasurements(40, 20, 0, 0, 90);
 
     weatherDataIn.RemoveObserver(EventType::TEMPERATURE_CHANGED, display);
 

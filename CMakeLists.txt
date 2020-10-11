@@ -57,7 +57,7 @@ add_executable(observer
         src/Observer/Counter/AverageWindDirectionMeter.hpp
         src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.cpp
         src/Observer/Display/ExpensiveDisplay/ExpensiveDisplay.hpp
-)
+        src/Observer/MemoryIndex/MemoryIndex.hpp)
 
 add_executable(observer_test
         src/Observer_test/main.cpp

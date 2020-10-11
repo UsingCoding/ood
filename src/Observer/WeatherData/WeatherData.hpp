@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Observer/CObserverable.hpp"
+#include "../MemoryIndex/MemoryIndex.hpp"
 
 enum WeatherDataSource
 {
@@ -9,17 +10,17 @@ enum WeatherDataSource
 
 enum EventType
 {
-    TEMPERATURE_CHANGED
+    TEMPERATURE_CHANGED,
+    HUMIDITY_CHANGED,
+    PRESSURE_CHANGED,
+    WIND_SPEED_CHANGED,
+    WIND_DIRECTION_CHANGED
 };
 
 struct WeatherInfo
 {
     WeatherDataSource m_source;
-    double m_temperature;
-    double m_humidity;
-    double m_pressure;
-    double m_windSpeed;
-    size_t m_windDirection;
+    double m_changedMeasurement;
 };
 
 class WeatherData: public CObservable<WeatherInfo, EventType>
@@ -47,7 +48,7 @@ public:
         return m_windSpeed;
     }
 
-    size_t GetWindDirection() const
+    double GetWindDirection() const
     {
         return m_windDirection;
     }
@@ -57,25 +58,27 @@ public:
         NotifyObservers();
     }
 
-    void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, size_t windDirection)
+    void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, double windDirection)
     {
-        m_humidity = humidity;
-        m_temperature = temp;
-        m_pressure = pressure;
-        m_windSpeed = windSpeed;
-        m_windDirection = windDirection;
+        std::map<EventType, double> changedMeasurementsMap;
+
+        m_humidity.SetIndex(humidity);
+        m_temperature.SetIndex(temp);
+        m_pressure.SetIndex(pressure);
+        m_windSpeed.SetIndex(windSpeed);
+        m_windDirection.SetIndex(windDirection);
 
         MeasurementsChanged();
     }
 
 protected:
-    WeatherInfo GetChangedData() const override;
+    std::map<EventType, WeatherInfo> GetChangedData() const override;
 
 private:
     WeatherDataSource m_type;
-    double m_temperature = 0.0;
-    double m_humidity = 0.0;
-    double m_pressure = 760.0;
-    double m_windSpeed = 3;
-    size_t m_windDirection = 270;
+    MemoryIndex<double> m_temperature = 0.0;
+    MemoryIndex<double> m_humidity = 0.0;
+    MemoryIndex<double> m_pressure = 760.0;
+    MemoryIndex<double> m_windSpeed = 3;
+    MemoryIndex<double> m_windDirection = 0;
 };
