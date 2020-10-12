@@ -6,6 +6,13 @@ std::map<EventType, WeatherInfo> WeatherData::GetChangedData() const
 {
     std::map<EventType, WeatherInfo> changedMeasurements;
 
+    CollectChangedEvents(changedMeasurements);
+
+    return changedMeasurements;
+}
+
+void WeatherData::CollectChangedEvents(std::map<EventType, WeatherInfo> & changedMeasurements) const
+{
     if (m_humidity.IsChanged())
     {
         changedMeasurements.insert(std::make_pair<EventType, WeatherInfo>(
@@ -45,6 +52,4 @@ std::map<EventType, WeatherInfo> WeatherData::GetChangedData() const
                 WeatherInfo{m_type, EventType::WIND_DIRECTION_CHANGED, m_windDirection})
         );
     }
-
-    return changedMeasurements;
 }

@@ -82,4 +82,6 @@ private:
     MemoryIndex<double> m_pressure = 760.0;
     MemoryIndex<double> m_windSpeed = 3;
     MemoryIndex<double> m_windDirection = 0;
+
+    void CollectChangedEvents(std::map<EventType, WeatherInfo> & changedMeasurements) const;
 };
