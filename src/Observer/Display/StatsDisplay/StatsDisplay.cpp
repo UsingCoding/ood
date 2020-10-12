@@ -31,7 +31,7 @@ void StatsDisplay::Update(const WeatherInfo & data)
             m_windSpeed.AddIndex(data.m_measurement);
             break;
         case WIND_DIRECTION_CHANGED:
-            m_windDirectionMeter.AddIndex(m_windSpeed.GetAverage(), data.m_measurement);
+            m_windDirectionMeter.AddIndex(data.m_measurement);
             break;
     }
 
