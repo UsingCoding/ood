@@ -1,20 +1,24 @@
 #include "AverageWindDirectionMeter.hpp"
 #include <cmath>
 
-double AverageWindDirectionMeter::GetAverage() const
+double ToRadians(double value)
 {
-    auto sinSum = m_sinusSum / m_count;
-    auto cosSum = m_cosineSum / m_count;
-
-    auto averageDir = (int) ((atan2(sinSum, cosSum) * 180 / M_PI) + 360) % 360;
-    auto someAvDir = sqrt(cosSum * cosSum + sinSum * sinSum);
-
-    return someAvDir;
+    return value * M_PI / 180;
 }
 
-void AverageWindDirectionMeter::AddIndex(double speed, double direction)
+double ToDegrees(double value)
 {
-    m_sinusSum += speed * sin(direction);
-    m_cosineSum += speed * cos(direction);
-    ++m_count;
+    return value * 180 / M_PI;
+}
+
+double AverageWindDirectionMeter::GetAverage() const
+{
+    double x = ToDegrees(atan2(m_sinusSum, m_cosineSum)) + 360;
+    return x - trunc(x / 360) * 360;
+}
+
+void AverageWindDirectionMeter::AddIndex(double direction)
+{
+    m_sinusSum += sin(ToRadians(direction));
+    m_cosineSum += cos(ToRadians(direction));
 }

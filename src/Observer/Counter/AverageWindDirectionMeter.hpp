@@ -4,7 +4,7 @@ class AverageWindDirectionMeter
 {
 public:
     double GetAverage() const;
-    void AddIndex(double speed, double direction);
+    void AddIndex(double direction);
 private:
     double m_sinusSum;
     double m_cosineSum;
