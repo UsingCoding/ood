@@ -8,6 +8,8 @@ public:
     Latte() : Coffee("Latte")
     {}
 
+    Latte(std::string && description) : Coffee(description) {}
+
     double GetCost() const override
     {
         return 90;

@@ -71,7 +71,6 @@ add_executable(observer_test
 
 add_executable(decorator-beverage
         src/Decorator/Beverage/Beverage/IBeverage.hpp
-        src/Decorator/Beverage/Beverage/Beverage.cpp
         src/Decorator/Beverage/Beverage/Beverage.hpp
         src/Decorator/Beverage/Beverages/Coffee/Coffee.hpp
         src/Decorator/Beverage/Beverages/Cappuccino/Cappuccino.hpp
@@ -79,6 +78,7 @@ add_executable(decorator-beverage
         src/Decorator/Beverage/Beverages/Tea/Tea.hpp
         src/Decorator/Beverage/Beverages/MilkShake/MilkShake.hpp
         src/Decorator/Beverage/Condiments/Condiments.hpp
-        src/Decorator/Beverage/main.cpp)
+        src/Decorator/Beverage/main.cpp
+        src/Decorator/Beverage/Beverages/Latte/DoubleLatte.hpp src/Decorator/Beverage/Beverages/Cappuccino/DoubleCappuccino.hpp src/Decorator/Beverage/Beverages/Tea/CeylonTea.hpp src/Decorator/Beverage/Beverages/Tea/GreenTea.hpp src/Decorator/Beverage/Beverages/Tea/YellowTea.hpp src/Decorator/Beverage/Beverages/Tea/BergamotTea.hpp src/Decorator/Beverage/Beverages/MilkShake/SmallMilkShake.hpp src/Decorator/Beverage/Beverages/MilkShake/MediumMilkShake.hpp src/Decorator/Beverage/Beverages/MilkShake/BigMilkShake.hpp)
 
 include_directories(src/Catch2)

@@ -2,11 +2,13 @@
 
 #include "../../Beverage/Beverage.hpp"
 
-class Milkshake : public Beverage
+class MilkShake : public Beverage
 {
 public:
-    Milkshake() : Beverage("Milkshake")
+    MilkShake() : Beverage("MilkShake")
     {}
+
+    MilkShake(std::string && description) : Beverage(description) {}
 
     double GetCost() const override
     {

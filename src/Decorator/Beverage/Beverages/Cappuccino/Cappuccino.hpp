@@ -8,6 +8,8 @@ public:
     Cappuccino() : Coffee("Cappuccino")
     {}
 
+    Cappuccino(std::string && description) : Coffee(description) {}
+
     double GetCost() const override
     {
         return 80;
