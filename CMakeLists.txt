@@ -79,7 +79,33 @@ add_executable(decorator-beverage
         src/Decorator/Beverage/Beverages/MilkShake/MilkShake.hpp
         src/Decorator/Beverage/Condiments/Condiments.hpp
         src/Decorator/Beverage/main.cpp
-        src/Decorator/Beverage/Beverages/Latte/DoubleLatte.hpp src/Decorator/Beverage/Beverages/Cappuccino/DoubleCappuccino.hpp src/Decorator/Beverage/Beverages/Tea/CeylonTea.hpp src/Decorator/Beverage/Beverages/Tea/GreenTea.hpp src/Decorator/Beverage/Beverages/Tea/YellowTea.hpp src/Decorator/Beverage/Beverages/Tea/BergamotTea.hpp src/Decorator/Beverage/Beverages/MilkShake/SmallMilkShake.hpp src/Decorator/Beverage/Beverages/MilkShake/MediumMilkShake.hpp src/Decorator/Beverage/Beverages/MilkShake/BigMilkShake.hpp src/Decorator/Beverage/Condiments/Cream.hpp src/Decorator/Beverage/Condiments/Chocolate.hpp src/Utils/Strings.hpp src/Decorator/Beverage/Condiments/Liquor.hpp src/Decorator/Beverage/Condiments/ChocolateLiquor.hpp src/Decorator/Beverage/Condiments/WalnutLiquor.hpp)
+        src/Decorator/Beverage/Beverages/Latte/DoubleLatte.hpp
+        src/Decorator/Beverage/Beverages/Cappuccino/DoubleCappuccino.hpp
+        src/Decorator/Beverage/Beverages/Tea/CeylonTea.hpp
+        src/Decorator/Beverage/Beverages/Tea/GreenTea.hpp
+        src/Decorator/Beverage/Beverages/Tea/YellowTea.hpp
+        src/Decorator/Beverage/Beverages/Tea/BergamotTea.hpp
+        src/Decorator/Beverage/Beverages/MilkShake/SmallMilkShake.hpp
+        src/Decorator/Beverage/Beverages/MilkShake/MediumMilkShake.hpp
+        src/Decorator/Beverage/Beverages/MilkShake/BigMilkShake.hpp
+        src/Decorator/Beverage/Condiments/Cream.hpp
+        src/Decorator/Beverage/Condiments/Chocolate.hpp
+        src/Utils/Strings.hpp
+        src/Decorator/Beverage/Condiments/Liquor.hpp
+        src/Decorator/Beverage/Condiments/ChocolateLiquor.hpp
+        src/Decorator/Beverage/Condiments/WalnutLiquor.hpp)
+
+
+add_executable(decorator-streams
+        src/Decorator/Streams/main.cpp
+        src/Decorator/Streams/Input/IInputDataStream.hpp
+        src/Decorator/Streams/Output/IOutputDataStream.hpp
+        src/Decorator/Streams/Output/MemoryOutputStream/MemoryOutputStream.cpp
+        src/Decorator/Streams/Output/MemoryOutputStream/MemoryOutputStream.hpp
+        src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.cpp
+        src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.hpp
+        src/Decorator/Streams/Application/TransformApplication.cpp
+        src/Decorator/Streams/Application/TransformApplication.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
