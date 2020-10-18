@@ -69,4 +69,16 @@ add_executable(observer_test
         src/Observer/WeatherData/WeatherData.hpp
         src/Observer_test/SafeObserversRemoving/Observer/MockObserver.cpp src/Observer_test/SafeObserversRemoving/Observer/MockObserver.hpp src/Observer_test/SafeObserversRemoving/Observable/MockObservable.cpp src/Observer_test/SafeObserversRemoving/Observable/MockObservable.hpp)
 
+add_executable(decorator-beverage
+        src/Decorator/Beverage/Beverage/IBeverage.hpp
+        src/Decorator/Beverage/Beverage/Beverage.cpp
+        src/Decorator/Beverage/Beverage/Beverage.hpp
+        src/Decorator/Beverage/Beverages/Coffee/Coffee.hpp
+        src/Decorator/Beverage/Beverages/Cappuccino/Cappuccino.hpp
+        src/Decorator/Beverage/Beverages/Latte/Latte.hpp
+        src/Decorator/Beverage/Beverages/Tea/Tea.hpp
+        src/Decorator/Beverage/Beverages/MilkShake/MilkShake.hpp
+        src/Decorator/Beverage/Condiments/Condiments.hpp
+        src/Decorator/Beverage/main.cpp)
+
 include_directories(src/Catch2)
