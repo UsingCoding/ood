@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.10)
 project(ood)
 
-set(CMAKE_CXX_STANDARD 20)
+#set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
         strategy-task-1 src/Strategy/task1/main.cpp
@@ -105,7 +105,15 @@ add_executable(decorator-streams
         src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.cpp
         src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.hpp
         src/Decorator/Streams/Application/TransformApplication.cpp
-        src/Decorator/Streams/Application/TransformApplication.hpp)
+        src/Decorator/Streams/Application/TransformApplication.hpp
+        src/Decorator/Streams/Output/CryptInputStream/CryptOutputDecoratorStream.cpp
+        src/Decorator/Streams/Output/CryptInputStream/CryptOutputDecoratorStream.hpp
+        src/Decorator/Streams/Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.cpp
+        src/Decorator/Streams/Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.hpp
+        src/Decorator/Streams/Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.cpp
+        src/Decorator/Streams/Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.hpp
+        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.cpp
+        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
