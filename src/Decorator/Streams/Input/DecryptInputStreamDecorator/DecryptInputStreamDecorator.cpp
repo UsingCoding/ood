@@ -3,7 +3,7 @@
 
 bool DecryptInputStreamDecorator::IsEOF() const
 {
-    return m_stream.IsEOF();
+    return m_stream->IsEOF();
 }
 
 uint8_t DecryptInputStreamDecorator::ReadByte()

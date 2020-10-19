@@ -2,7 +2,7 @@
 
 bool DecompressInputStreamDecorator::IsEOF() const
 {
-    return m_stream.IsEOF();
+    return m_stream->IsEOF();
 }
 
 uint8_t DecompressInputStreamDecorator::ReadByte()

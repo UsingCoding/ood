@@ -106,8 +106,8 @@ add_executable(decorator-streams
         src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.hpp
         src/Decorator/Streams/Application/TransformApplication.cpp
         src/Decorator/Streams/Application/TransformApplication.hpp
-        src/Decorator/Streams/Output/CryptInputStream/CryptOutputDecoratorStream.cpp
-        src/Decorator/Streams/Output/CryptInputStream/CryptOutputDecoratorStream.hpp
+        src/Decorator/Streams/Output/EncryptOutputDecoratorStream/EncryptOutputDecoratorStream.cpp
+        src/Decorator/Streams/Output/EncryptOutputDecoratorStream/EncryptOutputDecoratorStream.hpp
         src/Decorator/Streams/Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.cpp
         src/Decorator/Streams/Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.hpp
         src/Decorator/Streams/Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.cpp
