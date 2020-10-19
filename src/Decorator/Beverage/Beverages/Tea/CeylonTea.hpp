@@ -2,7 +2,8 @@
 
 #include "Tea.hpp"
 
-class GreenTea : public Tea
+class CeylonTea : public Tea
 {
-    GreenTea() : Tea("Ceylon Tea") {}
+public:
+    CeylonTea() : Tea("Ceylon Tea") {}
 };

@@ -7,7 +7,7 @@ class Tea : public Beverage
 public:
     Tea() : Beverage("Tea") {}
 
-    Tea(std::string && description) : Beverage(description) {}
+    Tea(const std::string & description) : Beverage(description) {}
 
     double GetCost() const override
     {

@@ -8,7 +8,7 @@ public:
     Cappuccino() : Coffee("Cappuccino")
     {}
 
-    Cappuccino(std::string && description) : Coffee(description) {}
+    Cappuccino(const std::string & description) : Coffee(description) {}
 
     double GetCost() const override
     {

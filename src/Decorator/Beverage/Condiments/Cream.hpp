@@ -5,6 +5,8 @@
 class Cream : public CondimentDecorator
 {
 public:
+    Cream(IBeveragePtr && beverage): CondimentDecorator(move(beverage)) {}
+
     std::string GetCondimentDescription() const override
     {
         return "Cream";

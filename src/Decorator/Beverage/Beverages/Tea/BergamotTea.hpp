@@ -4,5 +4,6 @@
 
 class BergamotTea : public Tea
 {
+public:
     BergamotTea() : Tea("Bergamot Tea") {}
 };
