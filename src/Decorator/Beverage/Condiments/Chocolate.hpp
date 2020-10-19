@@ -9,7 +9,7 @@ public:
     Chocolate(IBeveragePtr && beverage, unsigned quantity = 1)
     : CondimentDecorator(std::move(beverage))
     {
-        if (quantity > 5)
+        if (quantity > MAX_SLICE_COUNT)
         {
             throw std::logic_error(Strings::Concatenator() << "Chocolate slices must be less than " << MAX_SLICE_COUNT);
         }
