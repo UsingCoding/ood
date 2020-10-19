@@ -6,7 +6,7 @@
 class DecryptInputStreamDecorator : public IInputDataStream
 {
 public:
-    DecryptInputStreamDecorator(IInputDataStream &stream, int key) : m_stream(stream), m_key(key) {}
+    DecryptInputStreamDecorator(InputDataStreamPtr stream, int key) : m_stream(std::move(stream)), m_key(key) {}
 
     bool IsEOF() const override;
 
@@ -15,6 +15,6 @@ public:
     std::streamsize ReadBlock(void *dstBuffer, std::streamsize size) override;
 
 private:
-    IInputDataStream & m_stream;
+    InputDataStreamPtr m_stream;
     int m_key;
 };

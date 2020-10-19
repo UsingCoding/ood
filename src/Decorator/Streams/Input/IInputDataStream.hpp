@@ -3,11 +3,15 @@
 #include <iostream>
 #include <string>
 #include <cstdint>
+#include <memory>
 
 class IInputDataStream
 {
 public:
+    typedef std::unique_ptr<IInputDataStream> InputDataStreamPtr;
+
     IInputDataStream() {};
+
     // Возвращает признак достижения конца данных потока
     // Выбрасывает исключение std::ios_base::failuer в случае ошибки
     virtual bool IsEOF() const = 0;

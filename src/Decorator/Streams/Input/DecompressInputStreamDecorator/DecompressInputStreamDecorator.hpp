@@ -6,7 +6,7 @@
 class DecompressInputStreamDecorator : public IInputDataStream
 {
 public:
-    DecompressInputStreamDecorator(IInputDataStream &stream) : m_stream(stream) {}
+    DecompressInputStreamDecorator(InputDataStreamPtr stream) : m_stream(std::move(stream)) {}
 
     bool IsEOF() const override;
 
@@ -15,5 +15,5 @@ public:
     std::streamsize ReadBlock(void *dstBuffer, std::streamsize size) override;
 
 private:
-    IInputDataStream & m_stream;
+    InputDataStreamPtr m_stream;
 };

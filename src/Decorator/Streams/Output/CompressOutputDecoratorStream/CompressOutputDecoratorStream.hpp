@@ -6,12 +6,12 @@
 class CompressOutputDecoratorStream : public IOutputDataStream
 {
 public:
-    CompressOutputDecoratorStream(IOutputDataStream &mStream) : m_stream(mStream) {}
+    CompressOutputDecoratorStream(OutputDataStreamPtr stream) : m_stream(std::move(stream)) {}
 
     void WriteByte(uint8_t data) override;
 
     void WriteBlock(const void *srcData, std::streamsize size) override;
 
 private:
-    IOutputDataStream & m_stream;
+    OutputDataStreamPtr m_stream;
 };
