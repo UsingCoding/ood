@@ -1,8 +1,4 @@
 #include "TransformApplication.hpp"
-#include "../Input/MemoryInputStream/MemoryInputStream.hpp"
-#include "../Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.hpp"
-#include "../Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.hpp"
-
 
 void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 {
