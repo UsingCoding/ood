@@ -1,31 +1,19 @@
 #include <sstream>
 #include "Input/MemoryInputStream/MemoryInputStream.hpp"
 #include "Output/IOutputDataStream.hpp"
-#include "Output/MemoryOutputStream/MemoryOutputStream.hpp"
 #include "Application/TransformApplication.hpp"
 #include "Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp"
+#include "Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp"
 
 int main()
 {
     std::istringstream inputStringStream("--encrypt 3 --encrypt 100500 --compress --encrypt input.dat output.dat");
     std::ostringstream outputStringStream;
 
-    auto inputStreamCreator = [](const std::string && name){
-        std::string str = "some info";
-        std::unique_ptr<std::vector<uint8_t>> data = std::make_unique<std::vector<uint8_t>>(str.begin(), str.end());
-
-        return std::make_unique<MemoryInputStream>(std::move(data));
-    };
-
-    auto outputStreamCreator = [](const std::string && name){
-        return std::make_unique<MemoryOutputStream>();
-    };
-
     Encoder encoder;
 
     TransformApplication application(
-        inputStreamCreator,
-        outputStreamCreator,
+        std::make_unique<MemoryStreamFactory>(),
         std::make_unique<CryptStreamDecoratorFactory>(encoder)
     );
 

@@ -5,19 +5,21 @@
 #include "../Input/IInputDataStream.hpp"
 #include "../Output/IOutputDataStream.hpp"
 #include "../Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp"
+#include "../Factory/StreamFactory/IStreamFactory.hpp"
 
 class TransformApplication
 {
 public:
     TransformApplication(
-            const std::function<std::unique_ptr<IInputDataStream>(const std::string &&)> &mInputStreamCreator,
-            const std::function<std::unique_ptr<IOutputDataStream>(const std::string &&)> &mOutputStreamCreator,
-            std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory);
+        std::unique_ptr<IStreamFactory> streamFactory,
+        std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory
+    ) :
+        m_streamFactory(std::move(streamFactory)),
+        m_cryptStreamDecoratorFactory(std::move(cryptStreamDecoratorFactory))
+        {}
 
     void run(std::istream & istream, std::ostream & ostream);
 private:
-    std::function<std::unique_ptr<IInputDataStream>(const std::string &&)> m_inputStreamCreator;
-    std::function<std::unique_ptr<IOutputDataStream>(const std::string &&)> m_outputStreamCreator;
-
+    std::unique_ptr<IStreamFactory> m_streamFactory;
     std::unique_ptr<ICryptStreamDecoratorFactory> m_cryptStreamDecoratorFactory;
 };

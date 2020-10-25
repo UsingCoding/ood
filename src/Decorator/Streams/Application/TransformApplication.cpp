@@ -1,23 +1,13 @@
 #include "TransformApplication.hpp"
 #include "../Input/MemoryInputStream/MemoryInputStream.hpp"
-#include "../Output/EncryptOutputDecoratorStream/EncryptOutputDecoratorStream.hpp"
 #include "../Output/CompressOutputDecoratorStream/CompressOutputDecoratorStream.hpp"
 #include "../Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.hpp"
-#include "../Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp"
 
-TransformApplication::TransformApplication(
-        const std::function<std::unique_ptr<IInputDataStream>(const std::string &&)> &mInputStreamCreator,
-        const std::function<std::unique_ptr<IOutputDataStream>(const std::string &&)> &mOutputStreamCreator,
-        std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory)
-        : m_inputStreamCreator(mInputStreamCreator),
-          m_outputStreamCreator(mOutputStreamCreator),
-          m_cryptStreamDecoratorFactory(std::move(cryptStreamDecoratorFactory))
-        {}
 
 void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 {
-    std::unique_ptr<IInputDataStream> inputStream = m_inputStreamCreator("name");
-    std::unique_ptr<IOutputDataStream> outputStream = m_outputStreamCreator("name");
+    auto inputStream = m_streamFactory->CreateInputStream("name");
+    auto outputStream = m_streamFactory->CreateOutputStream("name");
 
     std::string input;
 

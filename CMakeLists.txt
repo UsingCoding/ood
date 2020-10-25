@@ -121,7 +121,11 @@ add_executable(decorator-streams
         src/Decorator/Streams/Crypt/IEncoder.hpp
         src/Decorator/Streams/Crypt/IDecoder.hpp
         src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.cpp
-        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp)
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp
+        src/Decorator/Streams/Factory/StreamFactory/FileStreamFactory/FileStreamFactory.cpp
+        src/Decorator/Streams/Factory/StreamFactory/FileStreamFactory/FileStreamFactory.hpp
+        src/Decorator/Streams/Factory/StreamFactory/IStreamFactory.hpp src/Decorator/Streams/Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.cpp src/Decorator/Streams/Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
