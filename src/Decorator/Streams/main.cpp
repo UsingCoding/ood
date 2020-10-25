@@ -4,6 +4,7 @@
 #include "Application/TransformApplication.hpp"
 #include "Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp"
 #include "Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp"
+#include "Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp"
 
 int main()
 {
@@ -14,7 +15,8 @@ int main()
 
     TransformApplication application(
         std::make_unique<MemoryStreamFactory>(),
-        std::make_unique<CryptStreamDecoratorFactory>(encoder)
+        std::make_unique<CryptStreamDecoratorFactory>(encoder),
+        std::make_unique<CompressStreamDecoratorFactory>()
     );
 
     application.run(inputStringStream, outputStringStream);

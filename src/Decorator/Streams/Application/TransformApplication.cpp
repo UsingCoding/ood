@@ -30,7 +30,7 @@ void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 
         if (input == "--compress")
         {
-            outputStream = std::make_unique<CompressOutputDecoratorStream>(std::move(outputStream));
+            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
 
             continue;
         }
@@ -48,7 +48,7 @@ void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 
         if (input == "--decompress")
         {
-            inputStream = std::make_unique<DecompressInputStreamDecorator>(std::move(inputStream));
+            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
 
             continue;
         }
