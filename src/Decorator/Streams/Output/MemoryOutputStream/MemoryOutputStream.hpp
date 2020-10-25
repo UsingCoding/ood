@@ -7,10 +7,8 @@
 class MemoryOutputStream : public IOutputDataStream
 {
 public:
-    MemoryOutputStream()
-    {
-        m_buffer = std::make_unique<std::vector<uint8_t>>();
-    }
+    MemoryOutputStream(): m_buffer(std::make_unique<std::vector<uint8_t>>())
+    {}
 
     typedef std::unique_ptr<std::vector<uint8_t>> BufferType;
 
