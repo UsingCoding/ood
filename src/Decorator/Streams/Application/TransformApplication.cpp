@@ -1,52 +1,108 @@
+#include <Strings.hpp>
 #include "TransformApplication.hpp"
 
-void TransformApplication::run(std::istream & istream, std::ostream & ostream)
+std::unique_ptr<InputDefinition> TransformApplication::BuildInputDefinition(const InputArgs & inputArgs)
 {
-    auto inputStream = m_streamFactory->CreateInputStream("name");
-    auto outputStream = m_streamFactory->CreateOutputStream("name");
+    auto definition = std::make_unique<InputDefinition>();
 
-    std::string input;
-
-    while (!istream.eof())
+    for (int i = 0; i < inputArgs->size(); ++i)
     {
-        istream >> input;
+        auto & arg = (*inputArgs)[i];
 
-        std::cout << input << std::endl;
-
-        if (input == "--encrypt")
+        if (Strings::StartsWith(arg, "--"))
         {
-            int key;
+            std::string & nextArg = (*inputArgs)[i + 1];
 
-            istream >> key;
+            std::optional<std::string> value;
 
-            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), key);
+            if (Strings::StartsWith(nextArg, "--"))
+            {
+                value = std::nullopt;
+            }
+            else
+            {
+                value = nextArg;
+                ++i;
+            }
 
+            definition->AddOptionalArgument(arg, value);
             continue;
         }
 
-        if (input == "--compress")
-        {
-            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
-
-            continue;
-        }
-
-        if (input == "--decrypt")
-        {
-            int key;
-
-            istream >> key;
-
-            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), key);
-
-            continue;
-        }
-
-        if (input == "--decompress")
-        {
-            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
-
-            continue;
-        }
+        definition->AddPositionalArgument(arg);
     }
+
+    return std::move(definition);
+}
+
+void TransformApplication::Run(const InputArgs & inputArgs)
+{
+    auto definition = BuildInputDefinition(inputArgs);
+
+    DoRun(std::move(definition));
+}
+
+void TransformApplication::DoRun(std::unique_ptr<InputDefinition> inputDefinition)
+{
+    std::cout << "Run" << std::endl;
+
+    std::cout << "Opt args: " << inputDefinition->GetOptionalArgumentsCount() << std::endl;
+    std::cout << "Pos args: " << inputDefinition->GetPositionalArgumentsCount() << std::endl;
+
+    inputDefinition->DoForEachOptionalArgument([](const InputDefinition::OptionalArgumentsContainer::value_type & value){
+        std::cout << "Opt arg: " << value.first << ", value: " << value.second.value_or("undefined") << std::endl;
+    });
+
+    for (int i = 0; i < inputDefinition->GetPositionalArgumentsCount(); ++i)
+    {
+        std::cout << "Pos arg: " << inputDefinition->GetPositionalArgument(i) << std::endl;
+    }
+
+//    auto inputStream = m_streamFactory->CreateInputStream("name");
+//    auto outputStream = m_streamFactory->CreateOutputStream("name");
+//
+//    std::string input;
+//
+//    while (!istream.eof())
+//    {
+//        istream >> input;
+//
+//        std::cout << input << std::endl;
+//
+//        if (input == "--encrypt")
+//        {
+//            int key;
+//
+//            istream >> key;
+//
+//            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), key);
+//
+//            continue;
+//        }
+//
+//        if (input == "--compress")
+//        {
+//            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
+//
+//            continue;
+//        }
+//
+//        if (input == "--decrypt")
+//        {
+//            int key;
+//
+//            istream >> key;
+//
+//            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), key);
+//
+//            continue;
+//        }
+//
+//        if (input == "--decompress")
+//        {
+//            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
+//
+//            continue;
+//        }
+//    }
 }

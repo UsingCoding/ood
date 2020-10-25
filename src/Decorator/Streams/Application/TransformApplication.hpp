@@ -2,15 +2,19 @@
 
 #include <memory>
 #include <functional>
+#include <vector>
 #include "../Input/IInputDataStream.hpp"
 #include "../Output/IOutputDataStream.hpp"
 #include "../Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp"
 #include "../Factory/StreamFactory/IStreamFactory.hpp"
 #include "../Factory/CompressStreamDecoratorFactory/ICompressStreamDecoratorFactory.hpp"
+#include "Input/InputDefinition/InputDefinition.hpp"
 
 class TransformApplication
 {
 public:
+    typedef std::unique_ptr<std::vector<std::string>> InputArgs;
+
     TransformApplication(
         std::unique_ptr<IStreamFactory> streamFactory,
         std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory,
@@ -21,9 +25,12 @@ public:
         m_compressStreamDecoratorFactory(std::move(compressStreamDecoratorFactory))
         {}
 
-    void run(std::istream & istream, std::ostream & ostream);
+    void Run(const InputArgs & inputArgs);
 private:
     std::unique_ptr<IStreamFactory> m_streamFactory;
     std::unique_ptr<ICryptStreamDecoratorFactory> m_cryptStreamDecoratorFactory;
     std::unique_ptr<ICompressStreamDecoratorFactory> m_compressStreamDecoratorFactory;
+
+    void DoRun(std::unique_ptr<InputDefinition> inputDefinition);
+    std::unique_ptr<InputDefinition> BuildInputDefinition(const InputArgs & inputArgs);
 };

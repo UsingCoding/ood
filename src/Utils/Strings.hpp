@@ -21,4 +21,8 @@ namespace Strings
             return stream.str();
         }
     };
+
+    bool StartsWith(const std::string & value, const std::string & beginOfString);
+
+    std::string Trim(const std::string & value);
 }

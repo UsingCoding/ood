@@ -1,4 +1,3 @@
-#include <sstream>
 #include "Input/MemoryInputStream/MemoryInputStream.hpp"
 #include "Output/IOutputDataStream.hpp"
 #include "Application/TransformApplication.hpp"
@@ -6,11 +5,20 @@
 #include "Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp"
 #include "Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp"
 
-int main()
+TransformApplication::InputArgs ConvertArgsToInputArgs(int argc, const char **argv)
 {
-    std::istringstream inputStringStream("--encrypt 3 --encrypt 100500 --compress --encrypt input.dat output.dat");
-    std::ostringstream outputStringStream;
+    auto args = std::make_unique<std::vector<std::string>>();
 
+    for (int i = 0; i < argc; ++i)
+    {
+        args->push_back(argv[i]);
+    }
+
+    return std::move(args);
+}
+
+int main(int argc, char const *argv[])
+{
     Encoder encoder;
 
     TransformApplication application(
@@ -19,7 +27,5 @@ int main()
         std::make_unique<CompressStreamDecoratorFactory>()
     );
 
-    application.run(inputStringStream, outputStringStream);
-
-    std::cout << outputStringStream.str() << std::endl;
+    application.Run(ConvertArgsToInputArgs(argc, argv));
 }

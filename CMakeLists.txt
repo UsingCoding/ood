@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(ood)
 
-#set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
         strategy-task-1 src/Strategy/task1/main.cpp
@@ -130,7 +130,9 @@ add_executable(decorator-streams
         src/Decorator/Streams/Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp
         src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/ICompressStreamDecoratorFactory.hpp
         src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.cpp
-        src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp)
+        src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp
+        src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.cpp
+        src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.hpp src/Utils/Strings.cpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
