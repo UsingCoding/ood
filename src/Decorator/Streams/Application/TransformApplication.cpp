@@ -7,8 +7,12 @@
 
 TransformApplication::TransformApplication(
         const std::function<std::unique_ptr<IInputDataStream>(const std::string &&)> &mInputStreamCreator,
-        const std::function<std::unique_ptr<IOutputDataStream>(const std::string &&)> &mOutputStreamCreator)
-        : m_inputStreamCreator(mInputStreamCreator), m_outputStreamCreator(mOutputStreamCreator) {}
+        const std::function<std::unique_ptr<IOutputDataStream>(const std::string &&)> &mOutputStreamCreator,
+        std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory)
+        : m_inputStreamCreator(mInputStreamCreator),
+          m_outputStreamCreator(mOutputStreamCreator),
+          m_cryptStreamDecoratorFactory(std::move(cryptStreamDecoratorFactory))
+        {}
 
 void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 {
@@ -29,7 +33,7 @@ void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 
             istream >> key;
 
-            outputStream = std::make_unique<EncryptOutputDecoratorStream>(std::move(outputStream), key);
+            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), key);
 
             continue;
         }
@@ -47,7 +51,7 @@ void TransformApplication::run(std::istream & istream, std::ostream & ostream)
 
             istream >> key;
 
-            inputStream = std::make_unique<DecryptInputStreamDecorator>(std::move(inputStream), key);
+            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), key);
 
             continue;
         }

@@ -3,6 +3,7 @@
 #include "Output/IOutputDataStream.hpp"
 #include "Output/MemoryOutputStream/MemoryOutputStream.hpp"
 #include "Application/TransformApplication.hpp"
+#include "Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp"
 
 int main()
 {
@@ -20,7 +21,13 @@ int main()
         return std::make_unique<MemoryOutputStream>();
     };
 
-    TransformApplication application(inputStreamCreator, outputStreamCreator);
+    Encoder encoder;
+
+    TransformApplication application(
+        inputStreamCreator,
+        outputStreamCreator,
+        std::make_unique<CryptStreamDecoratorFactory>(encoder)
+    );
 
     application.run(inputStringStream, outputStringStream);
 

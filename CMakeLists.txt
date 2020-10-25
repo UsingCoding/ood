@@ -113,7 +113,15 @@ add_executable(decorator-streams
         src/Decorator/Streams/Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.cpp
         src/Decorator/Streams/Input/DecompressInputStreamDecorator/DecompressInputStreamDecorator.hpp
         src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.cpp
-        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp)
+        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp
+        src/Decorator/Streams/Crypt/Encoder.cpp
+        src/Decorator/Streams/Crypt/Encoder.hpp
+        src/Decorator/Streams/Compressor/Compressor.cpp
+        src/Decorator/Streams/Compressor/Compressor.hpp
+        src/Decorator/Streams/Crypt/IEncoder.hpp
+        src/Decorator/Streams/Crypt/IDecoder.hpp
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.cpp
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
