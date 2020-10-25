@@ -8,7 +8,9 @@ bool DecryptInputStreamDecorator::IsEOF() const
 
 uint8_t DecryptInputStreamDecorator::ReadByte()
 {
-    return 0;
+    auto byte = m_stream->ReadByte();
+
+    return m_decoder.Decode(byte, m_key);
 }
 
 std::streamsize DecryptInputStreamDecorator::ReadBlock(void *dstBuffer, std::streamsize size)

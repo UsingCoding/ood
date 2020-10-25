@@ -44,65 +44,56 @@ void TransformApplication::Run(const InputArgs & inputArgs)
 
 void TransformApplication::DoRun(std::unique_ptr<InputDefinition> inputDefinition)
 {
-    std::cout << "Run" << std::endl;
-
-    std::cout << "Opt args: " << inputDefinition->GetOptionalArgumentsCount() << std::endl;
-    std::cout << "Pos args: " << inputDefinition->GetPositionalArgumentsCount() << std::endl;
-
-    inputDefinition->DoForEachOptionalArgument([](const InputDefinition::OptionalArgumentsContainer::value_type & value){
-        std::cout << "Opt arg: " << value.first << ", value: " << value.second.value_or("undefined") << std::endl;
-    });
-
-    for (int i = 0; i < inputDefinition->GetPositionalArgumentsCount(); ++i)
+    if (inputDefinition->GetPositionalArgumentsCount() != 3)
     {
-        std::cout << "Pos arg: " << inputDefinition->GetPositionalArgument(i) << std::endl;
+        throw std::runtime_error("Invalid count of arguments");
     }
 
-//    auto inputStream = m_streamFactory->CreateInputStream("name");
-//    auto outputStream = m_streamFactory->CreateOutputStream("name");
-//
-//    std::string input;
-//
-//    while (!istream.eof())
-//    {
-//        istream >> input;
-//
-//        std::cout << input << std::endl;
-//
-//        if (input == "--encrypt")
-//        {
-//            int key;
-//
-//            istream >> key;
-//
-//            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), key);
-//
-//            continue;
-//        }
-//
-//        if (input == "--compress")
-//        {
-//            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
-//
-//            continue;
-//        }
-//
-//        if (input == "--decrypt")
-//        {
-//            int key;
-//
-//            istream >> key;
-//
-//            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), key);
-//
-//            continue;
-//        }
-//
-//        if (input == "--decompress")
-//        {
-//            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
-//
-//            continue;
-//        }
-//    }
+    auto inputStream = m_streamFactory->CreateInputStream(inputDefinition->GetPositionalArgument(1));
+    auto outputStream = m_streamFactory->CreateOutputStream(inputDefinition->GetPositionalArgument(2));
+
+    inputDefinition->DoForEachOptionalArgument([&](const InputDefinition::OptionalArgumentsContainer::value_type & value){
+        std::cout << "Do: " << value.first << " with value: " << value.second.value_or("no value") << std::endl;
+
+        if (value.first == "--encrypt")
+        {
+            if (!value.second.has_value())
+            {
+                throw std::runtime_error("No key provided for encryption");
+            }
+
+            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), std::stoi(value.second.value()));
+            return;
+        }
+
+        if (value.first == "--decrypt")
+        {
+            if (!value.second.has_value())
+            {
+                throw std::runtime_error("No key provided for decryption");
+            }
+
+            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), std::stoi(value.second.value()));
+            return;
+        }
+
+        if (value.first == "--compress")
+        {
+            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
+            return;
+        }
+
+        if (value.first == "--decompress")
+        {
+            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
+            return;
+        }
+    });
+
+    while (!inputStream->IsEOF())
+    {
+        auto byte = inputStream->ReadByte();
+
+        outputStream->WriteByte(byte);
+    }
 }
