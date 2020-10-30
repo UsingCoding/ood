@@ -136,3 +136,4 @@ add_executable(decorator-streams
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
+include_directories(src/Common)
