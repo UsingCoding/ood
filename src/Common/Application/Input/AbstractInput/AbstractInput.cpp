@@ -1,5 +1,6 @@
 #include <Strings.hpp>
 #include <Arrays.hpp>
+#include <list>
 #include "AbstractInput.hpp"
 
 using namespace Common::Console;
@@ -58,6 +59,7 @@ const std::optional<std::string> &AbstractInput::GetOption(const std::string &na
 void AbstractInput::Bind(std::unique_ptr<IInputDefinition> inputDefinition)
 {
     m_options.clear();
+    m_optionsOrder.clear();
     m_arguments.clear();
     m_inputDefinition = std::move(inputDefinition);
 
@@ -88,7 +90,8 @@ const IOptionsEnumerator &AbstractInput::GetOptionsEnumerator()
 
 void AbstractInput::ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const
 {
-    std::for_each(m_options.begin(), m_options.end(), [&function](const std::pair<std::string, std::optional<std::string>> & pair){
-        function(pair.first, pair.second);
-    });
+    std::for_each(m_optionsOrder.begin(), m_optionsOrder.end(), [&](const std::string & optionName){
+        auto it = m_options.find(optionName);
+        function(it->first, it->second);
+    });;
 }

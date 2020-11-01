@@ -33,5 +33,6 @@ namespace Common::Console
         std::unique_ptr<IInputDefinition> m_inputDefinition;
         std::map<std::string, std::optional<std::string>> m_arguments;
         std::multimap<std::string, std::optional<std::string>> m_options;
+        std::vector<std::string> m_optionsOrder;
     };
 }
