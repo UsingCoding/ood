@@ -1,4 +1,5 @@
 #include <Strings.hpp>
+#include <Arrays.hpp>
 #include "AbstractInput.hpp"
 
 using namespace Common::Console;
@@ -65,5 +66,17 @@ void AbstractInput::Bind(std::unique_ptr<IInputDefinition> inputDefinition)
 
 void AbstractInput::Validate()
 {
+    std::vector<std::string> missingArgs;
 
+    m_inputDefinition->DoForEachArgument([&](const InputArgument & argument){
+        if (argument.IsRequired() && m_arguments.find(argument.GetName()) == m_arguments.end())
+        {
+            missingArgs.push_back(argument.GetName());
+        }
+    });
+
+    if (missingArgs.size() != 0)
+    {
+        throw std::runtime_error("Not enough arguments, missing: " + Arrays::Join(missingArgs.begin(), missingArgs.end(), ", "));
+    }
 }

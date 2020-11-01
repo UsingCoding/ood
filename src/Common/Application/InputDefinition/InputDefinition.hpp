@@ -20,6 +20,8 @@ namespace Common::Console
         const InputArgument &GetArgument(int index) const override;
         const InputOption &GetOption(const std::string &name) const override;
 
+        void DoForEachArgument(std::function<void(const InputArgument &)> function) const override;
+
     private:
         std::map<std::string, InputArgument> m_arguments;
         std::map<std::string, InputOption> m_options;

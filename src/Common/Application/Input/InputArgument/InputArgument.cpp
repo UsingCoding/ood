@@ -16,3 +16,8 @@ const std::optional<std::string> &InputArgument::GetDefaultValue() const
 {
     return m_default;
 }
+
+bool InputArgument::IsRequired() const
+{
+    return m_mode == Mode::REQUIRED;
+}

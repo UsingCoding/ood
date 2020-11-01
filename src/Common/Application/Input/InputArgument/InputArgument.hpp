@@ -28,6 +28,8 @@ namespace Common::Console
 
         const std::optional<std::string> &GetDefaultValue() const;
 
+        bool IsRequired() const;
+
     private:
         std::string m_name;
         Mode m_mode;
