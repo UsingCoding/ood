@@ -30,6 +30,12 @@ private:
 
     void DoRun(Common::Console::IInput &input, Common::Console::IOutput &output) override;
 
+    void DecorateStreams(
+        std::unique_ptr<IInputDataStream> & inputDataStream,
+        std::unique_ptr<IOutputDataStream> & outputDataStream,
+        Common::Console::IInput &input
+    );
+
     std::unique_ptr<IStreamFactory> m_streamFactory;
     std::unique_ptr<ICryptStreamDecoratorFactory> m_cryptStreamDecoratorFactory;
     std::unique_ptr<ICompressStreamDecoratorFactory> m_compressStreamDecoratorFactory;

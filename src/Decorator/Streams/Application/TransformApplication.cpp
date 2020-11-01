@@ -40,38 +40,80 @@ void TransformApplication::DoRun(Common::Console::IInput &input, Common::Console
     auto inputStream = m_streamFactory->CreateInputStream(input.GetArgument((std::string) INPUT_FILE_KEY).value());
     auto outputStream = m_streamFactory->CreateOutputStream(input.GetArgument((std::string) OUTPUT_FILE_KEY).value());
 
-    input.GetOptionsEnumerator().ForEach([&](const std::string & name, const std::optional<std::string> & value){
-        (*output) << "Do: " << name << " with value: " << value.value_or("no value") << std::endl;
+    DecorateStreams(inputStream, outputStream, input);
 
-        if (name == "--encrypt")
-        {
-            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), std::stoi(value.value()));
-            return;
-        }
-
-        if (name == "--decrypt")
-        {
-            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), std::stoi(value.value()));
-            return;
-        }
-
-        if (name == "--compress")
-        {
-            outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
-            return;
-        }
-
-        if (name == "--decompress")
-        {
-            inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
-            return;
-        }
-    });
+    *(output) << "Reading:" << std::endl;
 
     while (!inputStream->IsEOF())
     {
         auto byte = inputStream->ReadByte();
 
+        std::cout << byte;
+
         outputStream->WriteByte(byte);
     }
+}
+
+void TransformApplication::DecorateStreams(
+    std::unique_ptr<IInputDataStream> & inputDataStream,
+    std::unique_ptr<IOutputDataStream> & outputDataStream,
+    Common::Console::IInput &input
+    )
+{
+    std::vector<std::pair<std::string, std::optional<std::string>>> inputDecorations;
+    std::vector<std::pair<std::string, std::optional<std::string>>> outputDecorations;
+
+    input.GetOptionsEnumerator().ForEach([&inputDecorations, &outputDecorations](const std::string & name, const std::optional<std::string> & value){
+        if (name == ENCRYPT_KEY)
+        {
+            outputDecorations.push_back(std::pair((std::string) ENCRYPT_KEY, value));
+            return;
+        }
+
+        if (name == DECRYPT_KEY)
+        {
+            inputDecorations.push_back(std::pair((std::string) DECRYPT_KEY, value));
+            return;
+        }
+
+        if (name == COMPRESS_KEY)
+        {
+            outputDecorations.push_back(std::pair((std::string) COMPRESS_KEY, value));
+            return;
+        }
+
+        if (name == DECOMPRESS_KEY)
+        {
+            inputDecorations.push_back(std::pair((std::string) DECOMPRESS_KEY, value));
+            return;
+        }
+    });
+
+    std::for_each(inputDecorations.begin(), inputDecorations.end(), [&](const std::pair<std::string, std::optional<std::string>> & decoration){
+        if (decoration.first == DECRYPT_KEY)
+        {
+            inputDataStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputDataStream), std::stoi(decoration.second.value()));
+            return;
+        }
+
+        if (decoration.first == DECOMPRESS_KEY)
+        {
+            inputDataStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputDataStream));
+            return;
+        }
+    });
+
+    std::for_each(outputDecorations.rbegin(), outputDecorations.rend(), [&](const std::pair<std::string, std::optional<std::string>> & decoration){
+        if (decoration.first == ENCRYPT_KEY)
+        {
+            outputDataStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputDataStream), std::stoi(decoration.second.value()));
+            return;
+        }
+
+        if (decoration.first == COMPRESS_KEY)
+        {
+            outputDataStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputDataStream));
+            return;
+        }
+    });
 }

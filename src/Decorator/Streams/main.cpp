@@ -6,6 +6,7 @@
 #include "Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp"
 #include "Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp"
 #include "Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp"
+#include "Factory/StreamFactory/FileStreamFactory/FileStreamFactory.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -15,7 +16,7 @@ int main(int argc, char const *argv[])
     Encoder encoder;
 
     TransformApplication application(
-        std::make_unique<MemoryStreamFactory>(),
+        std::make_unique<FileStreamFactory>(),
         std::make_unique<CryptStreamDecoratorFactory>(encoder),
         std::make_unique<CompressStreamDecoratorFactory>()
     );
