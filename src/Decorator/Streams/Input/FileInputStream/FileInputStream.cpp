@@ -9,7 +9,7 @@ uint8_t FileInputStream::ReadByte()
 {
     char byte;
 
-    if (!m_fin.read(&byte, 1))
+    if (!m_fin.read(&byte, 1) && (int) byte != 0)
     {
         throw std::ios_base::failure("Cannot read byte");
     }
