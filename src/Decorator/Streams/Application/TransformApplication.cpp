@@ -6,25 +6,29 @@ void TransformApplication::Configure(std::unique_ptr<Common::Console::IInputDefi
     definition->AddOption(Common::Console::InputOption(
         (std::string) COMPRESS_KEY,
         std::nullopt,
-        Common::Console::InputOption::ValueMode::VALUE_NONE
+        Common::Console::InputOption::ValueMode::VALUE_NONE,
+        Common::Console::InputOption::MultipleMode::MULTIPLE
     ));
 
     definition->AddOption(Common::Console::InputOption(
         (std::string) DECOMPRESS_KEY,
         std::nullopt,
-        Common::Console::InputOption::ValueMode::VALUE_NONE
+        Common::Console::InputOption::ValueMode::VALUE_NONE,
+        Common::Console::InputOption::MultipleMode::MULTIPLE
     ));
 
     definition->AddOption(Common::Console::InputOption(
         (std::string) ENCRYPT_KEY,
         std::nullopt,
-        Common::Console::InputOption::ValueMode::VALUE_REQUIRED
+        Common::Console::InputOption::ValueMode::VALUE_REQUIRED,
+        Common::Console::InputOption::MultipleMode::MULTIPLE
     ));
 
     definition->AddOption(Common::Console::InputOption(
         (std::string) DECRYPT_KEY,
         std::nullopt,
-        Common::Console::InputOption::ValueMode::VALUE_REQUIRED
+        Common::Console::InputOption::ValueMode::VALUE_REQUIRED,
+        Common::Console::InputOption::MultipleMode::MULTIPLE
     ));
 
     definition->AddArgument(Common::Console::InputArgument((std::string) INPUT_FILE_KEY));
