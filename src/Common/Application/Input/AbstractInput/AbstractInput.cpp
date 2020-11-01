@@ -1,6 +1,7 @@
 #include <Strings.hpp>
 #include <Arrays.hpp>
 #include <list>
+#include <iostream>
 #include "AbstractInput.hpp"
 
 using namespace Common::Console;
@@ -90,8 +91,18 @@ const IOptionsEnumerator &AbstractInput::GetOptionsEnumerator()
 
 void AbstractInput::ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const
 {
-    std::for_each(m_optionsOrder.begin(), m_optionsOrder.end(), [&](const std::string & optionName){
-        auto it = m_options.find(optionName);
-        function(it->first, it->second);
-    });;
+    std::for_each(m_optionsOrder.begin(), m_optionsOrder.end(), [&](const std::string & optionNameAndValue) {
+        auto parts = Strings::Split(optionNameAndValue, "=");
+
+        auto option = m_inputDefinition->GetOption(parts[0]);
+
+        if (parts[0].size() == 1)
+        {
+            option = m_inputDefinition->GetOptionForShortcut(parts[0][0]);
+        }
+
+        auto value = option.IsAcceptValue() && parts.size() > 1 ? parts[1] : option.GetDefaultValue();
+
+        function(parts[0], parts.size() == 1 ? std::nullopt : value);
+    });
 }
