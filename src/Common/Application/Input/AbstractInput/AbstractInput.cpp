@@ -21,7 +21,7 @@ const std::string &AbstractInput::GetArgument(const std::string &name) const
     }
 
     auto searchIterator = m_arguments.find(name);
-    return searchIterator != m_arguments.end() ? searchIterator->second : m_inputDefinition->GetArgument(name).GetDefaultValue();
+    return searchIterator != m_arguments.end() ? searchIterator->second : m_inputDefinition->GetArgument(name).GetDefaultValue().value();
 }
 
 const std::string &AbstractInput::GetArgument(int number) const
@@ -42,7 +42,7 @@ const std::string &AbstractInput::GetArgument(int number) const
     throw std::runtime_error(Strings::Concatenator() << "No argument found by number " << number);
 }
 
-const std::string &AbstractInput::GetOption(const std::string &name) const
+const std::optional<std::string> &AbstractInput::GetOption(const std::string &name) const
 {
     if (!HasOption(name))
     {
@@ -50,6 +50,7 @@ const std::string &AbstractInput::GetOption(const std::string &name) const
     }
 
     auto searchIterator = m_options.find(name);
+
     return searchIterator != m_options.end() ? searchIterator->second : m_inputDefinition->GetOption(name).GetDefaultValue();
 }
 
@@ -60,4 +61,9 @@ void AbstractInput::Bind(std::unique_ptr<IInputDefinition> inputDefinition)
     m_inputDefinition = std::move(inputDefinition);
 
     Parse();
+}
+
+void AbstractInput::Validate()
+{
+
 }

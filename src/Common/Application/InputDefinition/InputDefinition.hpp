@@ -13,9 +13,11 @@ namespace Common::Console
         void AddOption(const InputOption &option) override;
 
         bool HasArgument(const std::string &name) const override;
+        bool HasArgument(int index) const override;
         bool HasOption(const std::string &name) const override;
 
         const InputArgument &GetArgument(const std::string &name) const override;
+        const InputArgument &GetArgument(int index) const override;
         const InputOption &GetOption(const std::string &name) const override;
 
     private:

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 namespace Common::Console
 {
@@ -19,27 +20,40 @@ namespace Common::Console
             MULTIPLE
         };
 
-        InputOption(const std::string &name,
-                    const std::string &shortcut,
-                    ValueMode valueMode,
-                    MultipleMode multipleMode,
-                    const std::string &defaultValue);
+        InputOption(
+                const std::string &name,
+                const std::optional<std::string> &shortcut = std::nullopt,
+                ValueMode valueMode = ValueMode::VALUE_REQUIRED,
+                MultipleMode multipleMode = MultipleMode::SINGLE,
+                const std::optional<std::string> &defaultValue = std::nullopt
+        ):
+                m_name(name),
+                m_shortcut(shortcut),
+                m_valueMode(valueMode),
+                m_multipleMode(multipleMode),
+                m_defaultValue(defaultValue)
+        {}
 
         const std::string &GetName() const;
 
-        const std::string &GetShortcut() const;
+        const std::optional<std::string> &GetShortcut() const;
 
         ValueMode GetValueMode() const;
 
         MultipleMode getMultipleMode() const;
 
-        const std::string &GetDefaultValue() const;
+        const std::optional<std::string> &GetDefaultValue() const;
+
+        bool IsValueRequired() const;
+        bool IsValueOptional() const;
+        bool IsAcceptValue() const;
+        bool IsMultiple() const;
 
     private:
         std::string m_name;
-        std::string m_shortcut;
+        std::optional<std::string> m_shortcut;
         ValueMode m_valueMode;
         MultipleMode m_multipleMode;
-        std::string m_default;
+        std::optional<std::string> m_defaultValue;
     };
 }

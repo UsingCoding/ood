@@ -10,6 +10,11 @@ namespace Common::Console
     public:
         StreamOutput(std::ostream &ostream);
 
+        std::ostream & operator*()
+        {
+            return m_ostream;
+        }
+
     private:
         std::ostream & m_ostream;
     };
