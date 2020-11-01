@@ -13,7 +13,7 @@ bool AbstractInput::HasOption(const std::string &name) const
     return m_inputDefinition->HasOption(name);
 }
 
-const std::string &AbstractInput::GetArgument(const std::string &name) const
+const std::optional<std::string> &AbstractInput::GetArgument(const std::string &name) const
 {
     if (!HasArgument(name))
     {
@@ -21,10 +21,10 @@ const std::string &AbstractInput::GetArgument(const std::string &name) const
     }
 
     auto searchIterator = m_arguments.find(name);
-    return searchIterator != m_arguments.end() ? searchIterator->second : m_inputDefinition->GetArgument(name).GetDefaultValue().value();
+    return searchIterator != m_arguments.end() ? searchIterator->second : m_inputDefinition->GetArgument(name).GetDefaultValue();
 }
 
-const std::string &AbstractInput::GetArgument(int number) const
+const std::optional<std::string> &AbstractInput::GetArgument(int number) const
 {
     if (m_arguments.size() >= number)
     {

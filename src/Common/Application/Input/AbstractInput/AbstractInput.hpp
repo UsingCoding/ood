@@ -16,9 +16,9 @@ namespace Common::Console
 
         bool HasOption(const std::string &name) const override;
 
-        const std::string &GetArgument(const std::string &name) const override;
+        const std::optional<std::string> &GetArgument(const std::string &name) const override;
 
-        const std::string &GetArgument(int number) const override;
+        const std::optional<std::string> &GetArgument(int number) const override;
 
         const std::optional<std::string> &GetOption(const std::string &name) const override;
 
@@ -26,7 +26,7 @@ namespace Common::Console
         virtual void Parse() = 0;
 
         std::unique_ptr<IInputDefinition> m_inputDefinition;
-        std::map<std::string, std::string> m_arguments;
+        std::map<std::string, std::optional<std::string>> m_arguments;
         std::multimap<std::string, std::optional<std::string>> m_options;
     };
 }

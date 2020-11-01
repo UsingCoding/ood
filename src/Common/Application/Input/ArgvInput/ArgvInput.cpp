@@ -15,10 +15,6 @@ ArgvInput::ArgvInput(int argc, const char **argv)
     }
 }
 
-ArgvInput::ArgvInput(std::unique_ptr<ArgsContainer> container): m_tokens(std::move(container))
-{
-}
-
 void ArgvInput::Parse()
 {
     std::for_each(m_tokens->begin(), m_tokens->end(), [&](const std::string & token){

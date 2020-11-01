@@ -13,7 +13,7 @@ namespace Common::Console
         typedef std::vector<std::string> ArgsContainer;
 
         ArgvInput(int argc, char const *argv[]);
-        ArgvInput(std::unique_ptr<ArgsContainer> container);
+        ArgvInput(std::unique_ptr<ArgsContainer> container): m_tokens(std::move(container)) {}
 
     protected:
         void Parse() override;

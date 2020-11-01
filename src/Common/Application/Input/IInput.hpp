@@ -17,8 +17,8 @@ namespace Common::Console
         virtual bool HasArgument(const std::string & name) const = 0;
         virtual bool HasOption(const std::string & name) const = 0;
 
-        virtual const std::string & GetArgument(const std::string & name) const = 0;
-        virtual const std::string & GetArgument(int number) const = 0;
+        virtual const std::optional<std::string> & GetArgument(const std::string & name) const = 0;
+        virtual const std::optional<std::string> & GetArgument(int number) const = 0;
         virtual const std::optional<std::string> & GetOption(const std::string & name) const = 0;
     };
 }
