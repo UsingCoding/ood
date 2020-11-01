@@ -26,6 +26,7 @@ namespace Common::Console
         const IOptionsEnumerator &GetOptionsEnumerator() override;
 
         void ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const override;
+        void ForEachReverse(std::function<void(const std::string &, const std::optional<std::string> &)> function) const override;
 
     protected:
         virtual void Parse() = 0;
@@ -34,5 +35,10 @@ namespace Common::Console
         std::map<std::string, std::optional<std::string>> m_arguments;
         std::multimap<std::string, std::optional<std::string>> m_options;
         std::vector<std::string> m_optionsOrder;
+
+    private:
+        void ProceedEnumeration(
+            std::function<void(const std::string &, const std::optional<std::string> &)> function,
+            const std::string & optionNameAndValue) const;
     };
 }

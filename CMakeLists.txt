@@ -147,7 +147,12 @@ add_executable(decorator-streams
         src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.cpp
         src/Decorator/Streams/Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp
         src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.cpp
-        src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.hpp src/Utils/Strings.cpp)
+        src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.hpp
+        src/Utils/Strings.cpp
+        src/Decorator/Streams/Input/FileInputStream/FileInputStream.cpp
+        src/Decorator/Streams/Input/FileInputStream/FileInputStream.hpp
+        src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.cpp
+        src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
