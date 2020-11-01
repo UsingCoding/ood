@@ -121,7 +121,7 @@ void ArgvInput::AddLongOption(const std::string &name, const std::optional<std::
     }
 
     m_options.insert(std::pair(name, value));
-    m_optionsOrder.push_back(name);
+    m_optionsOrder.push_back(Strings::Concatenator() << name << "=" << value.value_or(""));
 }
 
 void ArgvInput::AddShortOption(char shortcut, const std::optional<std::string> &value)
