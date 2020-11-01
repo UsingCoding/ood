@@ -21,6 +21,16 @@ void InputDefinition::AddOption(const InputOption &option)
     }
 
     m_options.insert(std::make_pair(option.GetName(), option));
+
+    if (option.GetShortcut().has_value())
+    {
+        if (HasShortcut(option.GetShortcut().value()))
+        {
+            throw std::logic_error(Strings::Concatenator() << "Shortcut " << option.GetShortcut().value() << " already set for another option");
+        }
+
+        m_shortcuts[option.GetShortcut().value()] = option.GetName();
+    }
 }
 
 bool InputDefinition::HasArgument(const std::string &name) const
@@ -94,4 +104,21 @@ void InputDefinition::DoForEachArgument(std::function<void(const InputArgument &
     std::for_each(m_arguments.begin(), m_arguments.end(), [function](const std::pair<std::string, InputArgument> pair){
         function(pair.second);
     });
+}
+
+bool InputDefinition::HasShortcut(char shortcut) const
+{
+    return m_shortcuts.find(shortcut) != m_shortcuts.end();
+}
+
+const InputOption &InputDefinition::GetOptionForShortcut(char shortcut) const
+{
+    auto searchIterator = m_shortcuts.find(shortcut);
+
+    if (searchIterator == m_shortcuts.end())
+    {
+        throw std::invalid_argument(Strings::Concatenator() << "No option for shortcut " << shortcut <<" found");
+    }
+
+    return m_options.find(searchIterator->second)->second;
 }

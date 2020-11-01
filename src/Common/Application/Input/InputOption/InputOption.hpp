@@ -10,6 +10,7 @@ namespace Common::Console
     public:
         enum class ValueMode
         {
+            VALUE_NONE,
             VALUE_OPTIONAL,
             VALUE_REQUIRED
         };
@@ -22,7 +23,7 @@ namespace Common::Console
 
         InputOption(
                 const std::string &name,
-                const std::optional<std::string> &shortcut = std::nullopt,
+                const std::optional<char> &shortcut = std::nullopt,
                 ValueMode valueMode = ValueMode::VALUE_REQUIRED,
                 MultipleMode multipleMode = MultipleMode::SINGLE,
                 const std::optional<std::string> &defaultValue = std::nullopt
@@ -36,7 +37,7 @@ namespace Common::Console
 
         const std::string &GetName() const;
 
-        const std::optional<std::string> &GetShortcut() const;
+        const std::optional<char> &GetShortcut() const;
 
         ValueMode GetValueMode() const;
 
@@ -51,7 +52,7 @@ namespace Common::Console
 
     private:
         std::string m_name;
-        std::optional<std::string> m_shortcut;
+        std::optional<char> m_shortcut;
         ValueMode m_valueMode;
         MultipleMode m_multipleMode;
         std::optional<std::string> m_defaultValue;

@@ -22,8 +22,10 @@ namespace Common::Console
         void ParseArgument(const std::string & token);
         void ParseLongOption(const std::string & token);
         void ParseShortOption(const std::string & token);
+        void ParseShortOptionList(const std::string & token);
 
         void AddLongOption(const std::string & name, const std::optional<std::string> & value = std::nullopt);
+        void AddShortOption(char shortcut, const std::optional<std::string> & value = std::nullopt);
 
         std::unique_ptr<ArgsContainer> m_tokens;
 

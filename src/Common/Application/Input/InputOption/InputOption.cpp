@@ -7,7 +7,7 @@ const std::string &InputOption::GetName() const
     return m_name;
 }
 
-const std::optional<std::string> &InputOption::GetShortcut() const
+const std::optional<char> &InputOption::GetShortcut() const
 {
     return m_shortcut;
 }

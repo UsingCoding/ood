@@ -63,12 +63,35 @@ void ArgvInput::ParseLongOption(const std::string &token)
 
 void ArgvInput::ParseShortOption(const std::string &token)
 {
-    std::cout << "Parsing short option" << std::endl;
+    auto shortcutAndValue = token.substr(1, token.size() - 1);
+
+    if (shortcutAndValue.length() > 1)
+    {
+        if (m_inputDefinition->HasShortcut(shortcutAndValue[0]) && m_inputDefinition->GetOptionForShortcut(shortcutAndValue[0]).IsAcceptValue())
+        {
+            auto parts = Strings::Split(shortcutAndValue, (std::string) KEY_VALUE_SEPARATOR);
+
+            if (parts.size() == 1)
+            {
+                throw std::runtime_error(Strings::Concatenator() << "No value provided for shortcut " << shortcutAndValue[0]);
+            }
+
+            AddShortOption(parts[0][0], parts[1]);
+        }
+        else
+        {
+            ParseShortOptionList(shortcutAndValue);
+        }
+    }
+    else
+    {
+        AddShortOption(shortcutAndValue[0]);
+    }
 }
 
 void ArgvInput::AddLongOption(const std::string &name, const std::optional<std::string> &value)
 {
-        if (!m_inputDefinition->HasOption(name))
+    if (!m_inputDefinition->HasOption(name))
     {
         throw std::runtime_error(Strings::Concatenator() << "No option " << name << " exists");
     }
@@ -98,5 +121,29 @@ void ArgvInput::AddLongOption(const std::string &name, const std::optional<std::
     }
 
     m_options.insert(std::pair(name, value));
+}
+
+void ArgvInput::AddShortOption(char shortcut, const std::optional<std::string> &value)
+{
+    AddLongOption(m_inputDefinition->GetOptionForShortcut(shortcut).GetName(), value);
+}
+
+void ArgvInput::ParseShortOptionList(const std::string &token)
+{
+    std::for_each(token.begin(), token.end(), [&](char symbol){
+        if (!m_inputDefinition->HasShortcut(symbol))
+        {
+            throw std::invalid_argument(Strings::Concatenator() << "No option for shortcut " << symbol <<" found");
+        }
+
+        auto option = m_inputDefinition->GetOptionForShortcut(symbol);
+
+        if (option.IsValueRequired())
+        {
+            throw std::runtime_error(Strings::Concatenator() << "You cannot put in shortcut list option with required value");
+        }
+
+        AddLongOption(option.GetName());
+    });
 }
 
