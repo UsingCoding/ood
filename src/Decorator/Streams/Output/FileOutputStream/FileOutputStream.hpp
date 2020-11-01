@@ -8,7 +8,7 @@ class FileOutputStream : public IOutputDataStream
 public:
     FileOutputStream(const std::string & name)
     {
-        m_fout.open(name);
+        m_fout.open(name, std::ios::binary);
 
         if (!m_fout.is_open())
         {

@@ -7,7 +7,9 @@ bool DecompressInputStreamDecorator::IsEOF() const
 
 uint8_t DecompressInputStreamDecorator::ReadByte()
 {
-    return 0;
+    auto byte = m_stream->ReadByte();
+
+    return byte;
 }
 
 std::streamsize DecompressInputStreamDecorator::ReadBlock(void *dstBuffer, std::streamsize size)

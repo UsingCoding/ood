@@ -7,14 +7,22 @@ bool FileInputStream::IsEOF() const
 
 uint8_t FileInputStream::ReadByte()
 {
-    char byte[1] = {};
+    char byte;
 
-    m_fin.read(byte, sizeof(byte));
+    if (!m_fin.read(&byte, 1))
+    {
+        throw std::ios_base::failure("Cannot read byte");
+    }
 
-    return byte[0];
+    return (uint8_t) byte;
 }
 
 std::streamsize FileInputStream::ReadBlock(void *dstBuffer, std::streamsize size)
 {
-    return 0;
+    if (!m_fin.read(static_cast<char*>(dstBuffer), size))
+    {
+        throw std::ios_base::failure("Cannot read block");
+    }
+
+    return m_fin.gcount();
 }
