@@ -1,89 +1,63 @@
 #include <Strings.hpp>
 #include "TransformApplication.hpp"
 
-std::unique_ptr<InputDefinition> TransformApplication::BuildInputDefinition(const InputArgs & inputArgs)
+void TransformApplication::Configure(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
-    auto definition = std::make_unique<InputDefinition>();
+    definition->AddOption(Common::Console::InputOption(
+        (std::string) COMPRESS_KEY,
+        std::nullopt,
+        Common::Console::InputOption::ValueMode::VALUE_NONE
+    ));
 
-    for (int i = 0; i < inputArgs->size(); ++i)
-    {
-        auto & arg = (*inputArgs)[i];
+    definition->AddOption(Common::Console::InputOption(
+        (std::string) DECOMPRESS_KEY,
+        std::nullopt,
+        Common::Console::InputOption::ValueMode::VALUE_NONE
+    ));
 
-        if (Strings::StartsWith(arg, "--"))
-        {
-            std::string & nextArg = (*inputArgs)[i + 1];
+    definition->AddOption(Common::Console::InputOption(
+        (std::string) ENCRYPT_KEY,
+        std::nullopt,
+        Common::Console::InputOption::ValueMode::VALUE_REQUIRED
+    ));
 
-            std::optional<std::string> value;
+    definition->AddOption(Common::Console::InputOption(
+        (std::string) DECRYPT_KEY,
+        std::nullopt,
+        Common::Console::InputOption::ValueMode::VALUE_REQUIRED
+    ));
 
-            if (Strings::StartsWith(nextArg, "--"))
-            {
-                value = std::nullopt;
-            }
-            else
-            {
-                value = nextArg;
-                ++i;
-            }
-
-            definition->AddOptionalArgument(arg, value);
-            continue;
-        }
-
-        definition->AddPositionalArgument(arg);
-    }
-
-    return std::move(definition);
+    definition->AddArgument(Common::Console::InputArgument((std::string) INPUT_FILE_KEY));
+    definition->AddArgument(Common::Console::InputArgument((std::string) OUTPUT_FILE_KEY));
 }
 
-void TransformApplication::Run(const InputArgs & inputArgs)
+void TransformApplication::DoRun(Common::Console::IInput &input, Common::Console::IOutput &output)
 {
-    auto definition = BuildInputDefinition(inputArgs);
+    auto inputStream = m_streamFactory->CreateInputStream(input.GetArgument((std::string) INPUT_FILE_KEY).value());
+    auto outputStream = m_streamFactory->CreateOutputStream(input.GetArgument((std::string) OUTPUT_FILE_KEY).value());
 
-    DoRun(std::move(definition));
-}
+    input.GetOptionsEnumerator().ForEach([&](const std::string & name, const std::optional<std::string> & value){
+        (*output) << "Do: " << name << " with value: " << value.value_or("no value") << std::endl;
 
-void TransformApplication::DoRun(std::unique_ptr<InputDefinition> inputDefinition)
-{
-    if (inputDefinition->GetPositionalArgumentsCount() != 3)
-    {
-        throw std::runtime_error("Invalid count of arguments");
-    }
-
-    auto inputStream = m_streamFactory->CreateInputStream(inputDefinition->GetPositionalArgument(1));
-    auto outputStream = m_streamFactory->CreateOutputStream(inputDefinition->GetPositionalArgument(2));
-
-    inputDefinition->DoForEachOptionalArgument([&](const InputDefinition::OptionalArgumentsContainer::value_type & value){
-        std::cout << "Do: " << value.first << " with value: " << value.second.value_or("no value") << std::endl;
-
-        if (value.first == "--encrypt")
+        if (name == "--encrypt")
         {
-            if (!value.second.has_value())
-            {
-                throw std::runtime_error("No key provided for encryption");
-            }
-
-            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), std::stoi(value.second.value()));
+            outputStream = m_cryptStreamDecoratorFactory->DecorateEncryptStream(std::move(outputStream), std::stoi(value.value()));
             return;
         }
 
-        if (value.first == "--decrypt")
+        if (name == "--decrypt")
         {
-            if (!value.second.has_value())
-            {
-                throw std::runtime_error("No key provided for decryption");
-            }
-
-            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), std::stoi(value.second.value()));
+            inputStream = m_cryptStreamDecoratorFactory->DecorateDecryptStream(std::move(inputStream), std::stoi(value.value()));
             return;
         }
 
-        if (value.first == "--compress")
+        if (name == "--compress")
         {
             outputStream = m_compressStreamDecoratorFactory->DecorateCompressStream(std::move(outputStream));
             return;
         }
 
-        if (value.first == "--decompress")
+        if (name == "--decompress")
         {
             inputStream = m_compressStreamDecoratorFactory->DecorateDecompressStream(std::move(inputStream));
             return;

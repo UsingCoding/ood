@@ -97,6 +97,21 @@ add_executable(decorator-beverage
 
 
 add_executable(decorator-streams
+        src/Common/Application/Input/ArgvInput/ArgvInput.cpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.cpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.hpp
+        src/Common/Application/InputDefinition/IInputDefinition.hpp
+        src/Common/Application/InputDefinition/InputDefinition.cpp
+        src/Common/Application/InputDefinition/InputDefinition.hpp
+        src/Common/Application/Application.cpp
+        src/Common/Application/Input/InputArgument/InputArgument.cpp
+        src/Common/Application/Input/InputOption/InputOption.cpp
+        src/Common/Application/Input/AbstractInput/IOptionsEnumerator.hpp
         src/Decorator/Streams/main.cpp
         src/Decorator/Streams/Input/IInputDataStream.hpp
         src/Decorator/Streams/Output/IOutputDataStream.hpp

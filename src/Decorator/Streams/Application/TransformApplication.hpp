@@ -3,6 +3,8 @@
 #include <memory>
 #include <functional>
 #include <vector>
+#include <Application/Application.hpp>
+
 #include "../Input/IInputDataStream.hpp"
 #include "../Output/IOutputDataStream.hpp"
 #include "../Factory/CryptStreamDecoratorFactory/ICryptStreamDecoratorFactory.hpp"
@@ -10,11 +12,9 @@
 #include "../Factory/CompressStreamDecoratorFactory/ICompressStreamDecoratorFactory.hpp"
 #include "Input/InputDefinition/InputDefinition.hpp"
 
-class TransformApplication
+class TransformApplication : public Common::Application
 {
 public:
-    typedef std::unique_ptr<std::vector<std::string>> InputArgs;
-
     TransformApplication(
         std::unique_ptr<IStreamFactory> streamFactory,
         std::unique_ptr<ICryptStreamDecoratorFactory> cryptStreamDecoratorFactory,
@@ -25,12 +25,20 @@ public:
         m_compressStreamDecoratorFactory(std::move(compressStreamDecoratorFactory))
         {}
 
-    void Run(const InputArgs & inputArgs);
 private:
+    void Configure(std::unique_ptr<Common::Console::IInputDefinition> &definition) override;
+
+    void DoRun(Common::Console::IInput &input, Common::Console::IOutput &output) override;
+
     std::unique_ptr<IStreamFactory> m_streamFactory;
     std::unique_ptr<ICryptStreamDecoratorFactory> m_cryptStreamDecoratorFactory;
     std::unique_ptr<ICompressStreamDecoratorFactory> m_compressStreamDecoratorFactory;
 
-    void DoRun(std::unique_ptr<InputDefinition> inputDefinition);
-    std::unique_ptr<InputDefinition> BuildInputDefinition(const InputArgs & inputArgs);
+    constexpr static std::string_view COMPRESS_KEY = "compress";
+    constexpr static std::string_view DECOMPRESS_KEY = "decompress";
+    constexpr static std::string_view ENCRYPT_KEY = "encrypt";
+    constexpr static std::string_view DECRYPT_KEY = "decrypt";
+
+    constexpr static std::string_view INPUT_FILE_KEY = "input_file";
+    constexpr static std::string_view OUTPUT_FILE_KEY = "output_file";
 };

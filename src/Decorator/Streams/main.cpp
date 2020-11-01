@@ -1,3 +1,5 @@
+#include <Application/Input/ArgvInput/ArgvInput.hpp>
+#include <Application/Output/StreamOutput/StreamOutput.hpp>
 #include "Input/MemoryInputStream/MemoryInputStream.hpp"
 #include "Output/IOutputDataStream.hpp"
 #include "Application/TransformApplication.hpp"
@@ -5,20 +7,11 @@
 #include "Factory/StreamFactory/MemoryStreamFactory/MemoryStreamFactory.hpp"
 #include "Factory/CompressStreamDecoratorFactory/CompressStreamDecoratorFactory.hpp"
 
-TransformApplication::InputArgs ConvertArgsToInputArgs(int argc, const char **argv)
-{
-    auto args = std::make_unique<std::vector<std::string>>();
-
-    for (int i = 0; i < argc; ++i)
-    {
-        args->push_back(argv[i]);
-    }
-
-    return std::move(args);
-}
-
 int main(int argc, char const *argv[])
 {
+    Common::Console::ArgvInput input(argc, argv);
+    Common::Console::StreamOutput output(std::cout);
+
     Encoder encoder;
 
     TransformApplication application(
@@ -27,5 +20,5 @@ int main(int argc, char const *argv[])
         std::make_unique<CompressStreamDecoratorFactory>()
     );
 
-    application.Run(ConvertArgsToInputArgs(argc, argv));
+    application.Run(input, output);
 }
