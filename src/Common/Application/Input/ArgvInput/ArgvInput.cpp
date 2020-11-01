@@ -52,8 +52,6 @@ void ArgvInput::ParseLongOption(const std::string &token)
 {
     auto parts = Strings::Split(token.substr(2, token.size() - 2), (std::string) KEY_VALUE_SEPARATOR);
 
-    std::cout << "Debug: " << parts.size() << std::endl;
-
     if (parts.size() != 1)
     {
         AddLongOption(parts[0], parts[1]);

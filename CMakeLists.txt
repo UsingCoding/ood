@@ -134,6 +134,26 @@ add_executable(decorator-streams
         src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.cpp
         src/Decorator/Streams/Application/Input/InputDefinition/InputDefinition.hpp src/Utils/Strings.cpp)
 
+add_executable(common-test
+        src/CommonTest/Application/TestApplication.cpp
+        src/CommonTest/Application/TestApplication.hpp
+        src/CommonTest/main.cpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.cpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.cpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.hpp
+        src/Common/Application/InputDefinition/IInputDefinition.hpp
+        src/Common/Application/InputDefinition/InputDefinition.cpp
+        src/Common/Application/InputDefinition/InputDefinition.hpp
+        src/Common/Application/Application.cpp
+        src/Common/Application/Input/InputArgument/InputArgument.cpp
+        src/Common/Application/Input/InputOption/InputOption.cpp
+        src/Utils/Strings.cpp src/Utils/Arrays.hpp)
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
