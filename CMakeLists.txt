@@ -154,6 +154,8 @@ add_executable(decorator-streams
         src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.cpp
         src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.hpp)
 
+add_executable(adapter src/Adapter/src/main.cpp src/Adapter/src/GraphicsLib/GraphicLib.hpp src/Adapter/src/ShapeDrawningLib/ShapeDrawningLib.hpp src/Adapter/src/ModernGraphicsLib/ModernGraphicsLib.hpp src/Adapter/src/App/App.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapter.cpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapter.hpp)
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
