@@ -80,3 +80,15 @@ void AbstractInput::Validate()
         throw std::runtime_error("Not enough arguments, missing: " + Arrays::Join(missingArgs.begin(), missingArgs.end(), ", "));
     }
 }
+
+const IOptionsEnumerator &AbstractInput::GetOptionsEnumerator()
+{
+    return *this;
+}
+
+void AbstractInput::ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const
+{
+    std::for_each(m_options.begin(), m_options.end(), [&function](const std::pair<std::string, std::optional<std::string>> & pair){
+        function(pair.first, pair.second);
+    });
+}

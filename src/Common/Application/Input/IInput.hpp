@@ -5,6 +5,7 @@
 #include <Application/InputDefinition/IInputDefinition.hpp>
 #include <memory>
 #include <optional>
+#include <Application/Input/AbstractInput/IOptionsEnumerator.hpp>
 
 namespace Common::Console
 {
@@ -20,5 +21,7 @@ namespace Common::Console
         virtual const std::optional<std::string> & GetArgument(const std::string & name) const = 0;
         virtual const std::optional<std::string> & GetArgument(int number) const = 0;
         virtual const std::optional<std::string> & GetOption(const std::string & name) const = 0;
+
+        virtual const IOptionsEnumerator & GetOptionsEnumerator() = 0;
     };
 }

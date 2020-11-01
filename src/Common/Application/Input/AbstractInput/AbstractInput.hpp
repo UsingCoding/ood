@@ -2,10 +2,11 @@
 
 #include <Application/Input/IInput.hpp>
 #include <map>
+#include "IOptionsEnumerator.hpp"
 
 namespace Common::Console
 {
-    class AbstractInput : public IInput
+    class AbstractInput : public IInput, IOptionsEnumerator
     {
     public:
         void Bind(std::unique_ptr<IInputDefinition> inputDefinition) override;
@@ -21,6 +22,10 @@ namespace Common::Console
         const std::optional<std::string> &GetArgument(int number) const override;
 
         const std::optional<std::string> &GetOption(const std::string &name) const override;
+
+        const IOptionsEnumerator &GetOptionsEnumerator() override;
+
+        void ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const override;
 
     protected:
         virtual void Parse() = 0;
