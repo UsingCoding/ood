@@ -3,6 +3,7 @@
 #include "../ShapeDrawningLib/ShapeDrawningLib.hpp"
 #include "../ModernGraphicsLib/ModernGraphicsLib.hpp"
 #include "../GraphicLibAdapter/GraphicLibAdapter.hpp"
+#include "../GraphicLibAdapter/GraphicLibAdapterV2.hpp"
 
 namespace app
 {
