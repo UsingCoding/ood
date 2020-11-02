@@ -41,10 +41,10 @@ namespace shape_drawing_lib
         Point m_point3;
     };
 
-    class LeftTopTriangle : public ICanvasDrawable
+    class TwoCoordsTriangle : public ICanvasDrawable
     {
     public:
-        LeftTopTriangle(const Point &point1, const Point &point2)
+        TwoCoordsTriangle(const Point &point1, const Point &point2)
                 : m_point1(point1), m_point2(point2) {}
 
         void Draw(graphics_lib::ICanvas & canvas)const override

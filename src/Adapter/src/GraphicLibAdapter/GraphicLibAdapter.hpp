@@ -19,60 +19,27 @@ namespace app
             {
                 return modern_graphics_lib::CPoint(m_x, m_y);
             }
-
-            friend bool operator ==(const Coord & c1, const Coord & c2)
-            {
-                return c1.m_x == c2.m_x && c1.m_y == c2.m_y;
-            }
         };
 
     public:
-        GraphicLibAdapter(modern_graphics_lib::CModernGraphicsRenderer &renderer) : m_renderer(renderer) {}
+        GraphicLibAdapter(modern_graphics_lib::CModernGraphicsRenderer &renderer) : m_renderer(renderer)
+        {
+            m_renderer.BeginDraw();
+        }
 
         void MoveTo(int x, int y) override
         {
-            Coord coord(x, y);
-
-            if (m_beginCoords == std::nullopt)
-            {
-                m_beginCoords = coord;
-                m_currCoord = coord;
-                m_renderer.BeginDraw();
-                return;
-            }
-
-            m_currCoord = coord;
+            m_currCoord = {x, y};
         }
 
         void LineTo(int x, int y) override
         {
-            Coord coord(x, y);
-
-            if (m_beginCoords == std::nullopt)
-            {
-                m_beginCoords = {0, 0};
-                m_currCoord = {x, y};
-
-                m_renderer.BeginDraw();
-                m_renderer.DrawLine(m_beginCoords.value(), m_currCoord.value());
-                return;
-            }
-
-            m_renderer.DrawLine(m_currCoord.value(), coord);
-
-            if (m_beginCoords.value() == coord)
-            {
-                m_renderer.EndDraw();
-                m_beginCoords = std::nullopt;
-                m_currCoord = std::nullopt;
-                return;
-            }
+            m_renderer.DrawLine(m_currCoord.value_or(Coord{0, 0}), {x, y});
         }
 
     private:
         modern_graphics_lib::CModernGraphicsRenderer & m_renderer;
         std::optional<Coord> m_currCoord = std::nullopt;
-        std::optional<Coord> m_beginCoords = std::nullopt;
     };
 }
 
