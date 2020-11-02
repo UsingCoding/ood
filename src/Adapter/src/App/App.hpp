@@ -12,9 +12,11 @@ namespace app
         using namespace shape_drawing_lib;
 
         CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
+        LeftTopTriangle leftTopTriangle({10, 15 }, {100, 200 });
         CRectangle rectangle({ 30, 40 }, 18, 24);
 
         painter.Draw(triangle);
+        painter.Draw(leftTopTriangle);
         painter.Draw(rectangle);
     }
 

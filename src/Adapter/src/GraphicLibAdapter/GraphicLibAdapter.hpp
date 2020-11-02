@@ -11,7 +11,6 @@ namespace app
     private:
         struct Coord
         {
-            Coord() {}
             Coord(int x, int y) : m_x(x), m_y(y) {}
 
             int m_x, m_y;
@@ -24,12 +23,6 @@ namespace app
             friend bool operator ==(const Coord & c1, const Coord & c2)
             {
                 return c1.m_x == c2.m_x && c1.m_y == c2.m_y;
-            }
-
-            void SetNewCoords(int x, int y)
-            {
-                m_x = x;
-                m_y = y;
             }
         };
 
@@ -54,6 +47,16 @@ namespace app
         void LineTo(int x, int y) override
         {
             Coord coord(x, y);
+
+            if (m_beginCoords == std::nullopt)
+            {
+                m_beginCoords = {0, 0};
+                m_currCoord = {x, y};
+
+                m_renderer.BeginDraw();
+                m_renderer.DrawLine(m_beginCoords.value(), m_currCoord.value());
+                return;
+            }
 
             m_renderer.DrawLine(m_currCoord.value(), coord);
 
