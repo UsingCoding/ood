@@ -13,7 +13,15 @@ namespace modern_graphics_lib
         int y;
     };
 
-// Класс для современного рисования графики
+    class CRGBAColor
+    {
+    public:
+        CRGBAColor(float r, float g, float b, float a):r(r), g(g), b(b), a(a){}
+        float r, g, b, a;
+    };
+
+
+    // Класс для современного рисования графики
     class CModernGraphicsRenderer
     {
     public:
@@ -41,7 +49,7 @@ namespace modern_graphics_lib
         }
 
         // Выполняет рисование линии
-        void DrawLine(const CPoint & start, const CPoint & end)
+        void DrawLine(const CPoint & start, const CPoint & end, const CRGBAColor& color)
         {
             if (!m_drawing)
             {
@@ -51,7 +59,16 @@ namespace modern_graphics_lib
             m_out << "  <line fromX=\"" << start.x
                 << "\" fromY=\"" << start.y
                 << "\" toX=\"" << end.x
-                << "\" toY=\"" << end.y << "\"/>" << std::endl;
+                << "\" toY=\"" << end.y << "\">"
+                << std::endl
+                << "    <color r=\"" << color.r
+                << "\" g=\"" << color.g
+                << "\" b=\"" << color.b
+                << "\" b=\"" << color.b
+                << "\" a=\"" << color.a << "\"/>"
+                << std::endl
+                << "  <line/>"
+                << std::endl;
         }
 
         // Этот метод должен быть вызван в конце рисования

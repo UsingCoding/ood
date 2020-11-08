@@ -14,6 +14,8 @@ namespace shape_drawing_lib
     class ICanvasDrawable
     {
     public:
+        static const uint32_t DEFAULT_COLOR = 0x000000;
+
         virtual void Draw(graphics_lib::ICanvas & canvas)const = 0;
         virtual ~ICanvasDrawable() = default;
     };
@@ -21,11 +23,13 @@ namespace shape_drawing_lib
     class CTriangle : public ICanvasDrawable
     {
     public:
-        CTriangle(const Point &point1, const Point &point2, const Point &point3)
-        : m_point1(point1), m_point2(point2), m_point3(point3) {}
+        CTriangle(const Point &point1, const Point &point2, const Point &point3, uint32_t color = DEFAULT_COLOR)
+        : m_point1(point1), m_point2(point2), m_point3(point3), m_color(color) {}
 
         void Draw(graphics_lib::ICanvas & canvas)const override
         {
+            canvas.SetColor(m_color);
+
             canvas.MoveTo(m_point1.x, m_point1.y);
             canvas.LineTo(m_point2.x, m_point2.y);
 
@@ -39,16 +43,19 @@ namespace shape_drawing_lib
         Point m_point1;
         Point m_point2;
         Point m_point3;
+        uint32_t m_color;
     };
 
     class TwoCoordsTriangle : public ICanvasDrawable
     {
     public:
-        TwoCoordsTriangle(const Point &point1, const Point &point2)
-                : m_point1(point1), m_point2(point2) {}
+        TwoCoordsTriangle(const Point &point1, const Point &point2, uint32_t color = DEFAULT_COLOR)
+                : m_point1(point1), m_point2(point2), m_color(color) {}
 
         void Draw(graphics_lib::ICanvas & canvas)const override
         {
+            canvas.SetColor(m_color);
+
             canvas.LineTo(m_point1.x, m_point1.y);
 
             canvas.MoveTo(m_point1.x, m_point1.y);
@@ -60,15 +67,19 @@ namespace shape_drawing_lib
     private:
         Point m_point1;
         Point m_point2;
+        uint32_t m_color;
     };
 
     class CRectangle : public ICanvasDrawable
     {
     public:
-        CRectangle(const Point &leftTop, int width, int height) : m_leftTop(leftTop), m_width(width), m_height(height) {}
+        CRectangle(const Point &leftTop, int width, int height, uint32_t color = DEFAULT_COLOR)
+                : m_leftTop(leftTop), m_width(width), m_height(height), m_color(color) {}
 
         void Draw(graphics_lib::ICanvas & canvas)const override
         {
+            canvas.SetColor(m_color);
+
             canvas.MoveTo(m_leftTop.x, m_leftTop.y);
             canvas.LineTo(m_leftTop.x + m_width, m_leftTop.y);
 
@@ -85,6 +96,7 @@ namespace shape_drawing_lib
         Point m_leftTop;
         int m_width;
         int m_height;
+        uint32_t m_color;
     };
 
     // Художник, способный рисовать ICanvasDrawable-объекты на ICanvas

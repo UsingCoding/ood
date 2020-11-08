@@ -11,9 +11,9 @@ namespace app
     {
         using namespace shape_drawing_lib;
 
-        TwoCoordsTriangle twoCoordsTriangle({10, 15 }, {100, 200 });
-        CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
-        CRectangle rectangle({ 30, 40 }, 18, 24);
+        TwoCoordsTriangle twoCoordsTriangle({10, 15}, {100, 200}, 0x002211);
+        CTriangle triangle({10, 15}, {100, 200}, {150, 250});
+        CRectangle rectangle({30, 40}, 18, 24, 0x002233);
 
         painter.Draw(twoCoordsTriangle);
         painter.Draw(triangle);
