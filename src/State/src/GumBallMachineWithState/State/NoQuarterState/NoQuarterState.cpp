@@ -6,6 +6,7 @@ GumBallWithState::NoQuarterState::NoQuarterState(IGumBallMachine &gumballMachine
 void GumBallWithState::NoQuarterState::InsertQuarter()
 {
     std::cout << "You inserted a quarter\n";
+    m_gumballMachine.AddCoin();
     m_gumballMachine.SetHasQuarterState();
 }
 

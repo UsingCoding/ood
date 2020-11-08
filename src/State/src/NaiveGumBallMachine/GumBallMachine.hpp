@@ -32,6 +32,7 @@ namespace Naive
                 case State::NoQuarter:
                     std::cout << "You inserted a quarter\n";
                     m_state = State::HasQuarter;
+                    m_coinsCount++;
                     break;
                 case State::HasQuarter:
                     m_coinsCount++;
@@ -118,20 +119,22 @@ namespace Naive
                     cout << "A gumball comes rolling out the slot\n";
                     --m_count;
 
-                    if (m_coinsCount > m_count)
-                    {
-                        m_state = State::HasQuarter;
-                        break;
-                    }
-
                     if (m_count == 0)
                     {
                         cout << "Oops, out of gumballs\n";
                         m_state = State::SoldOut;
+                        m_coinsCount = 0;
                     }
                     else
                     {
+                        if (m_coinsCount > m_count)
+                        {
+                            m_state = State::HasQuarter;
+                            break;
+                        }
+
                         m_state = State::NoQuarter;
+                        m_coinsCount = 0;
                     }
                     break;
                 case State::NoQuarter:
