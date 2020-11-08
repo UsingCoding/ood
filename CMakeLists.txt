@@ -172,7 +172,19 @@ add_executable(state
         src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.cpp
         src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
         src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachine.cpp
-        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/IGumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.cpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/State/IState.hpp)
+        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachine.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/IGumBallMachine.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.cpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/IState.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/SoldState/SoldState.cpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/SoldState/SoldState.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/SoldOutState/SoldOutState.cpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/SoldOutState/SoldOutState.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/HasQuarterState/HasQuarterState.cpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/HasQuarterState/HasQuarterState.hpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/NoQuarterState/NoQuarterState.cpp
+        src/State/src/GumBallMachineWithDynamicallyCreatedState/State/NoQuarterState/NoQuarterState.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
