@@ -189,6 +189,22 @@ add_executable(state-test src/State/test/main.cpp
         src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
         )
 
+add_executable(decorator-streams-tests
+        src/Decorator/StreamsTests/main.cpp
+        src/Decorator/Streams/Crypt/Encoder.hpp
+        src/Decorator/Streams/Crypt/Encoder.cpp
+        src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.cpp
+        src/Decorator/Streams/Input/MemoryInputStream/MemoryInputStream.hpp
+        src/Decorator/Streams/Output/MemoryOutputStream/MemoryOutputStream.cpp
+        src/Decorator/Streams/Output/MemoryOutputStream/MemoryOutputStream.hpp
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.cpp
+        src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.hpp
+        src/Decorator/Streams/Output/EncryptOutputDecoratorStream/EncryptOutputDecoratorStream.cpp
+        src/Decorator/Streams/Output/EncryptOutputDecoratorStream/EncryptOutputDecoratorStream.hpp
+        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.cpp
+        src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp)
+
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
