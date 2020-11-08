@@ -20,7 +20,14 @@ void State::MockGumBallMachine::ReleaseBall()
 {
     if (m_count != 0)
     {
-        --m_count;
+        if (m_coinsCount > m_count)
+        {
+            m_count = 0;
+        }
+        else
+        {
+            m_count -= m_coinsCount;
+        }
     }
 }
 
@@ -61,4 +68,19 @@ State::MockGumBallMachine::MOCK_STATE State::MockGumBallMachine::GetMockState() 
 IState *State::MockGumBallMachine::GetState() const
 {
     return m_state;
+}
+
+void State::MockGumBallMachine::AddCoin()
+{
+    m_coinsCount++;
+}
+
+unsigned int State::MockGumBallMachine::GetCoinsCount() const
+{
+    return m_coinsCount;
+}
+
+void State::MockGumBallMachine::ResetCoins()
+{
+    m_coinsCount = 0;
 }

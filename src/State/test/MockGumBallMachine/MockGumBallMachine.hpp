@@ -33,12 +33,19 @@ namespace State
 
         void SetHasQuarterState() override;
 
+        void AddCoin() override;
+
+        unsigned int GetCoinsCount() const override;
+
+        void ResetCoins() override;
+
         MOCK_STATE GetMockState() const;
 
         IState * GetState() const;
 
     private:
         unsigned m_count;
+        unsigned m_coinsCount = 0;
         MOCK_STATE m_mockState;
         GumBallWithState::SoldState m_soldState;
         GumBallWithState::SoldOutState m_soldOutState;

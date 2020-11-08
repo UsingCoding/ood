@@ -128,3 +128,43 @@ SCENARIO("Receiving a ball if gumball machine has balls")
         }
     }
 }
+
+SCENARIO("Insert several coins to machine")
+{
+    GIVEN("Mock gumball machine with 1 ball")
+    {
+        State::MockGumBallMachine machine(2);
+
+        WHEN("We twice insert quarter")
+        {
+            machine.GetState()->InsertQuarter();
+            machine.GetState()->InsertQuarter();
+            machine.GetState()->InsertQuarter();
+
+            THEN("Coins in machine is 3")
+            {
+                REQUIRE(machine.GetCoinsCount() == 3);
+
+                AND_THEN("Machine state is has quarter")
+                {
+                    REQUIRE(machine.GetMockState() == GumBallMachineState::HAS_QUARTER);
+                }
+            }
+
+            AND_WHEN("We turn crank")
+            {
+                machine.GetState()->TurnCrank();
+
+                AND_WHEN("We dispense")
+                {
+                    machine.GetState()->Dispense();
+
+                    THEN("We have state sold out cause coins was more than balls")
+                    {
+                        REQUIRE(machine.GetMockState() == GumBallMachineState::SOLD_OUT);
+                    }
+                }
+            }
+        }
+    }
+}

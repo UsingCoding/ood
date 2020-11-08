@@ -39,5 +39,4 @@ void SoldState::Dispense()
 std::string SoldState::ToString() const
 {
     return "delivering a gumball";
-
 }
