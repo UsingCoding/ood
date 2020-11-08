@@ -1,17 +1,17 @@
 #pragma once
 
-#include "IGumBallMachine.hpp"
-#include "../State/SoldState/SoldState.hpp"
-#include "../State/SoldOutState/SoldOutState.hpp"
-#include "../State/NoQuarterState/NoQuarterState.hpp"
-#include "../State/HasQuarterState/HasQuarterState.hpp"
+#include "../IGumBallMachine.hpp"
+#include "../../State/SoldState/SoldState.hpp"
+#include "../../State/SoldOutState/SoldOutState.hpp"
+#include "../../State/NoQuarterState/NoQuarterState.hpp"
+#include "../../State/HasQuarterState/HasQuarterState.hpp"
 
 namespace GumBallWithState
 {
-    class GumBallMachine : public IGumBallMachine
+    class GumBallMachineWithStaticState : public IGumBallMachine
     {
     public:
-        GumBallMachine(unsigned int count);
+        GumBallMachineWithStaticState(unsigned int count);
 
         void EjectQuarter();
         void InsertQuarter();

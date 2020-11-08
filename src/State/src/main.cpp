@@ -1,7 +1,7 @@
 #include <iostream>
-#include "GumBallMachineWithState/GumBallMachine/GumBallMachine.hpp"
 #include "NaiveGumBallMachine/GumBallMachine.hpp"
-#include "GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.hpp"
+#include "GumBallMachineWithState/GumBallMachine/GumBalMachineWithDynamicState/GumBalMachineWithDynamicState.hpp"
+#include "GumBallMachineWithState/GumBallMachine/GumBallMachineWithStaticState/GumBallMachineWithStaticState.hpp"
 
 using namespace std;
 
@@ -49,13 +49,13 @@ void TestNaiveGumballMachine()
 
 void TestGumballMachineWithState()
 {
-    GumBallWithState::GumBallMachine m(5);
+    GumBallWithState::GumBallMachineWithStaticState m(5);
     TestGumballMachine(m);
 }
 
 void TestGumballMachineWithDynamicState()
 {
-    GumBallWithDynamicState::GumBallMachine m(5);
+    GumBallWithState::GumBalMachineWithDynamicState m(5);
     TestGumballMachine(m);
 }
 
