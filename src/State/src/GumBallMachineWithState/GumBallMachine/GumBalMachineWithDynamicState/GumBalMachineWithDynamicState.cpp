@@ -25,7 +25,8 @@ void GumBallWithState::GumBalMachineWithDynamicState::ReleaseBall()
     if (m_count != 0)
     {
         std::cout << "A gumball comes rolling out the slot...\n";
-        --m_count;
+
+        m_count -= m_coinsCount;
     }
 }
 

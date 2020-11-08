@@ -12,7 +12,15 @@ void GumBallWithState::SoldOutState::InsertQuarter()
 
 void SoldOutState::EjectQuarter()
 {
-    std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+    if (m_gumballMachine.GetCoinsCount() == 0)
+    {
+        std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+        return;
+    }
+
+    std::cout << "Quarter(s) returned: " << m_gumballMachine.GetCoinsCount() << '\n';
+
+    m_gumballMachine.ResetCoins();
 }
 
 void SoldOutState::TurnCrank()

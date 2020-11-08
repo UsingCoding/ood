@@ -28,19 +28,11 @@ void SoldState::Dispense()
     {
         std::cout << "Oops, out of gumballs\n";
         m_gumballMachine.SetSoldOutState();
-        m_gumballMachine.ResetCoins();
     }
     else
     {
-        if (m_gumballMachine.GetCoinsCount() > m_gumballMachine.GetBallCount())
-        {
-            m_gumballMachine.SetHasQuarterState();
-            return;
-        }
-
         m_gumballMachine.SetNoQuarterState();
         m_gumballMachine.ResetCoins();
-
     }
 }
 

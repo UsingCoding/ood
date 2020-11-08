@@ -61,7 +61,15 @@ namespace Naive
                     cout << "Sorry you already turned the crank\n";
                     break;
                 case State::SoldOut:
-                    cout << "You can't eject, you haven't inserted a quarter yet\n";
+                    if (m_coinsCount == 0)
+                    {
+                        std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+                        break;
+                    }
+
+                    std::cout << "Quarter(s) returned: " << m_coinsCount << '\n';
+
+                    m_coinsCount = 0;
                     break;
             }
         }
@@ -123,16 +131,9 @@ namespace Naive
                     {
                         cout << "Oops, out of gumballs\n";
                         m_state = State::SoldOut;
-                        m_coinsCount = 0;
                     }
                     else
                     {
-                        if (m_coinsCount > m_count)
-                        {
-                            m_state = State::HasQuarter;
-                            break;
-                        }
-
                         m_state = State::NoQuarter;
                         m_coinsCount = 0;
                     }
