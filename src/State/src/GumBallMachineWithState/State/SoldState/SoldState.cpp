@@ -23,6 +23,13 @@ void SoldState::TurnCrank()
 void SoldState::Dispense()
 {
     m_gumballMachine.ReleaseBall();
+
+    if (m_gumballMachine.GetCoinsCount() > m_gumballMachine.GetBallCount())
+    {
+        m_gumballMachine.SetHasQuarterState();
+        return;
+    }
+
     if (m_gumballMachine.GetBallCount() == 0)
     {
         std::cout << "Oops, out of gumballs\n";

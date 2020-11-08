@@ -58,6 +58,7 @@ std::string GumBallWithState::GumBallMachine::ToString() const
         "Mighty Gumball, Inc.\n" <<
         "C++-enabled Standing Gumball Model #2016\n" <<
         "Inventory: " << m_count << " gumball" << (m_count != 1 ? "s" : "") << '\n' <<
+        "Coins: " << m_coinsCount << '\n' <<
         "Machine is " << m_state->ToString();
 }
 
@@ -73,4 +74,19 @@ GumBallWithState::GumBallMachine::GumBallMachine(unsigned int count)
     {
         m_state = &m_noQuarterState;
     }
+}
+
+unsigned int GumBallWithState::GumBallMachine::GetCoinsCount() const
+{
+    return m_coinsCount;
+}
+
+void GumBallWithState::GumBallMachine::AddCoin()
+{
+    m_coinsCount++;
+}
+
+void GumBallWithState::GumBallMachine::ResetCoins()
+{
+    m_coinsCount = 0;
 }

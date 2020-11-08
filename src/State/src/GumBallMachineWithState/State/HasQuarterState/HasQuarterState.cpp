@@ -5,12 +5,14 @@ GumBallWithState::HasQuarterState::HasQuarterState(IGumBallMachine &gumballMachi
 
 void GumBallWithState::HasQuarterState::InsertQuarter()
 {
-    std::cout << "You can't insert another quarter\n";
+    m_gumballMachine.AddCoin();
 }
 
 void GumBallWithState::HasQuarterState::EjectQuarter()
 {
-    std::cout << "Quarter returned\n";
+    std::cout << "Quarter(s) returned: " << m_gumballMachine.GetCoinsCount() << '\n';
+
+    m_gumballMachine.ResetCoins();
     m_gumballMachine.SetNoQuarterState();
 }
 
