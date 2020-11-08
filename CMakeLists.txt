@@ -158,6 +158,22 @@ add_executable(adapter src/Adapter/src/main.cpp src/Adapter/src/GraphicsLib/Grap
 
 add_executable(adapter-tests src/Adapter/tests/main.cpp)
 
+add_executable(state
+        src/State/src/main.cpp
+        src/State/src/NaiveGumBallMachine/NaiveGumBallMachine.hpp
+        src/State/src/GumBallMachineWithState/State/IState.hpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/IGumBallMachine.hpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.hpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.hpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.hpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachine.cpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/IGumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.cpp src/State/src/GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.hpp src/State/src/GumBallMachineWithDynamicallyCreatedState/State/IState.hpp)
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
