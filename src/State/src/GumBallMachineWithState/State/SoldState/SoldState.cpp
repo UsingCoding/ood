@@ -31,12 +31,6 @@ void SoldState::Dispense()
     }
     else
     {
-        if (m_gumballMachine.GetCoinsCount() > 0)
-        {
-            m_gumballMachine.SetHasQuarterState();
-            return;
-        }
-
         m_gumballMachine.SetNoQuarterState();
         m_gumballMachine.ResetCoins();
     }

@@ -134,12 +134,6 @@ namespace Naive
                     }
                     else
                     {
-                        if (m_coinsCount > 0)
-                        {
-                            m_state = State::HasQuarter;
-                            break;
-                        }
-
                         m_state = State::NoQuarter;
                         m_coinsCount = 0;
                     }
