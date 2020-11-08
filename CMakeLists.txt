@@ -186,6 +186,19 @@ add_executable(state
         src/State/src/GumBallMachineWithDynamicallyCreatedState/State/NoQuarterState/NoQuarterState.cpp
         src/State/src/GumBallMachineWithDynamicallyCreatedState/State/NoQuarterState/NoQuarterState.hpp)
 
+add_executable(state-test src/State/test/main.cpp
+        src/State/test/MockGumBallMachine/MockGumBallMachine.cpp
+        src/State/test/MockGumBallMachine/MockGumBallMachine.hpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.hpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.hpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.hpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
+        )
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
