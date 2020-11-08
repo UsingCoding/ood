@@ -34,7 +34,8 @@ namespace Naive
                     m_state = State::HasQuarter;
                     break;
                 case State::HasQuarter:
-                    std::cout << "You can't insert another quarter\n";
+                    m_coinsCount++;
+                    std::cout << "You inserted a quarter\n";
                     break;
                 case State::Sold:
                     std::cout << "Please wait, we're already giving you a gumball\n";
@@ -48,8 +49,9 @@ namespace Naive
             switch (m_state)
             {
                 case State::HasQuarter:
-                    cout << "Quarter returned\n";
+                    cout << "Quarter(s) returned: " << m_coinsCount << '\n';
                     m_state = State::NoQuarter;
+                    m_coinsCount = 0;
                     break;
                 case State::NoQuarter:
                     cout << "You haven't inserted a quarter\n";
@@ -115,6 +117,13 @@ namespace Naive
                 case State::Sold:
                     cout << "A gumball comes rolling out the slot\n";
                     --m_count;
+
+                    if (m_coinsCount > m_count)
+                    {
+                        m_state = State::HasQuarter;
+                        break;
+                    }
+
                     if (m_count == 0)
                     {
                         cout << "Oops, out of gumballs\n";
@@ -136,6 +145,7 @@ namespace Naive
         }
 
         unsigned m_count;
+        unsigned m_coinsCount = 0;
         State m_state = State::SoldOut;
     };
 }
