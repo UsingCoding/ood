@@ -160,7 +160,7 @@ add_executable(adapter-tests src/Adapter/tests/main.cpp)
 
 add_executable(state
         src/State/src/main.cpp
-        src/State/src/NaiveGumBallMachine/NaiveGumBallMachine.hpp
+        src/State/src/NaiveGumBallMachine/GumBallMachine.hpp
         src/State/src/GumBallMachineWithState/State/IState.hpp
         src/State/src/GumBallMachineWithState/GumBallMachine/IGumBallMachine.hpp
         src/State/src/GumBallMachineWithState/State/SoldState/SoldState.cpp

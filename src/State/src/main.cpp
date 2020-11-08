@@ -1,5 +1,7 @@
 #include <iostream>
 #include "GumBallMachineWithState/GumBallMachine/GumBallMachine.hpp"
+#include "NaiveGumBallMachine/GumBallMachine.hpp"
+#include "GumBallMachineWithDynamicallyCreatedState/GumBallMachine/GumBallMachine.hpp"
 
 using namespace std;
 
@@ -38,11 +40,11 @@ void TestGumballMachine(GumballMachineType & m)
     cout << m.ToString() << endl;
 }
 
-//void TestNaiveGumballMachine()
-//{
-//    naive::CGumballMachine m(5);
-//    TestGumballMachine(m);
-//}
+void TestNaiveGumballMachine()
+{
+    Naive::GumBallMachine m(5);
+    TestGumballMachine(m);
+}
 
 
 void TestGumballMachineWithState()
@@ -51,21 +53,21 @@ void TestGumballMachineWithState()
     TestGumballMachine(m);
 }
 
-//void TestGumballMachineWithDynamicState()
-//{
-//    with_dynamic_state::CGumballMachine m(5);
-//    TestGumballMachine(m);
-//}
+void TestGumballMachineWithDynamicState()
+{
+    GumBallWithDynamicState::GumBallMachine m(5);
+    TestGumballMachine(m);
+}
 
 int main()
 {
-//    TestNaiveGumballMachine();
+    TestNaiveGumballMachine();
 
     cout << "\n-----------------\n";
     TestGumballMachineWithState();
 
     cout << "\n-----------------\n";
-//    TestGumballMachineWithDynamicState();
+    TestGumballMachineWithDynamicState();
 
     return 0;
 }

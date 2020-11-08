@@ -9,12 +9,13 @@ namespace GumBallWithDynamicState
     class GumBallMachine : private IGumBallMachine
     {
     public:
+        GumBallMachine(unsigned int count);
+
         void EjectQuarter();
         void InsertQuarter();
         void TurnCrank();
         std::string ToString() const;
     private:
-        GumBallMachine(unsigned int count);
 
         void ReleaseBall() override;
 
