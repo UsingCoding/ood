@@ -8,14 +8,7 @@ void GumBallWithState::GumBallMachineWithStaticState::ReleaseBall()
     {
         std::cout << "A gumball comes rolling out the slot...\n";
 
-        if (m_coinsCount > m_count)
-        {
-            m_count = 0;
-        }
-        else
-        {
-            m_count -= m_coinsCount;
-        }
+        m_count--;
     }
 }
 
@@ -97,4 +90,12 @@ void GumBallWithState::GumBallMachineWithStaticState::AddCoin()
 void GumBallWithState::GumBallMachineWithStaticState::ResetCoins()
 {
     m_coinsCount = 0;
+}
+
+void GumBallWithState::GumBallMachineWithStaticState::SpendCoin()
+{
+    if (m_coinsCount != 0)
+    {
+        m_coinsCount--;
+    }
 }

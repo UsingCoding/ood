@@ -15,6 +15,7 @@ namespace GumBallWithState
 
         virtual void AddCoin() = 0;
         virtual unsigned GetCoinsCount() const = 0;
+        virtual void SpendCoin() = 0;
         virtual void ResetCoins() = 0;
 
         virtual ~IGumBallMachine() = default;

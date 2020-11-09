@@ -133,17 +133,18 @@ SCENARIO("Insert several coins to machine")
 {
     GIVEN("Mock gumball machine with 1 ball")
     {
-        State::MockGumBallMachine machine(2);
+        State::MockGumBallMachine machine(3);
 
         WHEN("We twice insert quarter")
         {
             machine.GetState()->InsertQuarter();
             machine.GetState()->InsertQuarter();
             machine.GetState()->InsertQuarter();
+            machine.GetState()->InsertQuarter();
 
-            THEN("Coins in machine is 3")
+            THEN("Coins in machine is 4")
             {
-                REQUIRE(machine.GetCoinsCount() == 3);
+                REQUIRE(machine.GetCoinsCount() == 4);
 
                 AND_THEN("Machine state is has quarter")
                 {
@@ -162,6 +163,38 @@ SCENARIO("Insert several coins to machine")
                     THEN("We have state sold out cause coins was more than balls")
                     {
                         REQUIRE(machine.GetMockState() == GumBallMachineState::SOLD_OUT);
+                    }
+                }
+            }
+        }
+
+        WHEN("We insert 2 quarter")
+        {
+            machine.GetState()->InsertQuarter();
+            machine.GetState()->InsertQuarter();
+
+            AND_WHEN("We turn crank")
+            {
+                machine.GetState()->TurnCrank();
+
+                AND_WHEN("We dispense")
+                {
+                    machine.GetState()->Dispense();
+
+                    THEN("We have state has quarter, cause we have 1 quarter in machine")
+                    {
+                        REQUIRE(machine.GetMockState() == GumBallMachineState::HAS_QUARTER);
+                    }
+
+                    AND_WHEN("We turn crank and dispense again")
+                    {
+                        machine.GetState()->TurnCrank();
+                        machine.GetState()->Dispense();
+
+                        THEN("We have state sold out")
+                        {
+                            REQUIRE(machine.GetMockState() == GumBallMachineState::SOLD_OUT);
+                        }
                     }
                 }
             }

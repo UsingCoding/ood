@@ -102,3 +102,8 @@ void GumBallWithState::GumBalMachineWithDynamicState::ResetCoins()
 {
     m_coinsCount = 0;
 }
+
+void GumBalMachineWithDynamicState::SpendCoin()
+{
+    m_coinsCount--;
+}

@@ -6,7 +6,7 @@
 
 namespace GumBallWithState
 {
-    class GumBalMachineWithDynamicState : public IGumBallMachine
+    class GumBalMachineWithDynamicState : private IGumBallMachine
     {
     public:
         GumBalMachineWithDynamicState(unsigned int count);
@@ -30,6 +30,8 @@ namespace GumBallWithState
         void SetHasQuarterState() override;
 
         void AddCoin() override;
+
+        void SpendCoin() override;
 
         unsigned int GetCoinsCount() const override;
 

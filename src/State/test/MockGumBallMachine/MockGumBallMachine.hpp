@@ -8,7 +8,7 @@
 
 namespace State
 {
-    class MockGumBallMachine : public GumBallWithState::IGumBallMachine
+    class MockGumBallMachine : private GumBallWithState::IGumBallMachine
     {
     public:
         enum class MOCK_STATE
@@ -33,11 +33,14 @@ namespace State
 
         void SetHasQuarterState() override;
 
+    public:
         void AddCoin() override;
 
         unsigned int GetCoinsCount() const override;
 
         void ResetCoins() override;
+
+        void SpendCoin() override;
 
         MOCK_STATE GetMockState() const;
 

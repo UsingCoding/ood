@@ -8,7 +8,7 @@
 
 namespace GumBallWithState
 {
-    class GumBallMachineWithStaticState : public IGumBallMachine
+    class GumBallMachineWithStaticState : private IGumBallMachine
     {
     public:
         GumBallMachineWithStaticState(unsigned int count);
@@ -22,6 +22,8 @@ namespace GumBallWithState
         void ReleaseBall() override;
 
         unsigned int GetBallCount() const override;
+
+        void SpendCoin() override;
 
         void SetSoldOutState() override;
 

@@ -23,6 +23,7 @@ void SoldState::TurnCrank()
 void SoldState::Dispense()
 {
     m_gumballMachine.ReleaseBall();
+    m_gumballMachine.SpendCoin();
 
     if (m_gumballMachine.GetBallCount() == 0)
     {
@@ -31,8 +32,13 @@ void SoldState::Dispense()
     }
     else
     {
+        if (m_gumballMachine.GetCoinsCount() > 0)
+        {
+            m_gumballMachine.SetHasQuarterState();
+            return;
+        }
+
         m_gumballMachine.SetNoQuarterState();
-        m_gumballMachine.ResetCoins();
     }
 }
 

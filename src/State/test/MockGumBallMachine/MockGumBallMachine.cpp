@@ -84,3 +84,8 @@ void State::MockGumBallMachine::ResetCoins()
 {
     m_coinsCount = 0;
 }
+
+void State::MockGumBallMachine::SpendCoin()
+{
+    m_coinsCount--;
+}
