@@ -126,15 +126,7 @@ namespace Naive
                 case State::Sold:
                     cout << "A gumball comes rolling out the slot\n";
                     --m_count;
-
-                    if (m_coinsCount > m_count)
-                    {
-                        m_count = 0;
-                    }
-                    else
-                    {
-                        m_count -= m_coinsCount;
-                    }
+                    --m_coinsCount;
 
                     if (m_count == 0)
                     {
@@ -143,6 +135,12 @@ namespace Naive
                     }
                     else
                     {
+                        if (m_coinsCount > 0)
+                        {
+                            m_state = State::HasQuarter;
+                            return;
+                        }
+
                         m_state = State::NoQuarter;
                         m_coinsCount = 0;
                     }
