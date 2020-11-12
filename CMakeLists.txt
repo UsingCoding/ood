@@ -187,6 +187,20 @@ add_executable(state-test src/State/test/main.cpp
         src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.hpp
         src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.cpp
         src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
+        src/State/test/StreamBufferOverrider/StreamBufferOverrider.cpp
+        src/State/test/StreamBufferOverrider/StreamBufferOverrider.hpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachineWithStaticState/GumBallMachineWithStaticState.cpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/GumBallMachineWithStaticState/GumBallMachineWithStaticState.hpp
+        src/State/src/GumBallMachineWithState/State/IState.hpp
+        src/State/src/GumBallMachineWithState/GumBallMachine/IGumBallMachine.hpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldState/SoldState.hpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.cpp
+        src/State/src/GumBallMachineWithState/State/SoldOutState/SoldOutState.hpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/HasQuarterState/HasQuarterState.hpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.cpp
+        src/State/src/GumBallMachineWithState/State/NoQuarterState/NoQuarterState.hpp
         )
 
 add_executable(decorator-streams-tests

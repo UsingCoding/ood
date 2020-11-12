@@ -1,6 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include "../Catch2/catch.hpp"
 #include "MockGumBallMachine/MockGumBallMachine.hpp"
+#include "../src/GumBallMachineWithState/GumBallMachine/GumBallMachineWithStaticState/GumBallMachineWithStaticState.hpp"
+#include "StreamBufferOverrider/StreamBufferOverrider.hpp"
+#include "../src/NaiveGumBallMachine/GumBallMachine.hpp"
 
 typedef State::MockGumBallMachine::MOCK_STATE GumBallMachineState;
 
@@ -35,6 +38,73 @@ SCENARIO("We can`t receive balls if there out")
                         machine.GetState()->Dispense();
 
                         REQUIRE(machine.GetMockState() == GumBallMachineState::SOLD_OUT);
+                    }
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("Buying ball from gumball machine")
+{
+    GIVEN("Gumball machine")
+    {
+        GumBallWithState::GumBallMachineWithStaticState machine(2);
+
+        std::stringstream buffer;
+
+        StreamBufferOverrider streamBufferOverrider(std::cout, buffer);
+
+        WHEN("We insert a quarter")
+        {
+            machine.InsertQuarter();
+
+            THEN("We got message that we insert a quarter")
+            {
+                std::string message;
+                getline(buffer, message);
+                REQUIRE(message == "You inserted a quarter");
+            }
+
+            AND_WHEN("We we insert another quarter")
+            {
+                machine.InsertQuarter();
+
+                THEN("We got message about that")
+                {
+                    std::string message;
+                    getline(buffer, message);
+                    REQUIRE(message == "You inserted a quarter");
+
+                    AND_WHEN("We turn crank")
+                    {
+                        machine.TurnCrank();
+
+                        THEN("We got message that we turned and than gumball rolling out")
+                        {
+                            getline(buffer, message);
+                            REQUIRE(message == "You turned...");
+
+                            getline(buffer, message);
+                            REQUIRE(message == "A gumball comes rolling out the slot...");
+
+                            AND_WHEN("We turn crank again")
+                            {
+                                machine.TurnCrank();
+
+                                THEN("We got message that we turned and than gumball rolling out and message that out of gumballs")
+                                {
+                                    getline(buffer, message);
+                                    REQUIRE(message == "You turned...");
+
+                                    getline(buffer, message);
+                                    REQUIRE(message == "A gumball comes rolling out the slot...");
+
+                                    getline(buffer, message);
+                                    REQUIRE(message == "Oops, out of gumballs");
+                                }
+                            }
+                        }
                     }
                 }
             }
