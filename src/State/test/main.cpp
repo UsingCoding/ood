@@ -112,6 +112,119 @@ SCENARIO("Buying ball from gumball machine")
     }
 }
 
+SCENARIO("Insert coins and buying in naive machine realization ")
+{
+    GIVEN("Naive machine realization")
+    {
+        Naive::GumBallMachine machine(5);
+
+        std::stringstream buffer;
+
+        StreamBufferOverrider streamBufferOverrider(std::cout, buffer);
+
+        WHEN("We inject quarter twice")
+        {
+            machine.InsertQuarter();
+            machine.InsertQuarter();
+
+            THEN("We got message about it")
+            {
+                std::string message;
+
+                getline(buffer, message);
+                REQUIRE(message == "You inserted a quarter");
+
+                getline(buffer, message);
+                REQUIRE(message == "You inserted a quarter");
+
+                AND_WHEN("We eject quarter")
+                {
+                    machine.EjectQuarter();
+
+                    THEN("We got message that coins is ejected and number of coins")
+                    {
+                        getline(buffer, message);
+                        REQUIRE(message == "Quarter(s) returned: 2");
+                    }
+                }
+            }
+        }
+    }
+
+    GIVEN("Naive machine realization with 2 gumballs")
+    {
+        Naive::GumBallMachine machine(2);
+
+        std::stringstream buffer;
+
+        StreamBufferOverrider streamBufferOverrider(std::cout, buffer);
+
+        WHEN("We inject quarter twice")
+        {
+            machine.InsertQuarter();
+            machine.InsertQuarter();
+
+            AND_WHEN("We turn crank")
+            {
+                machine.TurnCrank();
+
+                THEN("We got message about it")
+                {
+                    std::string message;
+
+                    getline(buffer, message);
+                    REQUIRE(message == "You inserted a quarter");
+
+                    getline(buffer, message);
+                    REQUIRE(message == "You inserted a quarter");
+
+                    getline(buffer, message);
+                    REQUIRE(message == "You turned...");
+
+                    getline(buffer, message);
+                    REQUIRE(message == "A gumball comes rolling out the slot");
+
+                    AND_WHEN("We eject coin")
+                    {
+                        machine.EjectQuarter();
+
+                        THEN("We got message that ejected one coin")
+                        {
+                            getline(buffer, message);
+                            REQUIRE(message == "Quarter(s) returned: 1");
+
+                            AND_WHEN("We insert quarter")
+                            {
+                                machine.InsertQuarter();
+
+                                AND_WHEN("We turn crank")
+                                {
+                                    machine.TurnCrank();
+
+                                    THEN("We got message that ball is rolling is balls is out")
+                                    {
+                                        getline(buffer, message);
+                                        REQUIRE(message == "You inserted a quarter");
+
+                                        getline(buffer, message);
+                                        REQUIRE(message == "You turned...");
+
+                                        getline(buffer, message);
+                                        REQUIRE(message == "A gumball comes rolling out the slot");
+
+                                        getline(buffer, message);
+                                        REQUIRE(message == "Oops, out of gumballs");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 SCENARIO("Trying to buy without money and eject quarter")
 {
     GIVEN("Mock gumball machine")
