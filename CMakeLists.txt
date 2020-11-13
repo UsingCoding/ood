@@ -218,6 +218,18 @@ add_executable(decorator-streams-tests
         src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.cpp
         src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp)
 
+add_executable(command src/Command/src/main.cpp
+        src/Command/src/Document/IDocument.hpp
+        src/Command/src/Document/Elements/Paragraph/IParagraph.hpp
+        src/Command/src/Document/Elements/Image/IImage.hpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.cpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.hpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.cpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.hpp
+        src/Command/src/Command/ICommand.hpp
+        src/Command/src/History/ICommandsHistory.hpp
+        src/Common/Application
+        )
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
