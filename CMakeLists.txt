@@ -229,7 +229,36 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Command/ICommand.hpp
         src/Command/src/History/ICommandsHistory.hpp
         src/Common/Application
-        )
+        src/Command/src/Command/SetTitleCommand/SetTitleCommand.cpp
+        src/Command/src/Command/SetTitleCommand/SetTitleCommand.hpp
+        src/Command/src/CommandHandler/ICommandHandler.hpp
+        src/Command/src/CommandHandler/AbstractCommandHandler/AbstractCommandHandler.cpp
+        src/Command/src/CommandHandler/AbstractCommandHandler/AbstractCommandHandler.hpp
+        src/Command/src/CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.cpp
+        src/Command/src/CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.hpp
+        src/Command/src/Application/Application.cpp
+        src/Command/src/Application/Application.hpp
+        src/Command/src/CommandHandlerRegistry/ICommandHandlerRegistry.hpp
+        src/Command/src/CommandHandlerRegistry/CommandHandlerRegistry.cpp
+        src/Command/src/CommandHandlerRegistry/CommandHandlerRegistry.hpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.cpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.cpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.hpp
+        src/Common/Application/InputDefinition/IInputDefinition.hpp
+        src/Common/Application/InputDefinition/InputDefinition.cpp
+        src/Common/Application/InputDefinition/InputDefinition.hpp
+        src/Common/Application/Application.cpp
+        src/Common/Application/Input/InputArgument/InputArgument.cpp
+        src/Common/Application/Input/InputOption/InputOption.cpp
+        src/Common/Application/Input/AbstractInput/IOptionsEnumerator.hpp
+        src/Utils/Strings.cpp
+        src/Utils/Strings.hpp
+        src/Command/src/History/CommandsHistory.cpp src/Command/src/History/CommandsHistory.hpp src/Command/src/Document/Document.cpp src/Command/src/Document/Document.hpp src/Command/src/Document/Elements/Paragraph/Paragraph.cpp src/Command/src/Document/Elements/Paragraph/Paragraph.hpp src/Command/src/Document/Elements/Image/Image.cpp src/Command/src/Document/Elements/Image/Image.hpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.cpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

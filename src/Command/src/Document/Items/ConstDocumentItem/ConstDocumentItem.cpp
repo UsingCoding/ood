@@ -2,10 +2,10 @@
 
 std::shared_ptr<const IImage> ConstDocumentItem::GetImage() const
 {
-    return nullptr;
+    return m_image;
 }
 
 std::shared_ptr<const IParagraph> ConstDocumentItem::GetParagraph() const
 {
-    return nullptr;
+    return m_paragraph;
 }

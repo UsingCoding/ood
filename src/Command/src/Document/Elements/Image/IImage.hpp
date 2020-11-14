@@ -4,6 +4,7 @@
 
 class IImage
 {
+public:
     typedef std::experimental::filesystem::path Path;
 
     // Возвращает путь относительно каталога документа

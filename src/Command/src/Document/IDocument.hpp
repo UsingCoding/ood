@@ -9,6 +9,7 @@
 
 class IDocument
 {
+public:
     typedef std::experimental::filesystem::path Path;
 
     virtual std::shared_ptr<IParagraph> InsertParagraph(
