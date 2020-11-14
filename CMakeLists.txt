@@ -272,7 +272,7 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Document/Elements/Image/Image.hpp
         src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp
         src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp
-        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp)
+        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp src/Common/Registry/Registry.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

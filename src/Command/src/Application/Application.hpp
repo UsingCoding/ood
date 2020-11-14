@@ -9,10 +9,10 @@ class Application : public Common::Application
 public:
     Application(
         std::unique_ptr<IDocument> document,
-        std::unique_ptr<IControllerRegistry> commandHandlerRegistry,
+        std::unique_ptr<IControllerRegistry> controllerRegistry,
         std::unique_ptr<ICommandsHistory> commandsHistory
     )
-    : m_commandHandlerRegistry(std::move(commandHandlerRegistry)),
+    : m_controllerRegistry(std::move(controllerRegistry)),
       m_commandsHistory(std::move(commandsHistory)),
       m_document(std::move(document))
     {}
@@ -24,7 +24,7 @@ protected:
 
 private:
     std::unique_ptr<IDocument> m_document;
-    std::unique_ptr<IControllerRegistry> m_commandHandlerRegistry;
+    std::unique_ptr<IControllerRegistry> m_controllerRegistry;
     std::unique_ptr<ICommandsHistory> m_commandsHistory;
 
     void RegisterCommandHandlers();

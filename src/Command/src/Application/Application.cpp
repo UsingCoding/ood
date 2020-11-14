@@ -33,13 +33,13 @@ void Application::DoRun(IInput &input, IOutput &output)
 
         try
         {
-            auto & commandHandler = m_commandHandlerRegistry->GetHandler((*arguments)[0]);
+            auto & controller = m_controllerRegistry->Get((*arguments)[0]);
 
             arguments->erase(arguments->begin());
 
             std::unique_ptr<IInputDefinition> definition = std::make_unique<InputDefinition>();
 
-            commandHandler->ConfigureInputDefinition(definition);
+            controller->ConfigureInputDefinition(definition);
 
             ArgvInput argvInput(std::move(arguments));
 
@@ -47,7 +47,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
             argvInput.Validate();
 
-            commandHandler->Handle(argvInput, output);
+            controller->Handle(argvInput, output);
 
             *output << "Command executed successfully" << std::endl;
         }
@@ -64,7 +64,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
 void Application::RegisterCommandHandlers()
 {
-    m_commandHandlerRegistry->RegisterHandler("SetTitle", std::make_unique<SetTitleController>(m_commandsHistory, m_document));
-    m_commandHandlerRegistry->RegisterHandler("List", std::make_unique<ListController>(m_commandsHistory, m_document));
-    m_commandHandlerRegistry->RegisterHandler("InsertParagraph", std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
+    m_controllerRegistry->Register("SetTitle", std::make_unique<SetTitleController>(m_commandsHistory, m_document));
+    m_controllerRegistry->Register("List", std::make_unique<ListController>(m_commandsHistory, m_document));
+    m_controllerRegistry->Register("InsertParagraph",std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
 }
