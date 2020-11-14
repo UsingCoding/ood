@@ -1,14 +1,14 @@
 #include <iostream>
-#include "InsertParagraphCommandHandler.hpp"
+#include "InsertParagraphController.hpp"
 #include "../../Command/InsertParagraphCommand/InsertParagraphCommand.hpp"
 
-void InsertParagraphCommandHandler::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
+void InsertParagraphController::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
     definition->AddArgument(Common::Console::InputArgument("position"));
     definition->AddArgument(Common::Console::InputArgument("text"));
 }
 
-void InsertParagraphCommandHandler::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
+void InsertParagraphController::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
 {
     std::optional<size_t> position;
     const auto arg = input.GetArgument("position").value();

@@ -1,15 +1,15 @@
 #pragma once
 
 #include <Application/Application.hpp>
-#include "../CommandHandlerRegistry/ICommandHandlerRegistry.hpp"
 #include "../History/ICommandsHistory.hpp"
+#include "../ControllerRegistry/IControllerRegistry.hpp"
 
 class Application : public Common::Application
 {
 public:
     Application(
         std::unique_ptr<IDocument> document,
-        std::unique_ptr<ICommandHandlerRegistry> commandHandlerRegistry,
+        std::unique_ptr<IControllerRegistry> commandHandlerRegistry,
         std::unique_ptr<ICommandsHistory> commandsHistory
     )
     : m_commandHandlerRegistry(std::move(commandHandlerRegistry)),
@@ -24,7 +24,7 @@ protected:
 
 private:
     std::unique_ptr<IDocument> m_document;
-    std::unique_ptr<ICommandHandlerRegistry> m_commandHandlerRegistry;
+    std::unique_ptr<IControllerRegistry> m_commandHandlerRegistry;
     std::unique_ptr<ICommandsHistory> m_commandsHistory;
 
     void RegisterCommandHandlers();

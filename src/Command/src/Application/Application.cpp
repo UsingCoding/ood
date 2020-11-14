@@ -3,9 +3,10 @@
 #include <Application/Input/ArgvInput/ArgvInput.hpp>
 #include <Application/InputDefinition/InputDefinition.hpp>
 #include "Application.hpp"
-#include "../CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.hpp"
-#include "../CommandHandler/ListCommandHandler/ListCommandHandler.hpp"
-#include "../CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.hpp"
+#include "../Controller/SetTitleController/SetTitleController.hpp"
+#include "../Controller/ListController/ListController.hpp"
+#include "../Controller/InsertParagraphController/InsertParagraphController.hpp"
+#include "../ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp"
 
 using namespace Common::Console;
 
@@ -50,9 +51,9 @@ void Application::DoRun(IInput &input, IOutput &output)
 
             *output << "Command executed successfully" << std::endl;
         }
-        catch (const std::logic_error & e)
+        catch (const ItemNotFoundInRegistryException & e)
         {
-            *output << e.what() << std::endl;
+            *output << "Unknown command" << std::endl;
         }
         catch (std::runtime_error e)
         {
@@ -63,7 +64,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
 void Application::RegisterCommandHandlers()
 {
-    m_commandHandlerRegistry->RegisterHandler("SetTitle", std::make_unique<SetTitleCommandHandler>(m_commandsHistory, m_document));
-    m_commandHandlerRegistry->RegisterHandler("List", std::make_unique<ListCommandHandler>(m_commandsHistory, m_document));
-    m_commandHandlerRegistry->RegisterHandler("InsertParagraph", std::make_unique<InsertParagraphCommandHandler>(m_commandsHistory, m_document));
+    m_commandHandlerRegistry->RegisterHandler("SetTitle", std::make_unique<SetTitleController>(m_commandsHistory, m_document));
+    m_commandHandlerRegistry->RegisterHandler("List", std::make_unique<ListController>(m_commandsHistory, m_document));
+    m_commandHandlerRegistry->RegisterHandler("InsertParagraph", std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
 }

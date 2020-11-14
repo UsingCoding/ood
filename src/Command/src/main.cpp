@@ -2,9 +2,9 @@
 #include <Application/Input/ArgvInput/ArgvInput.hpp>
 #include <iostream>
 #include "Application/Application.hpp"
-#include "CommandHandlerRegistry/CommandHandlerRegistry.hpp"
 #include "History/CommandsHistory.hpp"
 #include "Document/Document.hpp"
+#include "ControllerRegistry/ControllerRegistry.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 
     Application application(
         std::make_unique<Document>(commandsHistory),
-        std::make_unique<CommandHandlerRegistry>(),
+        std::make_unique<ControllerRegistry>(),
         std::move(commandsHistory)
     );
 

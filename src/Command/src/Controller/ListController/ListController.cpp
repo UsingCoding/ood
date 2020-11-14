@@ -1,13 +1,13 @@
-#include "ListCommandHandler.hpp"
+#include "ListController.hpp"
 #include <iostream>
 #include <Strings.hpp>
 
-void ListCommandHandler::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
+void ListController::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
 
 }
 
-void ListCommandHandler::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
+void ListController::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
 {
     Strings::Concatenator concatenator;
 

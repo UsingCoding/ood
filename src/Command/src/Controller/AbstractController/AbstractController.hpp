@@ -1,13 +1,13 @@
 #pragma once
 
 #include <memory>
-#include "../ICommandHandler.hpp"
+#include "../IController.hpp"
 #include "../../History/ICommandsHistory.hpp"
 
-class AbstractCommandHandler : public ICommandHandler
+class AbstractController : public IController
 {
 public:
-    AbstractCommandHandler(
+    AbstractController(
         std::unique_ptr<ICommandsHistory> &commandsHistory,
         std::unique_ptr<IDocument> &document
     )

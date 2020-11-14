@@ -4,11 +4,11 @@
 #include <Application/Output/IOutput.hpp>
 #include <Application/Input/IInput.hpp>
 
-class ICommandHandler
+class IController
 {
 public:
     virtual void ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> & definition) = 0;
     virtual void Handle(Common::Console::IInput &input, Common::Console::IOutput &output) = 0;
 
-    virtual ~ICommandHandler() = default;
+    virtual ~IController() = default;
 };

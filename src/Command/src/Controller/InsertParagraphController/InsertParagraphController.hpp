@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../AbstractCommandHandler/AbstractCommandHandler.hpp"
+#include "../AbstractController/AbstractController.hpp"
 
-class ListCommandHandler : public AbstractCommandHandler
+class InsertParagraphController : public AbstractController
 {
 public:
-    ListCommandHandler(
+    InsertParagraphController(
         std::unique_ptr<ICommandsHistory> &commandsHistory,
-        std::unique_ptr<IDocument> &document
-    )
-    : AbstractCommandHandler(commandsHistory, document) {}
+        std::unique_ptr<IDocument> &document)
+    : AbstractController(commandsHistory, document) {}
 
     void ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition) override;
 

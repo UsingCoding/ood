@@ -1,13 +1,13 @@
 #include <Strings.hpp>
-#include "SetTitleCommandHandler.hpp"
+#include "SetTitleController.hpp"
 #include "../../Command/SetTitleCommand/SetTitleCommand.hpp"
 
-void SetTitleCommandHandler::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
+void SetTitleController::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
     definition->AddArgument(Common::Console::InputArgument("title"));
 }
 
-void SetTitleCommandHandler::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
+void SetTitleController::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
 {
     auto newTitle = input.GetArgument("title");
 

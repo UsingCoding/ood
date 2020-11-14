@@ -231,16 +231,20 @@ add_executable(command src/Command/src/main.cpp
         src/Common/Application
         src/Command/src/Command/SetTitleCommand/SetTitleCommand.cpp
         src/Command/src/Command/SetTitleCommand/SetTitleCommand.hpp
-        src/Command/src/CommandHandler/ICommandHandler.hpp
-        src/Command/src/CommandHandler/AbstractCommandHandler/AbstractCommandHandler.cpp
-        src/Command/src/CommandHandler/AbstractCommandHandler/AbstractCommandHandler.hpp
-        src/Command/src/CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.cpp
-        src/Command/src/CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.hpp
+        src/Command/src/Controller/IController.hpp
+        src/Command/src/Controller/AbstractController/AbstractController.cpp
+        src/Command/src/Controller/AbstractController/AbstractController.hpp
+        src/Command/src/Controller/SetTitleController/SetTitleController.cpp
+        src/Command/src/Controller/SetTitleController/SetTitleController.hpp
+        src/Command/src/Controller/ListController/ListController.cpp
+        src/Command/src/Controller/ListController/ListController.hpp
+        src/Command/src/Controller/InsertParagraphController/InsertParagraphController.cpp
+        src/Command/src/Controller/InsertParagraphController/InsertParagraphController.hpp
         src/Command/src/Application/Application.cpp
         src/Command/src/Application/Application.hpp
-        src/Command/src/CommandHandlerRegistry/ICommandHandlerRegistry.hpp
-        src/Command/src/CommandHandlerRegistry/CommandHandlerRegistry.cpp
-        src/Command/src/CommandHandlerRegistry/CommandHandlerRegistry.hpp
+        src/Command/src/ControllerRegistry/IControllerRegistry.hpp
+        src/Command/src/ControllerRegistry/ControllerRegistry.cpp
+        src/Command/src/ControllerRegistry/ControllerRegistry.hpp
         src/Common/Application/Input/ArgvInput/ArgvInput.cpp
         src/Common/Application/Input/ArgvInput/ArgvInput.hpp
         src/Common/Application/Output/StreamOutput/StreamOutput.cpp
@@ -258,7 +262,17 @@ add_executable(command src/Command/src/main.cpp
         src/Common/Application/Input/AbstractInput/IOptionsEnumerator.hpp
         src/Utils/Strings.cpp
         src/Utils/Strings.hpp
-        src/Command/src/History/CommandsHistory.cpp src/Command/src/History/CommandsHistory.hpp src/Command/src/Document/Document.cpp src/Command/src/Document/Document.hpp src/Command/src/Document/Elements/Paragraph/Paragraph.cpp src/Command/src/Document/Elements/Paragraph/Paragraph.hpp src/Command/src/Document/Elements/Image/Image.cpp src/Command/src/Document/Elements/Image/Image.hpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.cpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.hpp src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp src/Command/src/CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.cpp src/Command/src/CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.hpp)
+        src/Command/src/History/CommandsHistory.cpp
+        src/Command/src/History/CommandsHistory.hpp
+        src/Command/src/Document/Document.cpp
+        src/Command/src/Document/Document.hpp
+        src/Command/src/Document/Elements/Paragraph/Paragraph.cpp
+        src/Command/src/Document/Elements/Paragraph/Paragraph.hpp
+        src/Command/src/Document/Elements/Image/Image.cpp
+        src/Command/src/Document/Elements/Image/Image.hpp
+        src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp
+        src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp
+        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

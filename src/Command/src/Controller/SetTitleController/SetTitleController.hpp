@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../ICommandHandler.hpp"
-#include "../AbstractCommandHandler/AbstractCommandHandler.hpp"
+#include "../IController.hpp"
+#include "../AbstractController/AbstractController.hpp"
 
-class SetTitleCommandHandler : public AbstractCommandHandler
+class SetTitleController : public AbstractController
 {
 public:
-    SetTitleCommandHandler(
+    SetTitleController(
             std::unique_ptr<ICommandsHistory> &commandsHistory,
             std::unique_ptr<IDocument> &document)
-    : AbstractCommandHandler(commandsHistory, document) {}
+    : AbstractController(commandsHistory, document) {}
 
     void ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition) override;
 
