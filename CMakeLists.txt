@@ -258,7 +258,7 @@ add_executable(command src/Command/src/main.cpp
         src/Common/Application/Input/AbstractInput/IOptionsEnumerator.hpp
         src/Utils/Strings.cpp
         src/Utils/Strings.hpp
-        src/Command/src/History/CommandsHistory.cpp src/Command/src/History/CommandsHistory.hpp src/Command/src/Document/Document.cpp src/Command/src/Document/Document.hpp src/Command/src/Document/Elements/Paragraph/Paragraph.cpp src/Command/src/Document/Elements/Paragraph/Paragraph.hpp src/Command/src/Document/Elements/Image/Image.cpp src/Command/src/Document/Elements/Image/Image.hpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.cpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.hpp)
+        src/Command/src/History/CommandsHistory.cpp src/Command/src/History/CommandsHistory.hpp src/Command/src/Document/Document.cpp src/Command/src/Document/Document.hpp src/Command/src/Document/Elements/Paragraph/Paragraph.cpp src/Command/src/Document/Elements/Paragraph/Paragraph.hpp src/Command/src/Document/Elements/Image/Image.cpp src/Command/src/Document/Elements/Image/Image.hpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.cpp src/Command/src/CommandHandler/ListCommandHandler/ListCommandHandler.hpp src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp src/Command/src/CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.cpp src/Command/src/CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

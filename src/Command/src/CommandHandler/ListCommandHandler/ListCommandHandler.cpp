@@ -1,5 +1,6 @@
 #include "ListCommandHandler.hpp"
 #include <iostream>
+#include <Strings.hpp>
 
 void ListCommandHandler::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
@@ -8,29 +9,33 @@ void ListCommandHandler::ConfigureInputDefinition(std::unique_ptr<Common::Consol
 
 void ListCommandHandler::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
 {
-    *output << "Title: " << m_document->GetTitle() << std::endl;
+    Strings::Concatenator concatenator;
+
+    concatenator << "Title: " << m_document->GetTitle() << '\n';
 
     for (int i = 0; i < m_document->GetItemsCount(); ++i)
     {
         auto item = m_document->GetItem(i);
 
-        *output << i << ". ";
+        concatenator << i << ". ";
 
         if (item.GetImage() != nullptr)
         {
-            *output << "Image: "
+            concatenator << "Image: "
             << item.GetImage()->GetWidth() << ' '
             << item.GetImage()->GetHeight() << ' '
-            << item.GetImage()->GetPath() << std::endl;
+            << item.GetImage()->GetPath() << '\n';
         }
         else if (item.GetParagraph() != nullptr)
         {
-            *output << "Paragraph: "
-            << item.GetParagraph()->GetText() << std::endl;
+            concatenator << "Paragraph: "
+            << item.GetParagraph()->GetText() << '\n';
         }
         else
         {
-            *output << "Unknown type of document item";
+            concatenator << "Unknown type of document item";
         }
     }
+
+    *output << (std::string) concatenator;
 }

@@ -5,6 +5,7 @@
 #include "Application.hpp"
 #include "../CommandHandler/SetTitleCommandHandler/SetTitleCommandHandler.hpp"
 #include "../CommandHandler/ListCommandHandler/ListCommandHandler.hpp"
+#include "../CommandHandler/InsertParagraphCommandHandler/InsertParagraphCommandHandler.hpp"
 
 using namespace Common::Console;
 
@@ -25,7 +26,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
         if (arguments->size() == 0)
         {
-            *output << "You must provide more than one argument" << std::endl;
+            *output << "You must provide more than zero arguments" << std::endl;
             continue;
         }
 
@@ -46,8 +47,10 @@ void Application::DoRun(IInput &input, IOutput &output)
             argvInput.Validate();
 
             commandHandler->Handle(argvInput, output);
+
+            *output << "Command executed successfully" << std::endl;
         }
-        catch (std::logic_error e)
+        catch (const std::logic_error & e)
         {
             *output << e.what() << std::endl;
         }
@@ -62,4 +65,5 @@ void Application::RegisterCommandHandlers()
 {
     m_commandHandlerRegistry->RegisterHandler("SetTitle", std::make_unique<SetTitleCommandHandler>(m_commandsHistory, m_document));
     m_commandHandlerRegistry->RegisterHandler("List", std::make_unique<ListCommandHandler>(m_commandsHistory, m_document));
+    m_commandHandlerRegistry->RegisterHandler("InsertParagraph", std::make_unique<InsertParagraphCommandHandler>(m_commandsHistory, m_document));
 }

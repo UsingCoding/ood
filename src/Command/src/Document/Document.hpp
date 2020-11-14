@@ -1,10 +1,13 @@
 #pragma once
 
 #include "IDocument.hpp"
+#include "../History/ICommandsHistory.hpp"
 
 class Document : public IDocument
 {
 public:
+    Document(std::unique_ptr<ICommandsHistory> & commandsHistory);
+
     std::shared_ptr<IParagraph> InsertParagraph(const std::string &text, std::optional<size_t> position) override;
 
     std::shared_ptr<IImage>
@@ -34,5 +37,8 @@ public:
 
 private:
     std::vector<DocumentItem> m_items;
+    size_t m_topPointer;
     std::string m_title;
+
+    std::unique_ptr<ICommandsHistory> & m_commandsHistory;
 };

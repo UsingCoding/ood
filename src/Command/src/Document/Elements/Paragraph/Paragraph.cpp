@@ -4,9 +4,10 @@ Paragraph::Paragraph(const std::string &text) : m_text(text) {}
 
 std::string Paragraph::GetText() const
 {
-    return nullptr;
+    return m_text;
 }
 
-void Paragraph::SetText(const std::string &text) {
-
+void Paragraph::SetText(const std::string &text)
+{
+    m_text = text;
 }

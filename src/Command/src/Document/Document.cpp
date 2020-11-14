@@ -2,6 +2,11 @@
 #include "Elements/Paragraph/Paragraph.hpp"
 #include "Elements/Image/Image.hpp"
 
+Document::Document(std::unique_ptr<ICommandsHistory> & commandsHistory) : m_commandsHistory(commandsHistory)
+{
+    m_topPointer = 0;
+}
+
 std::shared_ptr<IParagraph> Document::InsertParagraph(const std::string &text, std::optional<size_t> position)
 {
     auto paragraph = std::make_shared<Paragraph>(text);
@@ -33,7 +38,7 @@ ConstDocumentItem Document::GetItem(size_t index) const
 {
     if (index >= m_items.size())
     {
-        throw std::logic_error("Requested item from index ore than count of items");
+        throw std::logic_error("Requested item by index more than count of items");
     }
 
     return m_items[index];
@@ -43,7 +48,7 @@ DocumentItem Document::GetItem(size_t index)
 {
     if (index >= m_items.size())
     {
-        throw std::logic_error("Requested item from index ore than count of items");
+        throw std::logic_error("Requested item by index more than count of items");
     }
 
     return m_items[index];
@@ -51,7 +56,12 @@ DocumentItem Document::GetItem(size_t index)
 
 void Document::DeleteItem(size_t index)
 {
+    if (index >= m_items.size())
+    {
+        throw std::logic_error("Requested to delete item by index more than count of items");
+    }
 
+    m_items.erase(m_items.begin() + index);
 }
 
 std::string Document::GetTitle() const
@@ -66,7 +76,7 @@ void Document::SetTitle(const std::string &title)
 
 bool Document::CanUndo() const
 {
-    return false;
+    return m_items.size() != 0;
 }
 
 void Document::Undo()
@@ -76,7 +86,7 @@ void Document::Undo()
 
 bool Document::CanRedo() const
 {
-    return false;
+    return m_topPointer != m_items.size() - 1;
 }
 
 void Document::Redo()
