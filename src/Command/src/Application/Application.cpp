@@ -7,6 +7,7 @@
 #include "../Controller/ListController/ListController.hpp"
 #include "../Controller/InsertParagraphController/InsertParagraphController.hpp"
 #include "../ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp"
+#include "../Controller/ReplaceTextController/ReplaceTextController.hpp"
 
 using namespace Common::Console;
 
@@ -55,7 +56,7 @@ void Application::DoRun(IInput &input, IOutput &output)
         {
             *output << "Unknown command" << std::endl;
         }
-        catch (std::runtime_error e)
+        catch (const std::exception & e)
         {
             *output << e.what() << std::endl;
         }
@@ -67,4 +68,5 @@ void Application::RegisterCommandHandlers()
     m_controllerRegistry->Register("SetTitle", std::make_unique<SetTitleController>(m_commandsHistory, m_document));
     m_controllerRegistry->Register("List", std::make_unique<ListController>(m_commandsHistory, m_document));
     m_controllerRegistry->Register("InsertParagraph",std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
+    m_controllerRegistry->Register("ReplaceText",std::make_unique<ReplaceTextController>(m_commandsHistory, m_document));
 }
