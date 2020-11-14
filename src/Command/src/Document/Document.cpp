@@ -2,9 +2,9 @@
 #include "Elements/Paragraph/Paragraph.hpp"
 #include "Elements/Image/Image.hpp"
 
-Document::Document(std::unique_ptr<ICommandsHistory> & commandsHistory) : m_commandsHistory(commandsHistory)
+Document::Document(std::shared_ptr<ICommandsHistory> & commandsHistory) : m_commandsHistory(commandsHistory)
 {
-    m_topPointer = 0;
+
 }
 
 std::shared_ptr<IParagraph> Document::InsertParagraph(const std::string &text, std::optional<size_t> position)
@@ -88,22 +88,22 @@ void Document::SetTitle(const std::string &title)
 
 bool Document::CanUndo() const
 {
-    return m_items.size() != 0;
+    return !m_commandsHistory->IsEmpty();
 }
 
 void Document::Undo()
 {
-
+    m_commandsHistory->Undo(*this);
 }
 
 bool Document::CanRedo() const
 {
-    return m_topPointer != m_items.size() - 1;
+    return !m_commandsHistory->AtTop();
 }
 
 void Document::Redo()
 {
-
+    m_commandsHistory->Redo(*this);
 }
 
 void Document::Save(const IDocument::Path &path) const

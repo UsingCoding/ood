@@ -7,7 +7,7 @@ class SetTitleController : public AbstractController
 {
 public:
     SetTitleController(
-            std::unique_ptr<ICommandsHistory> &commandsHistory,
+            std::shared_ptr<ICommandsHistory> &commandsHistory,
             std::unique_ptr<IDocument> &document)
     : AbstractController(commandsHistory, document) {}
 

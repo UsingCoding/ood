@@ -8,6 +8,8 @@
 #include "../Controller/InsertParagraphController/InsertParagraphController.hpp"
 #include "../ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp"
 #include "../Controller/ReplaceTextController/ReplaceTextController.hpp"
+#include "../Controller/UndoController/UndoController.hpp"
+#include "../Controller/RedoController/RedoController.hpp"
 
 using namespace Common::Console;
 
@@ -69,4 +71,6 @@ void Application::RegisterCommandHandlers()
     m_controllerRegistry->Register("List", std::make_unique<ListController>(m_commandsHistory, m_document));
     m_controllerRegistry->Register("InsertParagraph",std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
     m_controllerRegistry->Register("ReplaceText",std::make_unique<ReplaceTextController>(m_commandsHistory, m_document));
+    m_controllerRegistry->Register("Undo",std::make_unique<UndoController>(m_document));
+    m_controllerRegistry->Register("Redo",std::make_unique<RedoController>(m_document));
 }

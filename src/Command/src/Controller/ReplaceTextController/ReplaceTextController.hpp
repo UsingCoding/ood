@@ -6,7 +6,7 @@ class ReplaceTextController : public AbstractController
 {
 public:
     ReplaceTextController(
-            std::unique_ptr<ICommandsHistory> &commandsHistory,
+            std::shared_ptr<ICommandsHistory> &commandsHistory,
     std::unique_ptr<IDocument> &document)
     : AbstractController(commandsHistory, document) {}
 

@@ -8,7 +8,7 @@ class AbstractController : public IController
 {
 public:
     AbstractController(
-        std::unique_ptr<ICommandsHistory> &commandsHistory,
+        std::shared_ptr<ICommandsHistory> &commandsHistory,
         std::unique_ptr<IDocument> &document
     )
     : m_commandsHistory(commandsHistory), m_document(document) {}
@@ -16,6 +16,6 @@ public:
 protected:
     void AddToCommandHistory(std::unique_ptr<ICommand> command);
 
-    std::unique_ptr<ICommandsHistory> & m_commandsHistory;
+    std::shared_ptr<ICommandsHistory> & m_commandsHistory;
     std::unique_ptr<IDocument> & m_document;
 };

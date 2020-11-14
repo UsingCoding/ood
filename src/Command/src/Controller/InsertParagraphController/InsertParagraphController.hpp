@@ -6,7 +6,7 @@ class InsertParagraphController : public AbstractController
 {
 public:
     InsertParagraphController(
-        std::unique_ptr<ICommandsHistory> &commandsHistory,
+        std::shared_ptr<ICommandsHistory> &commandsHistory,
         std::unique_ptr<IDocument> &document)
     : AbstractController(commandsHistory, document) {}
 

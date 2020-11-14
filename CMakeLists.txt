@@ -272,7 +272,16 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Document/Elements/Image/Image.hpp
         src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp
         src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp
-        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp src/Common/Registry/Registry.hpp src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.cpp src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.hpp src/Command/src/Controller/ReplaceTextController/ReplaceTextController.cpp src/Command/src/Controller/ReplaceTextController/ReplaceTextController.hpp)
+        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp
+        src/Common/Registry/Registry.hpp
+        src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.cpp
+        src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.hpp
+        src/Command/src/Controller/ReplaceTextController/ReplaceTextController.cpp
+        src/Command/src/Controller/ReplaceTextController/ReplaceTextController.hpp
+        src/Command/src/Controller/UndoController/UndoController.cpp
+        src/Command/src/Controller/UndoController/UndoController.hpp
+        src/Command/src/Controller/RedoController/RedoController.cpp
+        src/Command/src/Controller/RedoController/RedoController.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

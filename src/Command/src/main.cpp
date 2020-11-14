@@ -11,12 +11,12 @@ int main(int argc, char const *argv[])
     Common::Console::ArgvInput input(argc, argv);
     Common::Console::StreamOutput output(std::cout);
 
-    std::unique_ptr<ICommandsHistory> commandsHistory = std::make_unique<CommandsHistory>();
+    std::shared_ptr<ICommandsHistory> commandsHistory = std::make_unique<CommandsHistory>();
 
     Application application(
         std::make_unique<Document>(commandsHistory),
         std::make_unique<ControllerRegistry>(),
-        std::move(commandsHistory)
+        commandsHistory
     );
 
     application.Run(input, output);

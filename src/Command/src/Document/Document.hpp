@@ -6,7 +6,7 @@
 class Document : public IDocument
 {
 public:
-    Document(std::unique_ptr<ICommandsHistory> & commandsHistory);
+    Document(std::shared_ptr<ICommandsHistory> & commandsHistory);
 
     std::shared_ptr<IParagraph> InsertParagraph(const std::string &text, std::optional<size_t> position) override;
 
@@ -37,8 +37,7 @@ public:
 
 private:
     std::vector<DocumentItem> m_items;
-    size_t m_topPointer;
     std::string m_title;
 
-    std::unique_ptr<ICommandsHistory> & m_commandsHistory;
+    std::shared_ptr<ICommandsHistory> & m_commandsHistory;
 };

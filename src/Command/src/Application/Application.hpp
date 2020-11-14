@@ -10,7 +10,7 @@ public:
     Application(
         std::unique_ptr<IDocument> document,
         std::unique_ptr<IControllerRegistry> controllerRegistry,
-        std::unique_ptr<ICommandsHistory> commandsHistory
+        std::shared_ptr<ICommandsHistory> commandsHistory
     )
     : m_controllerRegistry(std::move(controllerRegistry)),
       m_commandsHistory(std::move(commandsHistory)),
@@ -25,7 +25,7 @@ protected:
 private:
     std::unique_ptr<IDocument> m_document;
     std::unique_ptr<IControllerRegistry> m_controllerRegistry;
-    std::unique_ptr<ICommandsHistory> m_commandsHistory;
+    std::shared_ptr<ICommandsHistory> m_commandsHistory;
 
     void RegisterCommandHandlers();
 };
