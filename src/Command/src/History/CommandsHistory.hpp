@@ -5,7 +5,7 @@
 class CommandsHistory : public ICommandsHistory
 {
 public:
-    void AddCommand(std::unique_ptr<ICommand> command) override;
+    void AddAndExecuteCommand(std::unique_ptr<ICommand> command, IDocument & document) override;
 
     std::unique_ptr<ICommand> PopCommand() override;
 

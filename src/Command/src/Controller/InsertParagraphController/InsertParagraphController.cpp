@@ -29,7 +29,5 @@ void InsertParagraphController::Handle(Common::Console::IInput &input, Common::C
 
     auto command = std::make_unique<InsertParagraphCommand>(position, input.GetArgument("text").value());
 
-    command->Execute(*m_document);
-
     AddToCommandHistory(std::move(command));
 }

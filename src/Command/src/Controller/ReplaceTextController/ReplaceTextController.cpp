@@ -30,7 +30,5 @@ void ReplaceTextController::Handle(Common::Console::IInput &input, Common::Conso
 
     auto command = std::make_unique<ReplaceTextCommand>(documentItem.GetParagraph(), input.GetArgument("text").value());
 
-    command->Execute(*m_document);
-
     AddToCommandHistory(std::move(command));
 }

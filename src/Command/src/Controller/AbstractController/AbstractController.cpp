@@ -2,5 +2,5 @@
 
 void AbstractController::AddToCommandHistory(std::unique_ptr<ICommand> command)
 {
-    m_commandsHistory->AddCommand(std::move(command));
+    m_commandsHistory->AddAndExecuteCommand(std::move(command), *m_document);
 }

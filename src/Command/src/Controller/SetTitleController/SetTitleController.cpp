@@ -13,7 +13,5 @@ void SetTitleController::Handle(Common::Console::IInput &input, Common::Console:
 
     auto command = std::make_unique<SetTitleCommand>(newTitle.value(), m_document->GetTitle());
 
-    command->Execute(*m_document);
-
     AddToCommandHistory(std::move(command));
 }

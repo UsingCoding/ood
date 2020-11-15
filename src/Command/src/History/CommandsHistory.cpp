@@ -1,12 +1,19 @@
 #include "CommandsHistory.hpp"
 
-void CommandsHistory::AddCommand(std::unique_ptr<ICommand> command)
+void CommandsHistory::AddAndExecuteCommand(std::unique_ptr<ICommand> command, IDocument & document)
 {
     if (!AtTop() && m_commands.size() != 0)
     {
-        // branch with adding new commands
-        return;
+        for (int i = m_commands.size() - 1; i >= m_topPtr; --i)
+        {
+            m_commands[i]->Revert(document);
+            m_commands[i]->Dispose();
+
+            m_commands.erase(m_commands.begin() + i);
+        }
     }
+
+    command->Execute(document);
 
     m_commands.push_back(std::move(command));
 
