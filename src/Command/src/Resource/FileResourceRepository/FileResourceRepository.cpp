@@ -24,6 +24,11 @@ void FileResourceRepository::Add(std::shared_ptr<FileResource> file)
 
     newPath /= fileId;
 
+    if (std::experimental::filesystem::exists(newPath))
+    {
+        std::experimental::filesystem::remove(newPath);
+    }
+
     std::experimental::filesystem::copy(file->GetPath(), newPath);
 
     file->SetPath(newPath);
