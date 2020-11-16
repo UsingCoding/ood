@@ -2,7 +2,7 @@
 
 void InsertImageCommand::Execute(IDocument &document)
 {
-    m_image = document.InsertImage(m_originalPath, m_width, m_height, m_position);
+    m_image = document.InsertImage(m_file->GetPath(), m_width, m_height, m_position);
 }
 
 void InsertImageCommand::Revert(IDocument &document)

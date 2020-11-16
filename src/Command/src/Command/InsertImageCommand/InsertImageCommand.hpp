@@ -10,14 +10,12 @@ public:
     InsertImageCommand(
         std::shared_ptr<FileResource> file,
         std::unique_ptr<IFileResourceRepository> & fileResourceRepo,
-        IDocument::Path originalPath,
         int width,
         int height,
         const std::optional<size_t> &position
     ) :
         m_file(file),
         m_fileResourceRepo(fileResourceRepo),
-        m_originalPath(originalPath),
         m_width(width),
         m_height(height),
         m_position(position)
@@ -32,7 +30,6 @@ public:
 private:
     std::shared_ptr<FileResource> m_file;
     std::unique_ptr<IFileResourceRepository> & m_fileResourceRepo;
-    IDocument::Path m_originalPath;
     int m_width;
     int m_height;
     std::optional<size_t> m_position;

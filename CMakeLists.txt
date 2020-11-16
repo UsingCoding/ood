@@ -285,7 +285,7 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Command/InsertImageCommand/InsertImageCommand.cpp
         src/Command/src/Command/InsertImageCommand/InsertImageCommand.hpp
         src/Command/src/Resource/FileResource.cpp
-        src/Command/src/Resource/FileResource.hpp src/Command/src/Controller/InsertImageController/InsertImageController.cpp src/Command/src/Controller/InsertImageController/InsertImageController.hpp src/Command/src/Resource/FileResourceRepository/IFileResourceRepository.hpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.cpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.hpp)
+        src/Command/src/Resource/FileResource.hpp src/Command/src/Controller/InsertImageController/InsertImageController.cpp src/Command/src/Controller/InsertImageController/InsertImageController.hpp src/Command/src/Resource/FileResourceRepository/IFileResourceRepository.hpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.cpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.hpp src/Command/src/Command/ResizeImageCommand/ResizeImageCommand.cpp src/Command/src/Command/ResizeImageCommand/ResizeImageCommand.hpp src/Command/src/Controller/ResizeImageController/ResizeImageController.cpp src/Command/src/Controller/ResizeImageController/ResizeImageController.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

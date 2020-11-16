@@ -52,7 +52,6 @@ void InsertImageController::Handle(Common::Console::IInput &input, Common::Conso
     auto command = std::make_unique<InsertImageCommand>(
         file,
         m_fileResourceRepo,
-        path,
         width,
         height,
         position

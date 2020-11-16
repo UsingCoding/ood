@@ -4,18 +4,21 @@ Image::Image(const IImage::Path &path, int width, int height) : m_path(path), m_
 
 IImage::Path Image::GetPath() const
 {
-    return IImage::Path();
+    return m_path;
 }
 
-int Image::GetWidth() const {
-    return 0;
+int Image::GetWidth() const
+{
+    return m_width;
 }
 
-int Image::GetHeight() const {
-    return 0;
+int Image::GetHeight() const
+{
+    return m_height;
 }
 
 void Image::Resize(int width, int height)
 {
-
+    m_width = width;
+    m_height = height;
 }
