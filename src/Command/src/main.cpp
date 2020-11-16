@@ -7,6 +7,8 @@
 #include "ControllerRegistry/ControllerRegistry.hpp"
 #include "Resource/FileResourceRepository/FileResourceRepository.hpp"
 
+const static std::string REPO_PATH = "./var";
+
 int main(int argc, char const *argv[])
 {
     Common::Console::ArgvInput input(argc, argv);
@@ -18,7 +20,7 @@ int main(int argc, char const *argv[])
         std::make_unique<Document>(commandsHistory),
         std::make_unique<ControllerRegistry>(),
         commandsHistory,
-        std::make_unique<FileResourceRepository>("/home/supernotuser/dev/ood/src/Command/src/var")
+        std::make_unique<FileResourceRepository>(REPO_PATH)
     );
 
     application.Run(input, output);
