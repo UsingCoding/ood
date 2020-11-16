@@ -6,11 +6,11 @@
 class ControllerRegistry : public IControllerRegistry
 {
 public:
-    void Register(const std::string &id, std::unique_ptr<IController> commandHandler) override;
+    void Register(const ControllerType &id, std::unique_ptr<IController> commandHandler) override;
 
-    std::unique_ptr<IController> &Get(const std::string &id) override;
+    std::unique_ptr<IController> &Get(const ControllerType &id) override;
 
 private:
-    std::map<std::string, std::unique_ptr<IController>> m_controllers;
+    std::map<ControllerType, std::unique_ptr<IController>> m_controllers;
 };
 

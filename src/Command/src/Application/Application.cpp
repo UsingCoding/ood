@@ -4,21 +4,24 @@
 #include <Application/InputDefinition/InputDefinition.hpp>
 #include "Application.hpp"
 #include "../Controller/SetTitleController/SetTitleController.hpp"
-#include "../Controller/ListController/ListController.hpp"
-#include "../Controller/InsertParagraphController/InsertParagraphController.hpp"
 #include "../ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp"
-#include "../Controller/ReplaceTextController/ReplaceTextController.hpp"
-#include "../Controller/UndoController/UndoController.hpp"
-#include "../Controller/RedoController/RedoController.hpp"
-#include "../Controller/InsertImageController/InsertImageController.hpp"
-#include "../Controller/ResizeImageController/ResizeImageController.hpp"
-#include "../Controller/SaveDocumentController/SaveDocumentController.hpp"
+
+const std::map<std::string, ControllerType> Application::COMMAND_CONTROLLER_MAP = {
+        std::make_pair("SetTitle", ControllerType::SET_TITLE),
+        std::make_pair("List", ControllerType::LIST),
+        std::make_pair("InsertParagraph", ControllerType::INSERT_PARAGRAPH),
+        std::make_pair("ReplaceText", ControllerType::REPLACE_TEXT),
+        std::make_pair("Undo", ControllerType::UNDO),
+        std::make_pair("Redo", ControllerType::REDO),
+        std::make_pair("InsertImage", ControllerType::INSERT_IMAGE),
+        std::make_pair("ResizeImage", ControllerType::RESIZE_IMAGE),
+        std::make_pair("Save", ControllerType::SAVE_DOCUMENT),
+};
 
 using namespace Common::Console;
 
 void Application::Configure(std::unique_ptr<IInputDefinition> &definition)
 {
-    RegisterCommandHandlers();
 }
 
 void Application::DoRun(IInput &input, IOutput &output)
@@ -39,9 +42,17 @@ void Application::DoRun(IInput &input, IOutput &output)
 
         try
         {
-            auto & controller = m_controllerRegistry->Get((*arguments)[0]);
+            auto it = COMMAND_CONTROLLER_MAP.find((*arguments)[0]);
+
+            if (it == COMMAND_CONTROLLER_MAP.end())
+            {
+                *output << "Unknown command" << std::endl;
+                continue;
+            }
 
             arguments->erase(arguments->begin());
+
+            auto & controller = m_controllerRegistry->Get(it->second);
 
             std::unique_ptr<IInputDefinition> definition = std::make_unique<InputDefinition>();
 
@@ -57,26 +68,9 @@ void Application::DoRun(IInput &input, IOutput &output)
 
             *output << "Command executed successfully" << std::endl;
         }
-        catch (const ItemNotFoundInRegistryException & e)
-        {
-            *output << "Unknown command" << std::endl;
-        }
         catch (const std::exception & e)
         {
             *output << e.what() << std::endl;
         }
     }
-}
-
-void Application::RegisterCommandHandlers()
-{
-    m_controllerRegistry->Register("SetTitle", std::make_unique<SetTitleController>(m_commandsHistory, m_document));
-    m_controllerRegistry->Register("List", std::make_unique<ListController>(m_commandsHistory, m_document));
-    m_controllerRegistry->Register("InsertParagraph",std::make_unique<InsertParagraphController>(m_commandsHistory, m_document));
-    m_controllerRegistry->Register("ReplaceText",std::make_unique<ReplaceTextController>(m_commandsHistory, m_document));
-    m_controllerRegistry->Register("Undo",std::make_unique<UndoController>(m_document));
-    m_controllerRegistry->Register("Redo",std::make_unique<RedoController>(m_document));
-    m_controllerRegistry->Register("InsertImage",std::make_unique<InsertImageController>(m_commandsHistory, m_document, m_fileResourceRepository));
-    m_controllerRegistry->Register("ResizeImage",std::make_unique<ResizeImageController>(m_commandsHistory, m_document));
-    m_controllerRegistry->Register("Save",std::make_unique<SaveDocumentController>(m_commandsHistory, m_document));
 }
