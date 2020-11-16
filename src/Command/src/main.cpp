@@ -6,6 +6,7 @@
 #include "Document/Document.hpp"
 #include "ControllerRegistry/ControllerRegistry.hpp"
 #include "Resource/FileResourceRepository/FileResourceRepository.hpp"
+#include "Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.hpp"
 
 const static std::string REPO_PATH = "./var";
 
@@ -17,7 +18,7 @@ int main(int argc, char const *argv[])
     std::shared_ptr<ICommandsHistory> commandsHistory = std::make_unique<CommandsHistory>();
 
     Application application(
-        std::make_unique<Document>(commandsHistory),
+        std::make_unique<Document>(commandsHistory, std::make_unique<HtmlDocumentConverter>()),
         std::make_unique<ControllerRegistry>(),
         commandsHistory,
         std::make_unique<FileResourceRepository>(REPO_PATH)

@@ -1,11 +1,7 @@
+#include <fstream>
 #include "Document.hpp"
 #include "Elements/Paragraph/Paragraph.hpp"
 #include "Elements/Image/Image.hpp"
-
-Document::Document(std::shared_ptr<ICommandsHistory> & commandsHistory) : m_commandsHistory(commandsHistory)
-{
-
-}
 
 std::shared_ptr<IParagraph> Document::InsertParagraph(const std::string &text, std::optional<size_t> position)
 {
@@ -108,5 +104,12 @@ void Document::Redo()
 
 void Document::Save(const IDocument::Path &path) const
 {
+    std::ofstream fout(path);
 
+    if (!fout.is_open())
+    {
+        throw std::runtime_error("Failed to open file to save doc");
+    }
+
+    fout << m_converter->Convert(*this);
 }

@@ -2,11 +2,16 @@
 
 #include "IDocument.hpp"
 #include "../History/ICommandsHistory.hpp"
+#include "DocumentConverter/IDocumentConverter.hpp"
 
 class Document : public IDocument
 {
 public:
-    Document(std::shared_ptr<ICommandsHistory> & commandsHistory);
+    Document(
+        std::shared_ptr<ICommandsHistory> commandsHistory,
+        std::unique_ptr<IDocumentConverter> converter
+    )
+    : m_commandsHistory(commandsHistory), m_converter(std::move(converter)) {}
 
     std::shared_ptr<IParagraph> InsertParagraph(const std::string &text, std::optional<size_t> position) override;
 
@@ -39,5 +44,6 @@ private:
     std::vector<DocumentItem> m_items;
     std::string m_title;
 
-    std::shared_ptr<ICommandsHistory> & m_commandsHistory;
+    std::shared_ptr<ICommandsHistory> m_commandsHistory;
+    std::unique_ptr<IDocumentConverter> m_converter;
 };
