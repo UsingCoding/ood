@@ -10,9 +10,9 @@ bool Strings::StartsWith(const std::string & value, const std::string & beginOfS
     return value.substr(0, beginOfString.length()) == beginOfString;
 }
 
-std::string Strings::Trim(const std::string & value)
+std::string Strings::Trim(const std::string & value, const std::string & additionalChars)
 {
-    const std::string chars = "\t\n\v\f\r ";
+    const std::string chars = "\t\n\v\f\r " + additionalChars;
     std::string cpValue = value;
 
     cpValue.erase(0, cpValue.find_first_not_of(chars));

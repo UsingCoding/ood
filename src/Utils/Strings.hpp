@@ -25,7 +25,7 @@ namespace Strings
 
     bool StartsWith(const std::string & value, const std::string & beginOfString);
 
-    std::string Trim(const std::string & value);
+    std::string Trim(const std::string & value, const std::string & additionalChars = "");
 
     std::vector<std::string> Split(const std::string & value, const std::string & separator);
 }

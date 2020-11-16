@@ -20,7 +20,7 @@ void FileResourceRepository::Add(std::shared_ptr<FileResource> file)
 
     auto newPath = m_repoPath;
 
-    std::string fileId = Strings::Concatenator() << currentOffset << fileExtension;
+    std::string fileId = Strings::Concatenator() << currentOffset << Strings::Trim(fileExtension, "\"");
 
     newPath /= fileId;
 
