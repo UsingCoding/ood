@@ -5,6 +5,7 @@
 #include "History/CommandsHistory.hpp"
 #include "Document/Document.hpp"
 #include "ControllerRegistry/ControllerRegistry.hpp"
+#include "Resource/FileResourceRepository/FileResourceRepository.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -16,7 +17,8 @@ int main(int argc, char const *argv[])
     Application application(
         std::make_unique<Document>(commandsHistory),
         std::make_unique<ControllerRegistry>(),
-        commandsHistory
+        commandsHistory,
+        std::make_unique<FileResourceRepository>("/home/supernotuser/dev/ood/src/Command/src/var")
     );
 
     application.Run(input, output);

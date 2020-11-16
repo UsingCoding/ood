@@ -10,6 +10,7 @@
 #include "../Controller/ReplaceTextController/ReplaceTextController.hpp"
 #include "../Controller/UndoController/UndoController.hpp"
 #include "../Controller/RedoController/RedoController.hpp"
+#include "../Controller/InsertImageController/InsertImageController.hpp"
 
 using namespace Common::Console;
 
@@ -73,4 +74,5 @@ void Application::RegisterCommandHandlers()
     m_controllerRegistry->Register("ReplaceText",std::make_unique<ReplaceTextController>(m_commandsHistory, m_document));
     m_controllerRegistry->Register("Undo",std::make_unique<UndoController>(m_document));
     m_controllerRegistry->Register("Redo",std::make_unique<RedoController>(m_document));
+    m_controllerRegistry->Register("InsertImage",std::make_unique<InsertImageController>(m_commandsHistory, m_document, m_fileResourceRepository));
 }

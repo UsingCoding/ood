@@ -26,6 +26,7 @@ namespace Common::Console
 
     private:
         std::map<std::string, InputArgument> m_arguments;
+        std::vector<std::string> m_argumentsOrder;
         std::map<std::string, InputOption> m_options;
         std::map<char, std::string> m_shortcuts;
     };

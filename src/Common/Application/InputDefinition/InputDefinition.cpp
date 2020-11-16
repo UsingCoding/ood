@@ -11,6 +11,7 @@ void InputDefinition::AddArgument(const InputArgument &argument)
     }
 
     m_arguments.insert(std::make_pair(argument.GetName(), argument));
+    m_argumentsOrder.push_back(argument.GetName());
 }
 
 void InputDefinition::AddOption(const InputOption &option)
@@ -40,20 +41,7 @@ bool InputDefinition::HasArgument(const std::string &name) const
 
 bool InputDefinition::HasArgument(int index) const
 {
-    if (m_arguments.size() <= index)
-    {
-        return false;
-    }
-
-    for (auto [i, it] = std::tuple{0, m_arguments.begin()}; it != m_arguments.end(); it++, i++)
-    {
-        if (i == index)
-        {
-            return true;
-        }
-    }
-
-    throw false;
+    return m_arguments.size() > index;
 }
 
 bool InputDefinition::HasOption(const std::string &name) const
@@ -78,15 +66,9 @@ const InputArgument &InputDefinition::GetArgument(int index) const
         throw std::runtime_error("Accessing offset more than count of arguments");
     }
 
-    for (auto [i, it] = std::tuple{0, m_arguments.begin()}; it != m_arguments.end(); it++, i++)
-    {
-        if (i == index)
-        {
-            return it->second;
-        }
-    }
+    auto argName = m_argumentsOrder[index];
 
-    throw std::runtime_error(Strings::Concatenator() << "No argument found by index " << index);
+    return m_arguments.find(argName)->second;
 }
 
 const InputOption &InputDefinition::GetOption(const std::string &name) const

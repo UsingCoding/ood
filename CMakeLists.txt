@@ -154,7 +154,7 @@ add_executable(decorator-streams
         src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.cpp
         src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.hpp)
 
-add_executable(adapter src/Adapter/src/main.cpp src/Adapter/src/GraphicsLib/GraphicLib.hpp src/Adapter/src/ShapeDrawningLib/ShapeDrawningLib.hpp src/Adapter/src/ModernGraphicsLib/ModernGraphicsLib.hpp src/Adapter/src/App/App.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapter.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapterV2.hpp)
+add_executable(adapter src/Adapter/src/main.cpp src/Adapter/src/GraphicsLib/GraphicLib.hpp src/Adapter/src/ShapeDrawningLib/ShapeDrawningLib.hpp src/Adapter/src/ModernGraphicsLib/ModernGraphicsLib.hpp src/Adapter/src/App/App.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapter.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapterV2.hpp src/Command/src/Command/InsertImageCommand/InsertImageCommand.cpp src/Command/src/Command/InsertImageCommand/InsertImageCommand.hpp)
 
 add_executable(adapter-tests src/Adapter/tests/main.cpp)
 
@@ -281,8 +281,15 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Controller/UndoController/UndoController.cpp
         src/Command/src/Controller/UndoController/UndoController.hpp
         src/Command/src/Controller/RedoController/RedoController.cpp
-        src/Command/src/Controller/RedoController/RedoController.hpp)
+        src/Command/src/Controller/RedoController/RedoController.hpp
+        src/Command/src/Command/InsertImageCommand/InsertImageCommand.cpp
+        src/Command/src/Command/InsertImageCommand/InsertImageCommand.hpp
+        src/Command/src/Resource/FileResource.cpp
+        src/Command/src/Resource/FileResource.hpp src/Command/src/Controller/InsertImageController/InsertImageController.cpp src/Command/src/Controller/InsertImageController/InsertImageController.hpp src/Command/src/Resource/FileResourceRepository/IFileResourceRepository.hpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.cpp src/Command/src/Resource/FileResourceRepository/FileResourceRepository.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
+link_libraries(stdc++fs)
+
+target_link_libraries(command stdc++fs)
