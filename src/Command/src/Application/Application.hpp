@@ -10,10 +10,10 @@ class Application : public Common::Application
 public:
     Application(
         std::unique_ptr<IControllerRegistry> controllerRegistry,
-        std::unique_ptr<IFileResourceRepository> fileResourceRepository
+        std::unique_ptr<IFileResourceRepository> & fileResourceRepository
     )
     : m_controllerRegistry(std::move(controllerRegistry)),
-      m_fileResourceRepository(std::move(fileResourceRepository))
+      m_fileResourceRepository(fileResourceRepository)
     {}
 
 protected:
@@ -23,7 +23,7 @@ protected:
 
 private:
     std::unique_ptr<IControllerRegistry> m_controllerRegistry;
-    std::unique_ptr<IFileResourceRepository> m_fileResourceRepository;
+    std::unique_ptr<IFileResourceRepository> & m_fileResourceRepository;
 
     const static std::map<std::string, ControllerType> COMMAND_CONTROLLER_MAP;
 };

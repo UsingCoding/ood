@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
 
     Application application(
         std::move(controllerRegistry),
-        std::move(fileResourceRepo)
+        fileResourceRepo
     );
 
     Common::Console::ArgvInput input(argc, argv);

@@ -5,10 +5,7 @@
 
 FileResourceRepository::FileResourceRepository(const FileResourceRepository::Path &repoPath) : m_repoPath(repoPath)
 {
-    if (!std::experimental::filesystem::exists(m_repoPath))
-    {
-        std::experimental::filesystem::create_directories(m_repoPath);
-    }
+    InitRepoDir();
 }
 
 void FileResourceRepository::Add(std::shared_ptr<FileResource> file)
@@ -52,7 +49,22 @@ void FileResourceRepository::Delete(std::shared_ptr<FileResource> file)
     m_inMemoryFileRepo.erase(searchIt);
 }
 
+void FileResourceRepository::SetPath(const IFileResourceRepository::Path &path)
+{
+    m_repoPath = path;
+
+    InitRepoDir();
+}
+
 void FileResourceRepository::Clear()
 {
     std::experimental::filesystem::remove_all(m_repoPath);
+}
+
+void FileResourceRepository::InitRepoDir()
+{
+    if (!std::experimental::filesystem::exists(m_repoPath))
+    {
+        std::experimental::filesystem::create_directories(m_repoPath);
+    }
 }

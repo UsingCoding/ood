@@ -22,10 +22,18 @@ using namespace Common::Console;
 
 void Application::Configure(std::unique_ptr<IInputDefinition> &definition)
 {
+    definition->AddOption(InputOption("repo_dir", 'd', InputOption::ValueMode::VALUE_OPTIONAL));
 }
 
 void Application::DoRun(IInput &input, IOutput &output)
 {
+    auto newRepoPath = input.GetOption("repo_dir");
+
+    if (newRepoPath.has_value())
+    {
+        m_fileResourceRepository->SetPath(newRepoPath.value());
+    }
+
     *output << "Run" << std::endl;
 
     std::string userInput;
