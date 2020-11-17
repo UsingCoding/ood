@@ -26,5 +26,6 @@ private:
     std::unique_ptr<IFileResourceRepository> & m_fileResourceRepository;
 
     const static std::map<std::string, ControllerType> COMMAND_CONTROLLER_MAP;
+    const static std::string EXIT_COMMAND;
 };
 

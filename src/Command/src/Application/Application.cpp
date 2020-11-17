@@ -19,6 +19,8 @@ const std::map<std::string, ControllerType> Application::COMMAND_CONTROLLER_MAP 
         std::make_pair("DeleteItem", ControllerType::DELETE_ITEM),
 };
 
+const std::string Application::EXIT_COMMAND = "Exit";
+
 using namespace Common::Console;
 
 void Application::Configure(std::unique_ptr<IInputDefinition> &definition)
@@ -47,6 +49,12 @@ void Application::DoRun(IInput &input, IOutput &output)
         {
             *output << "You must provide more than zero arguments" << std::endl;
             continue;
+        }
+
+        if (arguments->size() == 1 && arguments->front() == EXIT_COMMAND)
+        {
+            *output << "Exit" << std::endl;
+            return;
         }
 
         try
