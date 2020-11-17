@@ -10,5 +10,6 @@ enum class ControllerType
     REPLACE_TEXT,
     RESIZE_IMAGE,
     SAVE_DOCUMENT,
-    SET_TITLE
+    SET_TITLE,
+    DELETE_ITEM
 };

@@ -16,6 +16,7 @@ const std::map<std::string, ControllerType> Application::COMMAND_CONTROLLER_MAP 
         std::make_pair("InsertImage", ControllerType::INSERT_IMAGE),
         std::make_pair("ResizeImage", ControllerType::RESIZE_IMAGE),
         std::make_pair("Save", ControllerType::SAVE_DOCUMENT),
+        std::make_pair("DeleteItem", ControllerType::DELETE_ITEM),
 };
 
 using namespace Common::Console;

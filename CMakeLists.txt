@@ -297,7 +297,7 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Controller/ResizeImageController/ResizeImageController.hpp
         src/Command/src/Document/DocumentConverter/IDocumentConverter.hpp
         src/Command/src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.cpp
-        src/Command/src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.hpp src/Command/src/Controller/SaveDocumentController/SaveDocumentController.cpp src/Command/src/Controller/SaveDocumentController/SaveDocumentController.hpp src/Command/src/Controller/ControllerType.hpp)
+        src/Command/src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.hpp src/Command/src/Controller/SaveDocumentController/SaveDocumentController.cpp src/Command/src/Controller/SaveDocumentController/SaveDocumentController.hpp src/Command/src/Controller/ControllerType.hpp src/Command/src/Controller/DeleteItemController/DeleteItemController.cpp src/Command/src/Controller/DeleteItemController/DeleteItemController.hpp src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.cpp src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)

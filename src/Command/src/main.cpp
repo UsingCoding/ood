@@ -16,6 +16,7 @@
 #include "Controller/ResizeImageController/ResizeImageController.hpp"
 #include "Controller/SaveDocumentController/SaveDocumentController.hpp"
 #include "Controller/SetTitleController/SetTitleController.hpp"
+#include "Controller/DeleteItemController/DeleteItemController.hpp"
 
 const static std::string REPO_PATH = "./var";
 
@@ -36,6 +37,7 @@ int main(int argc, char const *argv[])
     controllerRegistry->Register(ControllerType::INSERT_IMAGE, std::make_unique<InsertImageController>(commandsHistory, document, fileResourceRepo));
     controllerRegistry->Register(ControllerType::RESIZE_IMAGE, std::make_unique<ResizeImageController>(commandsHistory, document));
     controllerRegistry->Register(ControllerType::SAVE_DOCUMENT, std::make_unique<SaveDocumentController>(commandsHistory, document));
+    controllerRegistry->Register(ControllerType::DELETE_ITEM, std::make_unique<DeleteItemController>(commandsHistory, document));
 
     Application application(
         std::move(controllerRegistry),
