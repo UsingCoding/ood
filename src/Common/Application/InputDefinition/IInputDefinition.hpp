@@ -23,5 +23,7 @@ namespace Common::Console
         virtual const InputOption & GetOptionForShortcut(char shortcut) const = 0;
 
         virtual void DoForEachArgument(std::function<void(const InputArgument &)>) const = 0;
+
+        virtual void Clear() = 0;
     };
 }

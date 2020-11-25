@@ -104,3 +104,11 @@ const InputOption &InputDefinition::GetOptionForShortcut(char shortcut) const
 
     return m_options.find(searchIterator->second)->second;
 }
+
+void InputDefinition::Clear()
+{
+    m_arguments.clear();
+    m_argumentsOrder.clear();
+    m_options.clear();
+    m_shortcuts.clear();
+}

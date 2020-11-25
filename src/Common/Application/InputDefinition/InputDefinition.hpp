@@ -24,6 +24,8 @@ namespace Common::Console
 
         void DoForEachArgument(std::function<void(const InputArgument &)> function) const override;
 
+        void Clear() override;
+
     private:
         std::map<std::string, InputArgument> m_arguments;
         std::vector<std::string> m_argumentsOrder;
