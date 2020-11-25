@@ -1,5 +1,6 @@
 #include <Strings.hpp>
 #include <Arrays.hpp>
+#include <Html.hpp>
 #include "HtmlDocumentConverter.hpp"
 
 std::string HtmlDocumentConverter::Convert(const IDocument &document)
@@ -24,7 +25,7 @@ std::string HtmlDocumentConverter::Convert(const IDocument &document)
         }
     }
 
-    return Strings::Concatenator() <<
+    return Html::Encoder() << Strings::Concatenator() <<
     "<!DOCTYPE html>\n"
     "<html lang=\"\">\n"
     "<head>\n"

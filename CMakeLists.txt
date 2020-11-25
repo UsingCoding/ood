@@ -311,7 +311,7 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/ControllerCommandsHolder/IControllerCommandsHolder.hpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.cpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.hpp
-        src/Command/src/ControllerRegistry/IControllerEnumerator.hpp)
+        src/Command/src/ControllerRegistry/IControllerEnumerator.hpp src/Utils/Html.cpp src/Utils/Html.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
