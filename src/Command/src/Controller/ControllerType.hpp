@@ -11,5 +11,6 @@ enum class ControllerType
     RESIZE_IMAGE,
     SAVE_DOCUMENT,
     SET_TITLE,
-    DELETE_ITEM
+    DELETE_ITEM,
+    HELP
 };

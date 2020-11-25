@@ -6,19 +6,6 @@
 #include "../Controller/SetTitleController/SetTitleController.hpp"
 #include "../ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp"
 
-const std::map<std::string, ControllerType> Application::COMMAND_CONTROLLER_MAP = {
-        std::make_pair("SetTitle", ControllerType::SET_TITLE),
-        std::make_pair("List", ControllerType::LIST),
-        std::make_pair("InsertParagraph", ControllerType::INSERT_PARAGRAPH),
-        std::make_pair("ReplaceText", ControllerType::REPLACE_TEXT),
-        std::make_pair("Undo", ControllerType::UNDO),
-        std::make_pair("Redo", ControllerType::REDO),
-        std::make_pair("InsertImage", ControllerType::INSERT_IMAGE),
-        std::make_pair("ResizeImage", ControllerType::RESIZE_IMAGE),
-        std::make_pair("Save", ControllerType::SAVE_DOCUMENT),
-        std::make_pair("DeleteItem", ControllerType::DELETE_ITEM),
-};
-
 const std::string Application::EXIT_COMMAND = "Exit";
 
 using namespace Common::Console;
@@ -59,17 +46,17 @@ void Application::DoRun(IInput &input, IOutput &output)
 
         try
         {
-            auto it = COMMAND_CONTROLLER_MAP.find((*arguments)[0]);
-
-            if (it == COMMAND_CONTROLLER_MAP.end())
+            if (!m_controllerCommandsHolder->Has((*arguments)[0]))
             {
                 *output << "Unknown command" << std::endl;
                 continue;
             }
 
+            auto controllerType = m_controllerCommandsHolder->Get(((*arguments)[0]));
+
             arguments->erase(arguments->begin());
 
-            auto & controller = m_controllerRegistry->Get(it->second);
+            auto & controller = m_controllerRegistry->Get(controllerType);
 
             std::unique_ptr<IInputDefinition> definition = std::make_unique<InputDefinition>();
 
