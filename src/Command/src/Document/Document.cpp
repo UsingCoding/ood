@@ -34,7 +34,19 @@ std::shared_ptr<IImage> Document::InsertImage(const IDocument::Path &path, int w
 
     auto documentItem = DocumentItem(image, nullptr);
 
-    m_items.push_back(documentItem);
+    if (position != std::nullopt)
+    {
+        if (position.value() > m_items.size())
+        {
+            throw std::runtime_error("Trying to insert paragraph in position after all elements");
+        }
+
+        m_items.insert(m_items.begin() + position.value(), documentItem);
+    }
+    else
+    {
+        m_items.push_back(documentItem);
+    }
 
     return image;
 }
