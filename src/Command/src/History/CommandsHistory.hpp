@@ -5,6 +5,8 @@
 class CommandsHistory : public ICommandsHistory
 {
 public:
+    CommandsHistory();
+
     void AddAndExecuteCommand(std::unique_ptr<ICommand> command, IDocument & document) override;
 
     std::unique_ptr<ICommand> PopCommand() override;
@@ -20,5 +22,5 @@ public:
 private:
     std::vector<std::unique_ptr<ICommand>> m_commands;
     size_t m_topPtr;
-    const static size_t MAX_COMMAND_HISTORY_CAPACITY = 10;
+    const static size_t CAPACITY = 10;
 };

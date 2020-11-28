@@ -1,5 +1,10 @@
 #include "CommandsHistory.hpp"
 
+CommandsHistory::CommandsHistory()
+{
+    m_commands.reserve(CAPACITY + 1);
+}
+
 void CommandsHistory::AddAndExecuteCommand(std::unique_ptr<ICommand> command, IDocument & document)
 {
     if (!AtTop() && m_commands.size() != 0)
@@ -16,12 +21,13 @@ void CommandsHistory::AddAndExecuteCommand(std::unique_ptr<ICommand> command, ID
 
     m_commands.push_back(std::move(command));
 
-    m_topPtr++;
-
-    if (m_commands.size() > MAX_COMMAND_HISTORY_CAPACITY)
+    if (m_topPtr != CAPACITY)
     {
-        auto commandToDelete = std::move(*m_commands.begin());
+        m_topPtr++;
+    }
 
+    if (m_commands.size() > CAPACITY)
+    {
         m_commands.erase(m_commands.begin());
     }
 }
