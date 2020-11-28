@@ -16,12 +16,12 @@ public:
 
     void SetPath(const Path &path) override;
 
+    void Init() override;
+
     void Clear() override;
 
 private:
     Path m_repoPath;
     std::map<std::string, int> m_fileExtensionOffsetMap;
     std::map<std::string, std::shared_ptr<FileResource>> m_inMemoryFileRepo;
-
-    void InitRepoDir();
 };

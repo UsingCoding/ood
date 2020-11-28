@@ -3,7 +3,7 @@
 #include <Html.hpp>
 #include "HtmlDocumentConverter.hpp"
 
-std::string HtmlDocumentConverter::Convert(const IDocument &document)
+std::string HtmlDocumentConverter::Convert(const IDocument &document, const std::unique_ptr<IAssetPathPreparer> & pathPreparer) const
 {
     std::vector<std::string> elements;
 
@@ -13,11 +13,11 @@ std::string HtmlDocumentConverter::Convert(const IDocument &document)
 
         if (item.GetImage() != nullptr)
         {
-            elements.push_back(ConvertImage(item.GetImage()));
+            elements.push_back(ConvertImage(item.GetImage(), pathPreparer));
         }
         else if (item.GetParagraph() != nullptr)
         {
-            elements.push_back(ConvertParagraph(item.GetParagraph()));
+            elements.push_back(ConvertParagraph(item.GetParagraph(), pathPreparer));
         }
         else
         {
@@ -38,13 +38,13 @@ std::string HtmlDocumentConverter::Convert(const IDocument &document)
     "</html>";
 }
 
-std::string HtmlDocumentConverter::ConvertImage(const std::shared_ptr<const IImage> &image) const
+std::string HtmlDocumentConverter::ConvertImage(const std::shared_ptr<const IImage> &image, const std::unique_ptr<IAssetPathPreparer> & pathPreparer) const
 {
     return Strings::Concatenator() <<
-    "<img src=\"" << image->GetPath() << "\" height=\"" << image->GetHeight() << "\" width=\"" << image->GetWidth() << "\" />\n";
+    "<img src=" << pathPreparer->Prepare(image->GetPath()) << " height=\"" << image->GetHeight() << "\" width=\"" << image->GetWidth() << "\" />\n";
 }
 
-std::string HtmlDocumentConverter::ConvertParagraph(const std::shared_ptr<const IParagraph> &paragraph) const
+std::string HtmlDocumentConverter::ConvertParagraph(const std::shared_ptr<const IParagraph> &paragraph, const std::unique_ptr<IAssetPathPreparer> & pathPreparer) const
 {
     return Strings::Concatenator() <<
     "<p>\n"

@@ -10,6 +10,7 @@ public:
     virtual void Add(std::shared_ptr<FileResource> file) = 0;
     virtual void Delete(std::shared_ptr<FileResource> file) = 0;
     virtual void SetPath(const Path & path) = 0;
+    virtual void Init() = 0;
     virtual void Clear() = 0;
 
     virtual ~IFileResourceRepository() = default;

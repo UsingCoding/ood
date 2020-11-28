@@ -24,6 +24,8 @@ void Application::DoRun(IInput &input, IOutput &output)
         m_fileResourceRepository->SetPath(newRepoPath.value());
     }
 
+    m_fileResourceRepository->Init();
+
     *output << "Run" << std::endl;
 
     std::string userInput;
@@ -41,7 +43,7 @@ void Application::DoRun(IInput &input, IOutput &output)
         if (arguments->size() == 1 && arguments->front() == EXIT_COMMAND)
         {
             *output << "Exit" << std::endl;
-            return;
+            break;
         }
 
         try
@@ -77,4 +79,6 @@ void Application::DoRun(IInput &input, IOutput &output)
             *output << e.what() << std::endl;
         }
     }
+
+    m_fileResourceRepository->Clear();
 }

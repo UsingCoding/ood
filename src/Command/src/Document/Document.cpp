@@ -1,4 +1,6 @@
 #include <fstream>
+#include <algorithm>
+#include <FileSystem.hpp>
 #include "Document.hpp"
 #include "Elements/Paragraph/Paragraph.hpp"
 #include "Elements/Image/Image.hpp"
@@ -104,6 +106,8 @@ void Document::Redo()
 
 void Document::Save(const IDocument::Path &path) const
 {
+    FileSystem::CreateDirIfNotExists(path.parent_path() / "images");
+
     std::ofstream fout(path);
 
     if (!fout.is_open())
@@ -111,5 +115,17 @@ void Document::Save(const IDocument::Path &path) const
         throw std::runtime_error("Failed to open file to save doc");
     }
 
-    fout << m_converter->Convert(*this);
+    fout << m_converter->Convert(*this, m_pathPreparer);
+
+    FileSystem::CreateDirIfNotExists(path.parent_path() / "images");
+
+    std::for_each(m_items.begin(), m_items.end(), [&](const ConstDocumentItem & item){
+        if (item.GetImage() == nullptr)
+        {
+            return;
+        }
+
+        auto imagePath = item.GetImage()->GetPath();
+        std::experimental::filesystem::copy(imagePath, path.parent_path() / m_pathPreparer->Prepare(imagePath));
+    });
 }

@@ -19,6 +19,7 @@
 #include "Controller/DeleteItemController/DeleteItemController.hpp"
 #include "ControllerCommandsHolder/ControllerCommandsHolder.hpp"
 #include "Controller/HelpController/HelpController.hpp"
+#include "Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.hpp"
 
 const static std::string REPO_PATH = "./var";
 
@@ -27,7 +28,11 @@ int main(int argc, char const *argv[])
     auto controllerRegistry = std::make_shared<ControllerRegistry>();
 
     std::shared_ptr<ICommandsHistory> commandsHistory = std::make_unique<CommandsHistory>();
-    std::unique_ptr<IDocument> document = std::make_unique<Document>(commandsHistory, std::make_unique<HtmlDocumentConverter>());
+    std::unique_ptr<IDocument> document = std::make_unique<Document>(
+            commandsHistory,
+            std::make_unique<HtmlDocumentConverter>(),
+            std::make_unique<RelativeAssetPathPreparer>()
+    );
     std::unique_ptr<IFileResourceRepository> fileResourceRepo = std::make_unique<FileResourceRepository>(REPO_PATH);
     auto controllerCommandsHolder = std::make_shared<ControllerCommandsHolder>();
 

@@ -9,9 +9,14 @@ class Document : public IDocument
 public:
     Document(
         std::shared_ptr<ICommandsHistory> commandsHistory,
-        std::unique_ptr<IDocumentConverter> converter
+        std::unique_ptr<IDocumentConverter> converter,
+        std::unique_ptr<IAssetPathPreparer> pathPreparer
     )
-    : m_commandsHistory(commandsHistory), m_converter(std::move(converter)) {}
+    :
+    m_commandsHistory(commandsHistory),
+    m_converter(std::move(converter)),
+    m_pathPreparer(std::move(pathPreparer))
+    {}
 
     std::shared_ptr<IParagraph> InsertParagraph(const std::string &text, std::optional<size_t> position) override;
 
@@ -46,4 +51,5 @@ private:
 
     std::shared_ptr<ICommandsHistory> m_commandsHistory;
     std::unique_ptr<IDocumentConverter> m_converter;
+    std::unique_ptr<IAssetPathPreparer> m_pathPreparer;
 };
