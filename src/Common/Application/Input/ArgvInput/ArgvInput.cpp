@@ -45,6 +45,19 @@ void ArgvInput::ParseArgument(const std::string &token)
         return;
     }
 
+    if (m_inputDefinition->GetArgumentsCount() != 0)
+    {
+        auto & arg = m_inputDefinition->GetLastArgument();
+
+        if (arg.GetValueMode() == InputArgument::ValueMode::TEXT)
+        {
+            auto it = m_arguments.find(arg.GetName());
+            it->second = it->second.value() + ' ' + token;
+
+            return;
+        }
+    }
+
     throw std::runtime_error("Unknown argument " + token);
 }
 

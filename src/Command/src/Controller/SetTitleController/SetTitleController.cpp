@@ -4,7 +4,11 @@
 
 void SetTitleController::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
-    definition->AddArgument(Common::Console::InputArgument("title"));
+    definition->AddArgument(Common::Console::InputArgument(
+            "title",
+            Common::Console::InputArgument::Mode::REQUIRED,
+            Common::Console::InputArgument::ValueMode::TEXT
+    ));
 }
 
 void SetTitleController::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)

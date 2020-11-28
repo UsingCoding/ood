@@ -21,3 +21,8 @@ bool InputArgument::IsRequired() const
 {
     return m_mode == Mode::REQUIRED;
 }
+
+InputArgument::ValueMode InputArgument::GetValueMode() const
+{
+    return m_valueMode;
+}

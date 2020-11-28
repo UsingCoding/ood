@@ -10,6 +10,16 @@ void InputDefinition::AddArgument(const InputArgument &argument)
         throw std::logic_error(Strings::Concatenator() << "Argument " << argument.GetName() << " already added to definition");
     }
 
+    if (argument.GetValueMode() == InputArgument::ValueMode::TEXT && m_arguments.begin() != m_arguments.end())
+    {
+        std::for_each(m_arguments.begin(), m_arguments.end(), [](const std::pair<std::string, InputArgument> & pair){
+            if (pair.second.GetValueMode() == InputArgument::ValueMode::TEXT)
+            {
+                throw std::logic_error("Only one argument can have ValueMode::TEXT and must be last one");
+            }
+        });
+    }
+
     m_arguments.insert(std::make_pair(argument.GetName(), argument));
     m_argumentsOrder.push_back(argument.GetName());
 }
@@ -111,4 +121,19 @@ void InputDefinition::Clear()
     m_argumentsOrder.clear();
     m_options.clear();
     m_shortcuts.clear();
+}
+
+const InputArgument &InputDefinition::GetLastArgument() const
+{
+    if (m_arguments.begin() == m_arguments.end())
+    {
+        throw std::runtime_error("Trying to get last argument in input definition without arguments");
+    }
+
+    return (--m_arguments.end())->second;
+}
+
+size_t InputDefinition::GetArgumentsCount() const
+{
+    return m_arguments.size();
 }

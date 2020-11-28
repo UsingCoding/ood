@@ -17,10 +17,14 @@ namespace Common::Console
         bool HasOption(const std::string &name) const override;
         bool HasShortcut(char shortcut) const override;
 
+        size_t GetArgumentsCount() const override;
+
         const InputArgument &GetArgument(const std::string &name) const override;
         const InputArgument &GetArgument(int index) const override;
         const InputOption &GetOption(const std::string &name) const override;
         const InputOption &GetOptionForShortcut(char shortcut) const override;
+
+        const InputArgument &GetLastArgument() const override;
 
         void DoForEachArgument(std::function<void(const InputArgument &)> function) const override;
 

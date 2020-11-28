@@ -5,7 +5,11 @@
 void InsertParagraphController::ConfigureInputDefinition(std::unique_ptr<Common::Console::IInputDefinition> &definition)
 {
     definition->AddArgument(Common::Console::InputArgument("position"));
-    definition->AddArgument(Common::Console::InputArgument("text"));
+    definition->AddArgument(Common::Console::InputArgument(
+            "text",
+            Common::Console::InputArgument::Mode::REQUIRED,
+            Common::Console::InputArgument::ValueMode::TEXT
+    ));
 }
 
 void InsertParagraphController::Handle(Common::Console::IInput &input, Common::Console::IOutput &output)
