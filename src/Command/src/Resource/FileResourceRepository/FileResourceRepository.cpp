@@ -13,7 +13,7 @@ void FileResourceRepository::Add(std::shared_ptr<FileResource> file)
     auto fileExtension = file->GetPath().extension();
     auto it = m_fileExtensionOffsetMap.find(fileExtension);
 
-    int currentOffset = it == m_fileExtensionOffsetMap.end() ? 0 : it->second;
+    int currentOffset = it == m_fileExtensionOffsetMap.end() ? 0 : it->second + 1;
 
     auto newPath = m_repoPath;
 
@@ -31,6 +31,7 @@ void FileResourceRepository::Add(std::shared_ptr<FileResource> file)
     file->SetPath(newPath);
 
     m_inMemoryFileRepo.insert(std::make_pair(fileId, file));
+    m_fileExtensionOffsetMap.insert(std::make_pair(fileExtension, currentOffset));
 }
 
 void FileResourceRepository::Delete(std::shared_ptr<FileResource> file)
