@@ -20,7 +20,7 @@ void HelpController::Handle(IInput &input, IOutput &output)
         pair.second->ConfigureInputDefinition(definition);
 
         definition->DoForEachArgument([&output](const InputArgument & argument){
-            *output << '<' << argument.GetName() << '>';
+            *output << '<' << argument.GetName() << '>' << ' ';
         });
 
         *output << std::endl;
