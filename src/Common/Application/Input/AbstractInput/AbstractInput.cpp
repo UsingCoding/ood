@@ -120,3 +120,8 @@ void AbstractInput::ProceedEnumeration(
 
     function(parts[0], parts.size() == 1 ? std::nullopt : value);
 }
+
+std::istream &AbstractInput::operator*()
+{
+    return m_istream;
+}

@@ -9,6 +9,8 @@ namespace Common::Console
     class AbstractInput : public IInput, IOptionsEnumerator
     {
     public:
+        AbstractInput(std::istream &istream) : m_istream(istream) {}
+
         void Bind(std::unique_ptr<IInputDefinition> inputDefinition) override;
 
         void Validate() override;
@@ -28,6 +30,8 @@ namespace Common::Console
         void ForEach(std::function<void(const std::string &, const std::optional<std::string> &)> function) const override;
         void ForEachReverse(std::function<void(const std::string &, const std::optional<std::string> &)> function) const override;
 
+        std::istream &operator*() override;
+
     protected:
         virtual void Parse() = 0;
 
@@ -40,5 +44,7 @@ namespace Common::Console
         void ProceedEnumeration(
             std::function<void(const std::string &, const std::optional<std::string> &)> function,
             const std::string & optionNameAndValue) const;
+
+        std::istream & m_istream;
     };
 }

@@ -23,5 +23,7 @@ namespace Common::Console
         virtual const std::optional<std::string> & GetOption(const std::string & name) const = 0;
 
         virtual const IOptionsEnumerator & GetOptionsEnumerator() = 0;
+
+        virtual std::istream & operator*() = 0;
     };
 }

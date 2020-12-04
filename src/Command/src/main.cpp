@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
         controllerCommandsHolder
     );
 
-    Common::Console::ArgvInput input(argc, argv);
+    Common::Console::ArgvInput input(argc, argv, std::cin);
     Common::Console::StreamOutput output(std::cout);
 
     application.Run(input, output);

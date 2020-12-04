@@ -5,7 +5,7 @@
 
 using namespace Common::Console;
 
-ArgvInput::ArgvInput(int argc, const char **argv)
+ArgvInput::ArgvInput(int argc, const char **argv, std::istream & istream): AbstractInput(istream)
 {
     m_tokens = std::make_unique<std::vector<std::string>>();
 

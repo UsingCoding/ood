@@ -30,7 +30,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
     std::string userInput;
 
-    while (getline(std::cin, userInput))
+    while (getline(*input, userInput))
     {
         auto arguments = std::make_unique<std::vector<std::string>>(Strings::Split(userInput, " "));
 
@@ -64,7 +64,7 @@ void Application::DoRun(IInput &input, IOutput &output)
 
             controller->ConfigureInputDefinition(definition);
 
-            ArgvInput argvInput(std::move(arguments));
+            ArgvInput argvInput(std::move(arguments), *input);
 
             argvInput.Bind(std::move(definition));
 
