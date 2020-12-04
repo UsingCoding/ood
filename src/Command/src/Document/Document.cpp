@@ -98,7 +98,7 @@ void Document::SetTitle(const std::string &title)
 
 bool Document::CanUndo() const
 {
-    return !m_commandsHistory->IsEmpty();
+    return !m_commandsHistory->IsEmpty() && !m_commandsHistory->AtBottom();
 }
 
 void Document::Undo()

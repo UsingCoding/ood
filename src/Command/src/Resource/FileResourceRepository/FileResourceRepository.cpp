@@ -1,6 +1,7 @@
 #include <Strings.hpp>
 #include <algorithm>
 #include <iostream>
+#include <FileSystem.hpp>
 #include "FileResourceRepository.hpp"
 
 FileResourceRepository::FileResourceRepository(const FileResourceRepository::Path &repoPath) : m_repoPath(repoPath)
@@ -58,12 +59,10 @@ void FileResourceRepository::SetPath(const IFileResourceRepository::Path &path)
 void FileResourceRepository::Clear()
 {
     std::experimental::filesystem::remove_all(m_repoPath);
+    m_inMemoryFileRepo.clear();
 }
 
 void FileResourceRepository::Init()
 {
-    if (!std::experimental::filesystem::exists(m_repoPath))
-    {
-        std::experimental::filesystem::create_directories(m_repoPath);
-    }
+    FileSystem::CreateDirIfNotExists(m_repoPath);
 }

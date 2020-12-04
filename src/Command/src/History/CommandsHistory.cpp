@@ -32,21 +32,16 @@ void CommandsHistory::AddAndExecuteCommand(std::unique_ptr<ICommand> command, ID
     }
 }
 
-std::unique_ptr<ICommand> CommandsHistory::PopCommand()
-{
-    auto command = std::move(m_commands.back());
-
-    m_commands.pop_back();
-
-    return std::move(command);
-}
-
-
 void CommandsHistory::Undo(IDocument &document)
 {
     if (IsEmpty())
     {
         throw std::runtime_error("Can`t undo with empty command stack");
+    }
+
+    if (AtBottom())
+    {
+        throw std::runtime_error("Can`t undo, already at history bottom");
     }
 
     m_commands.at(m_topPtr - 1)->Revert(document);
@@ -57,7 +52,7 @@ void CommandsHistory::Redo(IDocument &document)
 {
     if (AtTop())
     {
-        throw std::runtime_error("Can`t redo, already on history top");
+        throw std::runtime_error("Can`t redo, already at history top");
     }
 
     m_commands.at(m_topPtr)->Execute(document);
@@ -73,3 +68,10 @@ bool CommandsHistory::AtTop()
 {
     return m_topPtr == m_commands.size();
 }
+
+bool CommandsHistory::AtBottom()
+{
+    return m_topPtr == 0;
+}
+
+
