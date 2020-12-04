@@ -21,6 +21,6 @@ public:
 
 private:
     std::vector<std::unique_ptr<ICommand>> m_commands;
-    size_t m_topPtr;
+    size_t m_topPtr = 0;
     const static size_t CAPACITY = 10;
 };

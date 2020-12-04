@@ -311,7 +311,24 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/ControllerCommandsHolder/IControllerCommandsHolder.hpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.cpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.hpp
-        src/Command/src/ControllerRegistry/IControllerEnumerator.hpp src/Utils/Html.cpp src/Utils/Html.hpp src/Command/src/Document/AssetPathPreparer/IAssetPathPreparer.hpp src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.cpp src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.hpp src/Utils/FileSystem.cpp src/Utils/FileSystem.hpp)
+        src/Command/src/ControllerRegistry/IControllerEnumerator.hpp
+        src/Utils/Html.cpp
+        src/Utils/Html.hpp
+        src/Command/src/Document/AssetPathPreparer/IAssetPathPreparer.hpp
+        src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.cpp
+        src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.hpp
+        src/Utils/FileSystem.cpp
+        src/Utils/FileSystem.hpp)
+
+add_executable(command-tests
+        src/Command/tests/main.cpp
+        src/Command/tests/CommandHistoryTests/Command/MockCommand.cpp
+        src/Command/tests/CommandHistoryTests/Command/MockCommand.hpp
+        src/Command/tests/CommandHistoryTests/Document/MockDocument.cpp
+        src/Command/tests/CommandHistoryTests/Document/MockDocument.hpp
+        src/Command/src/History/CommandsHistory.cpp
+        src/Command/src/History/CommandsHistory.hpp
+)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
