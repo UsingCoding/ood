@@ -22,5 +22,5 @@ public:
 private:
     std::vector<std::unique_ptr<ICommand>> m_commands;
     size_t m_topPtr;
-    const static size_t CAPACITY = 2;
+    const static size_t CAPACITY = 10;
 };
