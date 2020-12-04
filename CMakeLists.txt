@@ -328,6 +328,24 @@ add_executable(command-tests
         src/Command/tests/CommandHistoryTests/Document/MockDocument.hpp
         src/Command/src/History/CommandsHistory.cpp
         src/Command/src/History/CommandsHistory.hpp
+        src/Command/tests/ControllerRegistryTests/Controller/MockController.cpp
+        src/Command/tests/ControllerRegistryTests/Controller/MockController.hpp
+        src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.cpp
+        src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.hpp
+        src/Command/tests/DocumentTests/AssetPathPreparer/MockAssetPathPreparer.cpp
+        src/Command/tests/DocumentTests/AssetPathPreparer/MockAssetPathPreparer.hpp
+        src/Command/src/Document/Document.cpp
+        src/Command/src/Document/Document.hpp
+        src/Command/src/Document/Elements/Paragraph/Paragraph.cpp
+        src/Command/src/Document/Elements/Paragraph/Paragraph.hpp
+        src/Command/src/Document/Elements/Image/Image.cpp
+        src/Command/src/Document/Elements/Image/Image.hpp
+        src/Utils/FileSystem.cpp
+        src/Utils/FileSystem.hpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.cpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.hpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.cpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.hpp
 )
 
 include_directories(src/Catch2)
@@ -336,3 +354,4 @@ include_directories(src/Common)
 link_libraries(stdc++fs)
 
 target_link_libraries(command stdc++fs)
+target_link_libraries(command-tests stdc++fs)
