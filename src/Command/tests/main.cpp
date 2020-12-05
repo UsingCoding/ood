@@ -1,13 +1,32 @@
 #define CATCH_CONFIG_MAIN
+
+#include <Application/Input/ArgvInput/ArgvInput.hpp>
+#include <Application/Output/StreamOutput/StreamOutput.hpp>
 #include "../Catch2/catch.hpp"
 #include "../src/History/CommandsHistory.hpp"
 #include "CommandHistoryTests/Document/MockDocument.hpp"
 #include "CommandHistoryTests/Command/MockCommand.hpp"
 #include "../src/ControllerRegistry/ControllerRegistry.hpp"
-#include "ControllerRegistryTests/Controller/MockController.hpp"
 #include "../src/Document/Document.hpp"
 #include "DocumentTests/DocumentConverter/MockDocumentConverter.hpp"
 #include "DocumentTests/AssetPathPreparer/MockAssetPathPreparer.hpp"
+#include "../src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.hpp"
+#include "../src/Resource/FileResourceRepository/IFileResourceRepository.hpp"
+#include "../src/ControllerCommandsHolder/ControllerCommandsHolder.hpp"
+#include "../src/Controller/SetTitleController/SetTitleController.hpp"
+#include "../src/Controller/ListController/ListController.hpp"
+#include "../src/Controller/InsertParagraphController/InsertParagraphController.hpp"
+#include "../src/Controller/ReplaceTextController/ReplaceTextController.hpp"
+#include "../src/Controller/UndoController/UndoController.hpp"
+#include "../src/Controller/RedoController/RedoController.hpp"
+#include "../src/Controller/InsertImageController/InsertImageController.hpp"
+#include "../src/Controller/ResizeImageController/ResizeImageController.hpp"
+#include "../src/Controller/SaveDocumentController/SaveDocumentController.hpp"
+#include "../src/Controller/DeleteItemController/DeleteItemController.hpp"
+#include "../src/Controller/HelpController/HelpController.hpp"
+#include "../src/Application/Application.hpp"
+#include "../src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.hpp"
+#include "ApplicationTests/FileResourceRepository/MockFileResourceRepository.hpp"
 
 SCENARIO("Using command history to undo commands and redo commands")
 {
@@ -209,5 +228,266 @@ SCENARIO("Testing document")
         }
 
 
+    }
+}
+
+SCENARIO("Using application to create a simple document")
+{
+    GIVEN("Application")
+    {
+        auto controllerRegistry = std::make_shared<ControllerRegistry>();
+
+        std::shared_ptr<ICommandsHistory> commandsHistory = std::make_unique<CommandsHistory>();
+        std::unique_ptr<IDocument> document = std::make_unique<Document>(
+                commandsHistory,
+                std::make_unique<HtmlDocumentConverter>(),
+                std::make_unique<RelativeAssetPathPreparer>()
+        );
+        std::unique_ptr<IFileResourceRepository> fileResourceRepo = std::make_unique<ApplicationTests::MockFileResourceRepository>();
+        auto controllerCommandsHolder = std::make_shared<ControllerCommandsHolder>();
+
+        controllerRegistry->Register(ControllerType::SET_TITLE, std::make_unique<SetTitleController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::LIST, std::make_unique<ListController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::INSERT_PARAGRAPH, std::make_unique<InsertParagraphController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::REPLACE_TEXT, std::make_unique<ReplaceTextController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::UNDO, std::make_unique<UndoController>(document));
+        controllerRegistry->Register(ControllerType::REDO, std::make_unique<RedoController>(document));
+        controllerRegistry->Register(ControllerType::INSERT_IMAGE, std::make_unique<InsertImageController>(commandsHistory, document, fileResourceRepo));
+        controllerRegistry->Register(ControllerType::RESIZE_IMAGE, std::make_unique<ResizeImageController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::SAVE_DOCUMENT, std::make_unique<SaveDocumentController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::DELETE_ITEM, std::make_unique<DeleteItemController>(commandsHistory, document));
+        controllerRegistry->Register(ControllerType::HELP, std::make_unique<HelpController>(controllerRegistry, controllerCommandsHolder));
+
+        Application application(
+            controllerRegistry,
+            fileResourceRepo,
+            controllerCommandsHolder
+        );
+
+        std::stringstream istream;
+        std::stringstream ostream;
+
+        auto inputArgs = std::make_unique<std::vector<std::string>>();
+
+        inputArgs->push_back("main");
+
+        Common::Console::ArgvInput input(std::move(inputArgs), istream);
+        Common::Console::StreamOutput output(ostream);
+
+        WHEN("We set new title")
+        {
+            std::string title = "new title";
+            REQUIRE_NOTHROW(istream << "SetTitle " << title << "\n");
+
+            WHEN("We run command to insert paragraph")
+            {
+                std::string paragraphText = "Useful text";
+                REQUIRE_NOTHROW(istream << "InsertParagraph end " << paragraphText << "\n");
+
+                AND_WHEN("We call List to show all elements ant title and exit to stop application")
+                {
+                    REQUIRE_NOTHROW(istream << "List\n");
+                    REQUIRE_NOTHROW(istream << "Exit\n");
+
+                    THEN("We Run application")
+                    {
+                        REQUIRE_NOTHROW(application.Run(input, output));
+
+                        AND_THEN("We go two message about that commands executed successfully and list of elements")
+                        {
+                            std::string outputString;
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Run");
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Command executed successfully");
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Command executed successfully");
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Title: " + title);
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "0. Paragraph: " + paragraphText);
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Command executed successfully");
+
+                            getline(ostream, outputString);
+                            REQUIRE(outputString == "Exit");
+                        }
+                    }
+                }
+            }
+        }
+
+        WHEN("We passing unknown command")
+        {
+            istream.clear();
+            ostream.clear();
+
+            REQUIRE_NOTHROW(istream << "InsertQuarter\n");
+            REQUIRE_NOTHROW(istream << "Exit\n");
+
+            THEN("We got got message about it")
+            {
+                REQUIRE_NOTHROW(application.Run(input, output));
+
+                std::string outputString;
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Run");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Unknown command");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Exit");
+            }
+        }
+
+        WHEN("We pass no arguments")
+        {
+            istream.clear();
+            ostream.clear();
+
+            REQUIRE_NOTHROW(istream << "\n");
+            REQUIRE_NOTHROW(istream << "Exit\n");
+
+            THEN("We got got message about it")
+            {
+                REQUIRE_NOTHROW(application.Run(input, output));
+
+                std::string outputString;
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Run");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "You must provide more than zero arguments");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Exit");
+            }
+        }
+
+        WHEN("We pass one command and second command with incorrect arguments")
+        {
+            istream.clear();
+            ostream.clear();
+
+            std::string text = "Incredible text";
+            REQUIRE_NOTHROW(istream << "InsertParagraph end " << text << " \n");
+            REQUIRE_NOTHROW(istream << "InsertParagraph text " << text << " \n");
+            REQUIRE_NOTHROW(istream << "List\n");
+            REQUIRE_NOTHROW(istream << "Exit\n");
+
+            THEN("We got messages that first command successfully executed and second has incorrect arguments passed")
+            {
+                REQUIRE_NOTHROW(application.Run(input, output));
+
+                std::string outputString;
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Run");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Invalid argument provided for position");
+
+                getline(ostream, outputString);
+                getline(ostream, outputString);
+                REQUIRE(outputString == "0. Paragraph: " + text);
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Exit");
+            }
+        }
+
+        WHEN("Inserting a image in document")
+        {
+            istream.clear();
+            ostream.clear();
+
+            std::string path = "/path/to/image.png";
+            std::string sizes = "100 100";
+            REQUIRE_NOTHROW(istream << "InsertImage end " << sizes << " " << path << " \n");
+            REQUIRE_NOTHROW(istream << "List\n");
+            REQUIRE_NOTHROW(istream << "Exit\n");
+
+            THEN("We got message that command executed and image added")
+            {
+                REQUIRE_NOTHROW(application.Run(input, output));
+
+                std::string outputString;
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Run");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Title: ");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "0. Image: " + sizes + " " + "\"" + path + "\"");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+            }
+        }
+
+        WHEN("We deleting already added element")
+        {
+            istream.clear();
+            ostream.clear();
+
+            std::string text = "Incredible text";
+            REQUIRE_NOTHROW(istream << "InsertParagraph end " << text << " \n");
+            REQUIRE_NOTHROW(istream << "List\n");
+            REQUIRE_NOTHROW(istream << "DeleteItem 1\n");
+            REQUIRE_NOTHROW(istream << "DeleteItem 0\n");
+            REQUIRE_NOTHROW(istream << "List\n");
+            REQUIRE_NOTHROW(istream << "Exit\n");
+
+            THEN("We got messages that deleting on unknown position and the second one is we successfully delete item")
+            {
+                REQUIRE_NOTHROW(application.Run(input, output));
+
+                std::string outputString;
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Run");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Title: ");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "0. Paragraph: " + text);
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Requested item by index more than count of items");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Command executed successfully");
+
+                getline(ostream, outputString);
+                REQUIRE(outputString == "Title: ");
+            }
+        }
     }
 }

@@ -326,27 +326,113 @@ add_executable(command-tests
         src/Command/tests/CommandHistoryTests/Command/MockCommand.hpp
         src/Command/tests/CommandHistoryTests/Document/MockDocument.cpp
         src/Command/tests/CommandHistoryTests/Document/MockDocument.hpp
-        src/Command/src/History/CommandsHistory.cpp
-        src/Command/src/History/CommandsHistory.hpp
         src/Command/tests/ControllerRegistryTests/Controller/MockController.cpp
         src/Command/tests/ControllerRegistryTests/Controller/MockController.hpp
         src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.cpp
         src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.hpp
         src/Command/tests/DocumentTests/AssetPathPreparer/MockAssetPathPreparer.cpp
         src/Command/tests/DocumentTests/AssetPathPreparer/MockAssetPathPreparer.hpp
+        src/Command/src/Document/IDocument.hpp
+        src/Command/src/Document/Elements/Paragraph/IParagraph.hpp
+        src/Command/src/Document/Elements/Image/IImage.hpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.cpp
+        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.hpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.cpp
+        src/Command/src/Document/Items/DocumentItem/DocumentItem.hpp
+        src/Command/src/Command/ICommand.hpp
+        src/Command/src/History/ICommandsHistory.hpp
+        src/Common/Application
+        src/Command/src/Command/SetTitleCommand/SetTitleCommand.cpp
+        src/Command/src/Command/SetTitleCommand/SetTitleCommand.hpp
+        src/Command/src/Controller/IController.hpp
+        src/Command/src/Controller/AbstractController/AbstractController.cpp
+        src/Command/src/Controller/AbstractController/AbstractController.hpp
+        src/Command/src/Controller/SetTitleController/SetTitleController.cpp
+        src/Command/src/Controller/SetTitleController/SetTitleController.hpp
+        src/Command/src/Controller/ListController/ListController.cpp
+        src/Command/src/Controller/ListController/ListController.hpp
+        src/Command/src/Controller/InsertParagraphController/InsertParagraphController.cpp
+        src/Command/src/Controller/InsertParagraphController/InsertParagraphController.hpp
+        src/Command/src/Application/Application.cpp
+        src/Command/src/Application/Application.hpp
+        src/Command/src/ControllerRegistry/IControllerRegistry.hpp
+        src/Command/src/ControllerRegistry/ControllerRegistry.cpp
+        src/Command/src/ControllerRegistry/ControllerRegistry.hpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.cpp
+        src/Common/Application/Input/ArgvInput/ArgvInput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.cpp
+        src/Common/Application/Output/StreamOutput/StreamOutput.hpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.cpp
+        src/Common/Application/Input/AbstractInput/AbstractInput.hpp
+        src/Common/Application/InputDefinition/IInputDefinition.hpp
+        src/Common/Application/InputDefinition/InputDefinition.cpp
+        src/Common/Application/InputDefinition/InputDefinition.hpp
+        src/Common/Application/Application.cpp
+        src/Common/Application/Input/InputArgument/InputArgument.cpp
+        src/Common/Application/Input/InputOption/InputOption.cpp
+        src/Common/Application/Input/AbstractInput/IOptionsEnumerator.hpp
+        src/Utils/Strings.cpp
+        src/Utils/Strings.hpp
+        src/Command/src/History/CommandsHistory.cpp
+        src/Command/src/History/CommandsHistory.hpp
         src/Command/src/Document/Document.cpp
         src/Command/src/Document/Document.hpp
         src/Command/src/Document/Elements/Paragraph/Paragraph.cpp
         src/Command/src/Document/Elements/Paragraph/Paragraph.hpp
         src/Command/src/Document/Elements/Image/Image.cpp
         src/Command/src/Document/Elements/Image/Image.hpp
+        src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.cpp
+        src/Command/src/Command/InsertParagraphCommand/InsertParagraphCommand.hpp
+        src/Command/src/ControllerRegistry/Exception/ItemNotFoundInRegistryException.hpp
+        src/Common/Registry/Registry.hpp
+        src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.cpp
+        src/Command/src/Command/ReplaceTextCommand/ReplaceTextCommand.hpp
+        src/Command/src/Controller/ReplaceTextController/ReplaceTextController.cpp
+        src/Command/src/Controller/ReplaceTextController/ReplaceTextController.hpp
+        src/Command/src/Controller/UndoController/UndoController.cpp
+        src/Command/src/Controller/UndoController/UndoController.hpp
+        src/Command/src/Controller/RedoController/RedoController.cpp
+        src/Command/src/Controller/RedoController/RedoController.hpp
+        src/Command/src/Command/InsertImageCommand/InsertImageCommand.cpp
+        src/Command/src/Command/InsertImageCommand/InsertImageCommand.hpp
+        src/Command/src/Resource/FileResource.cpp
+        src/Command/src/Resource/FileResource.hpp
+        src/Command/src/Controller/InsertImageController/InsertImageController.cpp
+        src/Command/src/Controller/InsertImageController/InsertImageController.hpp
+        src/Command/src/Resource/FileResourceRepository/IFileResourceRepository.hpp
+        src/Command/src/Resource/FileResourceRepository/FileResourceRepository.cpp
+        src/Command/src/Resource/FileResourceRepository/FileResourceRepository.hpp
+        src/Command/src/Command/ResizeImageCommand/ResizeImageCommand.cpp
+        src/Command/src/Command/ResizeImageCommand/ResizeImageCommand.hpp
+        src/Command/src/Controller/ResizeImageController/ResizeImageController.cpp
+        src/Command/src/Controller/ResizeImageController/ResizeImageController.hpp
+        src/Command/src/Document/DocumentConverter/IDocumentConverter.hpp
+        src/Command/src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.cpp
+        src/Command/src/Document/DocumentConverter/HtmlDocumentConverter/HtmlDocumentConverter.hpp
+        src/Command/src/Controller/SaveDocumentController/SaveDocumentController.cpp
+        src/Command/src/Controller/SaveDocumentController/SaveDocumentController.hpp
+        src/Command/src/Controller/ControllerType.hpp
+        src/Command/src/Controller/DeleteItemController/DeleteItemController.cpp
+        src/Command/src/Controller/DeleteItemController/DeleteItemController.hpp
+        src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.cpp
+        src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.hpp
+        src/Command/src/Controller/HelpController/HelpController.cpp
+        src/Command/src/Controller/HelpController/HelpController.hpp
+        src/Common/Registry/IEnumerator.hpp
+        src/Command/src/ControllerCommandsHolder/IControllerCommandsHolder.hpp
+        src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.cpp
+        src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.hpp
+        src/Command/src/ControllerRegistry/IControllerEnumerator.hpp
+        src/Utils/Html.cpp
+        src/Utils/Html.hpp
+        src/Command/src/Document/AssetPathPreparer/IAssetPathPreparer.hpp
+        src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.cpp
+        src/Command/src/Document/AssetPathPreparer/RelativeAssetPathPreparer/RelativeAssetPathPreparer.hpp
         src/Utils/FileSystem.cpp
         src/Utils/FileSystem.hpp
-        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.cpp
-        src/Command/src/Document/Items/ConstDocumentItem/ConstDocumentItem.hpp
-        src/Command/src/Document/Items/DocumentItem/DocumentItem.cpp
-        src/Command/src/Document/Items/DocumentItem/DocumentItem.hpp
-)
+        src/Command/tests/ApplicationTests/FileResourceRepository/MockFileResourceRepository.cpp src/Command/tests/ApplicationTests/FileResourceRepository/MockFileResourceRepository.hpp)
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
