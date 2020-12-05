@@ -93,8 +93,8 @@ const InputOption &InputDefinition::GetOption(const std::string &name) const
 
 void InputDefinition::DoForEachArgument(std::function<void(const InputArgument &)> function) const
 {
-    std::for_each(m_arguments.begin(), m_arguments.end(), [function](const std::pair<std::string, InputArgument> pair){
-        function(pair.second);
+    std::for_each(m_argumentsOrder.begin(), m_argumentsOrder.end(), [&](const std::string argumentName){
+        function(m_arguments.find(argumentName)->second);
     });
 }
 
