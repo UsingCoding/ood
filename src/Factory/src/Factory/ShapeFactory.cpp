@@ -112,7 +112,7 @@ std::unique_ptr<Shape> ShapeFactory::CreateEllipse(const std::vector<std::string
 
 std::unique_ptr<Shape> ShapeFactory::CreateRegularPolygon(const std::vector<std::string> &tokens)
 {
-    if (tokens.size() != 10)
+    if (tokens.size() != 5)
     {
         throw std::invalid_argument("Not enough args to create Regular polygon");
     }
