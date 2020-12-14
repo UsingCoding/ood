@@ -326,8 +326,6 @@ add_executable(command-tests
         src/Command/tests/CommandHistoryTests/Command/MockCommand.hpp
         src/Command/tests/CommandHistoryTests/Document/MockDocument.cpp
         src/Command/tests/CommandHistoryTests/Document/MockDocument.hpp
-        src/Command/tests/ControllerRegistryTests/Controller/MockController.cpp
-        src/Command/tests/ControllerRegistryTests/Controller/MockController.hpp
         src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.cpp
         src/Command/tests/DocumentTests/DocumentConverter/MockDocumentConverter.hpp
         src/Command/tests/DocumentTests/AssetPathPreparer/MockAssetPathPreparer.cpp
@@ -433,6 +431,33 @@ add_executable(command-tests
         src/Utils/FileSystem.cpp
         src/Utils/FileSystem.hpp
         src/Command/tests/ApplicationTests/FileResourceRepository/MockFileResourceRepository.cpp src/Command/tests/ApplicationTests/FileResourceRepository/MockFileResourceRepository.hpp)
+
+add_executable(factory src/Factory/src/main.cpp
+        src/Factory/src/Factory/IShapeFactory.hpp
+        src/Factory/src/Factory/ShapeFactory.cpp
+        src/Factory/src/Factory/ShapeFactory.hpp
+        src/Factory/src/Shape/Shape.cpp
+        src/Factory/src/Shape/Shape.hpp
+        src/Factory/src/Shape/Rectangle/Rectangle.cpp
+        src/Factory/src/Shape/Rectangle/Rectangle.hpp
+        src/Factory/src/Shape/Color.hpp
+        src/Factory/src/Shape/Point.hpp
+        src/Factory/src/Canvas/Canvas.cpp
+        src/Factory/src/Canvas/Canvas.hpp
+        src/Factory/src/Shape/Triangle/Triangle.cpp
+        src/Factory/src/Shape/Triangle/Triangle.hpp
+        src/Factory/src/Shape/Ellipse/Ellipse.cpp
+        src/Factory/src/Shape/Ellipse/Ellipse.hpp
+        src/Factory/src/Shape/RegularPolygon/RegularPolygon.cpp
+        src/Factory/src/Shape/RegularPolygon/RegularPolygon.hpp
+        src/Factory/src/Designer/IDesigner.hpp src/Factory/src/Designer/Designer.cpp
+        src/Factory/src/Designer/Designer.hpp
+        src/Factory/src/PictureDraft/PictureDraft.cpp
+        src/Factory/src/PictureDraft/PictureDraft.hpp
+        src/Factory/src/Painter/Painter.cpp src/Factory/src/Painter/Painter.hpp
+        src/Utils/Strings.hpp
+        src/Utils/Strings.cpp
+    )
 
 include_directories(src/Catch2)
 include_directories(src/Utils)
