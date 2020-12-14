@@ -6,6 +6,8 @@ void Painter::DrawPicture(PictureDraft &draft, ICanvas &canvas)
     {
         auto & shape = draft.GetShape(i);
 
+        canvas.SetColor(shape->GetColor());
+
         shape->Draw(canvas);
     }
 }
