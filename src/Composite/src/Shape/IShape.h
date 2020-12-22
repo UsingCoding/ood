@@ -1,6 +1,6 @@
 #pragma once
 #include "CommonTypes.h"
-#include "IDrawable.h"
+#include "../Canvas/IDrawable.h"
 #include "IOutlineStyle.h"
 #include "IStyle.h"
 #include <memory>

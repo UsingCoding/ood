@@ -1,5 +1,5 @@
 #pragma once
-#include "CommonTypes.h"
+#include "../Shape/CommonTypes.h"
 #include <functional>
 
 class ICanvas

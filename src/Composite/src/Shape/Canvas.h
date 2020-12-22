@@ -1,5 +1,5 @@
 #pragma once
-#include "ICanvas.h"
+#include "../Canvas/ICanvas.h"
 
 class CCanvas : public ICanvas
 {

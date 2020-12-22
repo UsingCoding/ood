@@ -1,9 +1,9 @@
-#include "Canvas.h"
-#include "Ellipse.h"
-#include "ShapeGroup.h"
-#include "Rectangle.h"
-#include "Slide.h"
-#include "Triangle.h"
+#include "Shape/Canvas.h"
+#include "Shape/Ellipse.h"
+#include "Shape/ShapeGroup.h"
+#include "Shape/Rectangle.h"
+#include "Slide/Slide.h"
+#include "Shape/Triangle.h"
 #include <iostream>
 
 const double SLIDE_WIDTH = 800;
