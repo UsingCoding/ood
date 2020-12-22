@@ -2,6 +2,7 @@
 
 #include "../../Output/IOutputDataStream.hpp"
 #include "../IInputDataStream.hpp"
+#include "../../Chunk/Chunk.hpp"
 
 class DecompressInputStreamDecorator : public IInputDataStream
 {
@@ -16,4 +17,6 @@ public:
 
 private:
     InputDataStreamPtr m_stream;
+
+    Chunk m_chunk;
 };

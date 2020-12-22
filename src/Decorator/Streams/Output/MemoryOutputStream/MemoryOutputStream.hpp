@@ -7,9 +7,9 @@
 class MemoryOutputStream : public IOutputDataStream
 {
 public:
-    typedef std::vector<uint8_t> BufferType;
+    typedef std::shared_ptr<std::vector<uint8_t>> BufferType;
 
-    MemoryOutputStream(BufferType & buffer): m_buffer(buffer)
+    MemoryOutputStream(BufferType buffer): m_buffer(buffer)
     {}
 
     void WriteByte(uint8_t data) override;
@@ -17,5 +17,5 @@ public:
     void WriteBlock(const void *srcData, std::streamsize size) override;
 
 private:
-    BufferType & m_buffer;
+    BufferType m_buffer;
 };

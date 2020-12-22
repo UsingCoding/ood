@@ -2,6 +2,7 @@
 
 #include "../../Input/IInputDataStream.hpp"
 #include "../IOutputDataStream.hpp"
+#include "../../Chunk/Chunk.hpp"
 
 class CompressOutputDecoratorStream : public IOutputDataStream
 {
@@ -14,4 +15,8 @@ public:
 
 private:
     OutputDataStreamPtr m_stream;
+
+    void Flush();
+
+    Chunk m_chunk;
 };

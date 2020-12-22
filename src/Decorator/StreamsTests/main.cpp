@@ -64,7 +64,7 @@ SCENARIO("Passing data into stream and read write without decorating")
         std::string str = "some info";
         std::unique_ptr<std::vector<uint8_t>> data = std::make_unique<std::vector<uint8_t>>(str.begin(), str.end());
 
-        std::vector<uint8_t> outputBuffer;
+        auto outputBuffer = std::make_shared<std::vector<uint8_t>>();
 
         auto inputStream = std::make_unique<MemoryInputStream>(std::move(data));
         auto outputStream = std::make_unique<MemoryOutputStream>(outputBuffer);

@@ -12,5 +12,5 @@ std::unique_ptr<IInputDataStream> MemoryStreamFactory::CreateInputStream(const s
 
 std::unique_ptr<IOutputDataStream> MemoryStreamFactory::CreateOutputStream(const std::string &name)
 {
-    return std::make_unique<MemoryOutputStream>();
+    return std::make_unique<MemoryOutputStream>(std::make_shared<std::vector<uint8_t>>());
 }

@@ -7,12 +7,33 @@ bool DecompressInputStreamDecorator::IsEOF() const
 
 uint8_t DecompressInputStreamDecorator::ReadByte()
 {
-    auto byte = m_stream->ReadByte();
+    if (m_chunk.IsEmpty())
+    {
+        m_chunk.countOfBytes = m_stream->ReadByte();
+        m_chunk.byte = m_stream->ReadByte();
+    }
 
-    return byte;
+    m_chunk.countOfBytes--;
+
+    return m_chunk.byte;
 }
 
 std::streamsize DecompressInputStreamDecorator::ReadBlock(void *dstBuffer, std::streamsize size)
 {
-    return 0;
+    auto data = static_cast<uint8_t*>(dstBuffer);
+
+    for (std::streamsize i = 0; i < size; i++)
+    {
+        try
+        {
+            *data = ReadByte();
+        }
+        catch (std::exception&)
+        {
+            return i + 1;
+        }
+        data++;
+    }
+
+    return size;
 }

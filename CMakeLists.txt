@@ -131,8 +131,6 @@ add_executable(decorator-streams
         src/Decorator/Streams/Input/DecryptInputStreamDecorator/DecryptInputStreamDecorator.hpp
         src/Decorator/Streams/Crypt/Encoder.cpp
         src/Decorator/Streams/Crypt/Encoder.hpp
-        src/Decorator/Streams/Compressor/Compressor.cpp
-        src/Decorator/Streams/Compressor/Compressor.hpp
         src/Decorator/Streams/Crypt/IEncoder.hpp
         src/Decorator/Streams/Crypt/IDecoder.hpp
         src/Decorator/Streams/Factory/CryptStreamDecoratorFactory/CryptStreamDecoratorFactory.cpp
@@ -152,7 +150,7 @@ add_executable(decorator-streams
         src/Decorator/Streams/Input/FileInputStream/FileInputStream.cpp
         src/Decorator/Streams/Input/FileInputStream/FileInputStream.hpp
         src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.cpp
-        src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.hpp)
+        src/Decorator/Streams/Output/FileOutputStream/FileOutputStream.hpp src/Decorator/Streams/Chunk/Chunk.hpp)
 
 add_executable(adapter src/Adapter/src/main.cpp src/Adapter/src/GraphicsLib/GraphicLib.hpp src/Adapter/src/ShapeDrawningLib/ShapeDrawningLib.hpp src/Adapter/src/ModernGraphicsLib/ModernGraphicsLib.hpp src/Adapter/src/App/App.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapter.hpp src/Adapter/src/GraphicLibAdapter/GraphicLibAdapterV2.hpp src/Command/src/Command/InsertImageCommand/InsertImageCommand.cpp src/Command/src/Command/InsertImageCommand/InsertImageCommand.hpp)
 
