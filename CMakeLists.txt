@@ -459,6 +459,41 @@ add_executable(factory src/Factory/src/main.cpp
         src/Utils/Strings.cpp
     )
 
+add_executable(composite
+        src/Composite/src/Canvas.cpp
+        src/Composite/src/Canvas.h
+        src/Composite/src/CommonTypes.h
+        src/Composite/src/Ellipse.cpp
+        src/Composite/src/Ellipse.h
+        src/Composite/src/FillStyle.cpp
+        src/Composite/src/FillStyle.h
+        src/Composite/src/GroupFillStyle.cpp
+        src/Composite/src/GroupFillStyle.h
+        src/Composite/src/GroupOutlineStyle.cpp
+        src/Composite/src/GroupOutlineStyle.h
+        src/Composite/src/ICanvas.h
+        src/Composite/src/IDrawable.h
+        src/Composite/src/IOutlineStyle.h
+        src/Composite/src/IShapeGroup.h
+        src/Composite/src/IShape.h
+        src/Composite/src/ISlide.h
+        src/Composite/src/IStyle.h
+        src/Composite/src/main.cpp
+        src/Composite/src/OutlineStyle.cpp
+        src/Composite/src/OutlineStyle.h
+        src/Composite/src/Rectangle.cpp
+        src/Composite/src/Rectangle.h
+        src/Composite/src/Shape
+        src/Composite/src/ShapeGroup.cpp
+        src/Composite/src/ShapeGroup.h
+        src/Composite/src/SimpleShape.cpp
+        src/Composite/src/SimpleShape.h
+        src/Composite/src/Slide.cpp
+        src/Composite/src/Slide.h
+        src/Composite/src/Triangle.cpp
+        src/Composite/src/Triangle.h
+)
+
 include_directories(src/Catch2)
 include_directories(src/Utils)
 include_directories(src/Common)
