@@ -13,7 +13,7 @@ SCENARIO("Decorate memory stream twice with encrypt and decrypt to get source da
         std::string str = "some info";
         std::unique_ptr<std::vector<uint8_t>> data = std::make_unique<std::vector<uint8_t>>(str.begin(), str.end());
 
-        std::vector<uint8_t> outputBuffer;
+        auto outputBuffer = std::make_shared<std::vector<uint8_t>>();
 
         auto inputStream = std::make_unique<MemoryInputStream>(std::move(data));
         auto outputStream = std::make_unique<MemoryOutputStream>(outputBuffer);
@@ -45,9 +45,9 @@ SCENARIO("Decorate memory stream twice with encrypt and decrypt to get source da
 
                         THEN("We have identical data that we passed into input stream")
                         {
-                            for (auto i = 0; i < outputBuffer.size(); i++)
+                            for (auto i = 0; i < outputBuffer->size(); i++)
                             {
-                                REQUIRE((outputBuffer[i] == str[i]));
+                                REQUIRE(((*outputBuffer)[i] == str[i]));
                             }
                         }
                     }
@@ -80,9 +80,9 @@ SCENARIO("Passing data into stream and read write without decorating")
 
             THEN("We have a source data")
             {
-                for (auto i = 0; i < outputBuffer.size(); i++)
+                for (auto i = 0; i < outputBuffer->size(); i++)
                 {
-                    REQUIRE((outputBuffer[i] == str[i]));
+                    REQUIRE(((*outputBuffer)[i] == str[i]));
                 }
             }
         }
