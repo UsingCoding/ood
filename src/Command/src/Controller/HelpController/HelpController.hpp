@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Registry/IEnumerator.hpp>
 #include "../IController.hpp"
 #include "../ControllerType.hpp"
 #include "../../ControllerCommandsHolder/IControllerCommandsHolder.hpp"

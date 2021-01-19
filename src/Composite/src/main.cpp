@@ -9,7 +9,7 @@
 const double SLIDE_WIDTH = 800;
 const double SLIDE_HEIGHT = 600;
 
-enum HousePalette : RGBAColor
+enum HouseColors : RGBAColor
 {
     RoofColor = 0x473925FF,
     FacadeColor = 0xB39F82FF,
@@ -17,7 +17,7 @@ enum HousePalette : RGBAColor
     DoorColor = 0x473925FF,
 };
 
-enum WorldPalette : RGBAColor
+enum WorldColor : RGBAColor
 {
     SunColor = 0xEBE244FF,
     SunRayColor = 0xEBE79D99,
@@ -28,24 +28,24 @@ std::shared_ptr<IShape> CreateHouse()
 {
     std::shared_ptr<IShape> roof = std::make_shared<CTriangle>(PointD{ 25, 250 }, PointD{ 150, 150 }, PointD{ 275, 250 });
     roof->GetFillStyle()->Enable(true);
-    roof->GetFillStyle()->SetColor(HousePalette::RoofColor);
+    roof->GetFillStyle()->SetColor(HouseColors::RoofColor);
     roof->GetOutlineStyle()->Enable(true);
-    roof->GetOutlineStyle()->SetColor(HousePalette::FacadeColor);
+    roof->GetOutlineStyle()->SetColor(HouseColors::FacadeColor);
     roof->GetOutlineStyle()->SetThickness(10.0);
 
     std::shared_ptr<IShape> facade = std::make_shared<CRectangle>(PointD{ 50, 250 }, 200, 200);
     facade->GetFillStyle()->Enable(true);
-    facade->GetFillStyle()->SetColor(HousePalette::FacadeColor);
+    facade->GetFillStyle()->SetColor(HouseColors::FacadeColor);
     facade->GetOutlineStyle()->Enable(false);
 
     std::shared_ptr<IShape> window = std::make_shared<CEllipse>(PointD{ 100, 325 }, 25, 25);
     window->GetFillStyle()->Enable(true);
-    window->GetFillStyle()->SetColor(HousePalette::WindowColor);
+    window->GetFillStyle()->SetColor(HouseColors::WindowColor);
     facade->GetOutlineStyle()->Enable(false);
 
     std::shared_ptr<IShape> door = std::make_shared<CRectangle>(PointD{ 150, 325 }, 75, 125);
     door->GetFillStyle()->Enable(true);
-    door->GetFillStyle()->SetColor(HousePalette::DoorColor);
+    door->GetFillStyle()->SetColor(HouseColors::DoorColor);
     door->GetOutlineStyle()->Enable(false);
 
     std::shared_ptr<IShape> house = std::make_shared<CShapeGroup>();
@@ -59,38 +59,38 @@ std::shared_ptr<IShape> CreateHouse()
 
 std::shared_ptr<IShape> CreateScaledHouse()
 {
-    auto scaledHouse = CreateHouse();
+    auto house = CreateHouse();
 
     auto empty = std::make_shared<CShapeGroup>();
-    scaledHouse->GetGroup()->InsertShape(empty);
+    house->GetGroup()->InsertShape(empty);
 
-    scaledHouse->SetFrame({{ 420, 230}, 320, 200 });
+    house->SetFrame({{420, 230}, 320, 200 });
 
-    scaledHouse->GetFillStyle()->Enable(false);
-    scaledHouse->GetOutlineStyle()->Enable(true);
-    scaledHouse->GetOutlineStyle()->SetColor(HousePalette::WindowColor);
-    scaledHouse->GetOutlineStyle()->SetThickness(3);
+    house->GetFillStyle()->Enable(false);
+    house->GetOutlineStyle()->Enable(true);
+    house->GetOutlineStyle()->SetColor(HouseColors::WindowColor);
+    house->GetOutlineStyle()->SetThickness(3);
 
-    return scaledHouse;
+    return house;
 }
 
 std::shared_ptr<IShape> CreateWorld()
 {
     std::shared_ptr<IShape> sun = std::make_shared<CEllipse>(PointD{ 500, 50 }, 50, 50);
     sun->GetFillStyle()->Enable(true);
-    sun->GetFillStyle()->SetColor(WorldPalette::SunColor);
+    sun->GetFillStyle()->SetColor(WorldColor::SunColor);
     sun->GetOutlineStyle()->Enable(true);
-    sun->GetOutlineStyle()->SetColor(WorldPalette::SunRayColor);
+    sun->GetOutlineStyle()->SetColor(WorldColor::SunRayColor);
     sun->GetOutlineStyle()->SetThickness(30);
 
     std::shared_ptr<IShape> grass = std::make_shared<CRectangle>(PointD{ 0, 450 }, 800, 150);
     grass->GetFillStyle()->Enable(true);
-    grass->GetFillStyle()->SetColor(WorldPalette::GrassColor);
+    grass->GetFillStyle()->SetColor(WorldColor::GrassColor);
     grass->GetOutlineStyle()->Enable(false);
 
     std::shared_ptr<IShape> grass2 = std::make_shared<CEllipse>(PointD{ 580, 480 }, 200, 70);
     grass2->GetFillStyle()->Enable(true);
-    grass2->GetFillStyle()->SetColor(WorldPalette::GrassColor);
+    grass2->GetFillStyle()->SetColor(WorldColor::GrassColor);
     grass2->GetOutlineStyle()->Enable(false);
 
     auto house = CreateHouse();
@@ -114,9 +114,9 @@ std::shared_ptr<ISlide> CreateSlide()
 
 void Draw(std::shared_ptr<ISlide> slide)
 {
-    CCanvas sfmlCanvas(std::cout);
+    CCanvas canvas(std::cout);
 
-    slide->Draw(sfmlCanvas);
+    slide->Draw(canvas);
 }
 
 int main()

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Shape/CommonTypes.h"
+#include "../Shape/Common/Types.h"
 #include "../Canvas/IDrawable.h"
 #include <optional>
 #include "../Shape/IShape.h"

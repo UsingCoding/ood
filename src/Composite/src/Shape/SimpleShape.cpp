@@ -1,6 +1,6 @@
 #include "SimpleShape.h"
-#include "FillStyle.h"
-#include "OutlineStyle.h"
+#include "Style/FillStyle.h"
+#include "Style/OutlineStyle.h"
 #include <memory>
 
 CSimpleShape::CSimpleShape()

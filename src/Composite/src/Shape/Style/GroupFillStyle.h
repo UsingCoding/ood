@@ -1,5 +1,5 @@
 #pragma once
-#include "IStyle.h"
+#include "../IStyle.h"
 #include <functional>
 
 typedef std::function<void(StyleCallback)> FillStyleEnumerator;

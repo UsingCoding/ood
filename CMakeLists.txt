@@ -305,7 +305,6 @@ add_executable(command src/Command/src/main.cpp
         src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.hpp
         src/Command/src/Controller/HelpController/HelpController.cpp
         src/Command/src/Controller/HelpController/HelpController.hpp
-        src/Common/Registry/IEnumerator.hpp
         src/Command/src/ControllerCommandsHolder/IControllerCommandsHolder.hpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.cpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.hpp
@@ -416,7 +415,6 @@ add_executable(command-tests
         src/Command/src/Command/DeleteItemCommand/DeleteItemCommand.hpp
         src/Command/src/Controller/HelpController/HelpController.cpp
         src/Command/src/Controller/HelpController/HelpController.hpp
-        src/Common/Registry/IEnumerator.hpp
         src/Command/src/ControllerCommandsHolder/IControllerCommandsHolder.hpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.cpp
         src/Command/src/ControllerCommandsHolder/ControllerCommandsHolder.hpp
@@ -460,25 +458,25 @@ add_executable(factory src/Factory/src/main.cpp
 add_executable(composite
         src/Composite/src/Shape/Canvas.cpp
         src/Composite/src/Shape/Canvas.h
-        src/Composite/src/Shape/CommonTypes.h
+        src/Composite/src/Shape/Common/Types.h
         src/Composite/src/Shape/Ellipse.cpp
         src/Composite/src/Shape/Ellipse.h
-        src/Composite/src/Shape/FillStyle.cpp
-        src/Composite/src/Shape/FillStyle.h
-        src/Composite/src/Shape/GroupFillStyle.cpp
-        src/Composite/src/Shape/GroupFillStyle.h
-        src/Composite/src/Shape/GroupOutlineStyle.cpp
-        src/Composite/src/Shape/GroupOutlineStyle.h
+        src/Composite/src/Shape/Style/FillStyle.cpp
+        src/Composite/src/Shape/Style/FillStyle.h
+        src/Composite/src/Shape/Style/GroupFillStyle.cpp
+        src/Composite/src/Shape/Style/GroupFillStyle.h
+        src/Composite/src/Shape/Style/GroupOutlineStyle.cpp
+        src/Composite/src/Shape/Style/GroupOutlineStyle.h
         src/Composite/src/Canvas/ICanvas.h
         src/Composite/src/Canvas/IDrawable.h
-        src/Composite/src/Shape/IOutlineStyle.h
+        src/Composite/src/Shape/Style/IOutlineStyle.h
         src/Composite/src/Shape/IShapeGroup.h
         src/Composite/src/Shape/IShape.h
         src/Composite/src/Slide/ISlide.h
         src/Composite/src/Shape/IStyle.h
         src/Composite/src/main.cpp
-        src/Composite/src/Shape/OutlineStyle.cpp
-        src/Composite/src/Shape/OutlineStyle.h
+        src/Composite/src/Shape/Style/OutlineStyle.cpp
+        src/Composite/src/Shape/Style/OutlineStyle.h
         src/Composite/src/Shape/Rectangle.cpp
         src/Composite/src/Shape/Rectangle.h
         src/Composite/src/Shape

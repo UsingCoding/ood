@@ -1,6 +1,6 @@
 #include "ShapeGroup.h"
-#include "GroupFillStyle.h"
-#include "GroupOutlineStyle.h"
+#include "Style/GroupFillStyle.h"
+#include "Style/GroupOutlineStyle.h"
 #include <algorithm>
 #include <stdexcept>
 
@@ -79,13 +79,11 @@ std::optional<RectD> CShapeGroup::GetFrame() const
 
 void CShapeGroup::SetFrame(const RectD& rect)
 {
-	auto IsCurrentGroupFrame = GetFrame();
-	if (!IsCurrentGroupFrame)
+	auto currentGroupFrame = GetFrame();
+	if (!currentGroupFrame.has_value())
 	{
 		return;
 	}
-
-	auto currentGroupFrame = *IsCurrentGroupFrame;
 
 	for (auto& shape : m_shapes)
 	{
@@ -95,10 +93,10 @@ void CShapeGroup::SetFrame(const RectD& rect)
 		}
 		auto shapeFrame = *shape->GetFrame();
 
-		double newShapeLeft = rect.leftTop.x + (shapeFrame.leftTop.x - currentGroupFrame.leftTop.x) / currentGroupFrame.width * rect.width;
-		double newShapeTop = rect.leftTop.y + (shapeFrame.leftTop.y - currentGroupFrame.leftTop.y) / currentGroupFrame.height * rect.height;
-		double newShapeWidth = shapeFrame.width / currentGroupFrame.width * rect.width;
-		double newShapeHeight = shapeFrame.height / currentGroupFrame.height * rect.height;
+		double newShapeLeft = rect.leftTop.x + (shapeFrame.leftTop.x - currentGroupFrame.value().leftTop.x) / currentGroupFrame.value().width * rect.width;
+		double newShapeTop = rect.leftTop.y + (shapeFrame.leftTop.y - currentGroupFrame.value().leftTop.y) / currentGroupFrame.value().height * rect.height;
+		double newShapeWidth = shapeFrame.width / currentGroupFrame.value().width * rect.width;
+		double newShapeHeight = shapeFrame.height / currentGroupFrame.value().height * rect.height;
 
 		auto newShapeFrame = RectD{ { newShapeLeft, newShapeTop }, newShapeWidth, newShapeHeight };
 		shape->SetFrame(newShapeFrame);
@@ -107,7 +105,7 @@ void CShapeGroup::SetFrame(const RectD& rect)
 
 std::shared_ptr<IOutlineStyle> CShapeGroup::GetOutlineStyle()
 {
-	if (!m_outlineStyle)
+	if (m_outlineStyle == nullptr)
 	{
 		throw std::runtime_error("Outline style doesn't exist");
 	}
@@ -116,7 +114,7 @@ std::shared_ptr<IOutlineStyle> CShapeGroup::GetOutlineStyle()
 
 std::shared_ptr<const IOutlineStyle> CShapeGroup::GetOutlineStyle() const
 {
-	if (!m_outlineStyle)
+	if (m_outlineStyle == nullptr)
 	{
 		throw std::runtime_error("Outline style doesn't exist");
 	}
@@ -125,7 +123,7 @@ std::shared_ptr<const IOutlineStyle> CShapeGroup::GetOutlineStyle() const
 
 std::shared_ptr<IStyle> CShapeGroup::GetFillStyle()
 {
-	if (!m_fillStyle)
+	if (m_fillStyle == nullptr)
 	{
 		throw std::runtime_error("Fill style doesn't exist");
 	}
@@ -134,7 +132,7 @@ std::shared_ptr<IStyle> CShapeGroup::GetFillStyle()
 
 std::shared_ptr<const IStyle> CShapeGroup::GetFillStyle() const
 {
-	if (!m_fillStyle)
+	if (m_fillStyle == nullptr)
 	{
 		throw std::runtime_error("Fill style doesn't exist");
 	}
@@ -158,10 +156,11 @@ size_t CShapeGroup::GetShapesCount() const
 
 void CShapeGroup::InsertShape(std::shared_ptr<IShape> shape, size_t position)
 {
-	if (!shape)
+	if (shape == nullptr)
 	{
 		throw std::out_of_range("Shape cannot be nullptr");	
 	}
+
 	if (position == std::numeric_limits<size_t>::max())
 	{
 		m_shapes.push_back(shape);
@@ -182,6 +181,7 @@ std::shared_ptr<IShape> CShapeGroup::GetShapeAtIndex(size_t index) const
 	{
 		throw std::out_of_range("Index is out of range");
 	}
+
 	return m_shapes.at(index);
 }
 
@@ -191,5 +191,6 @@ void CShapeGroup::RemoveShapeAtIndex(size_t index)
 	{
 		throw std::out_of_range("Index is out of range");
 	}
+
 	m_shapes.erase(m_shapes.begin() + index);
 }

@@ -3,7 +3,6 @@
 #include "IControllerRegistry.hpp"
 #include "IControllerEnumerator.hpp"
 #include <map>
-#include <Registry/IEnumerator.hpp>
 
 class ControllerRegistry : public IControllerRegistry, public IControllerEnumerator
 {

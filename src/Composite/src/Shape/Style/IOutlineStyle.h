@@ -1,5 +1,5 @@
 #pragma once
-#include "IStyle.h"
+#include "../IStyle.h"
 #include <functional>
 
 class IOutlineStyle : public IStyle

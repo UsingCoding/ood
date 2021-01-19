@@ -1,46 +1,49 @@
+import 'package:MVC/view/shape_view.dart';
+import 'package:MVC/view/shapes/rectangle_view.dart';
 import 'package:flutter/material.dart';
 
-class Canvas extends StatefulWidget
+class CanvasView extends StatefulWidget
 {
   @override
-  State createState() => _CanvasState();
+  State createState() => _CanvasViewState();
 }
 
-class _CanvasState extends State<Canvas>
+class _CanvasViewState extends State<CanvasView>
 {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    final size = MediaQuery.of(context).size;
+    print(size);
+    return Container(
+      width: size.width,
+      height: size.height,
+      color: Colors.white,
       child: GestureDetector(
-        onTap: () {
-          print('HI');
+        onTapUp: (TapUpDetails details) {
+          print(details.localPosition);
+          print(details.globalPosition);
         },
-        child: ClipPath(
-          clipper: CanvasClipper(),
-          child: Container(
-            width: 600,
-            height: 600,
-            color: Colors.pink,
-          ),
+        child: CustomPaint(
+          size: Size.infinite,
+          painter: _CanvasPainter([RectangleView()]),
         ),
-      ),
+      )
     );
   }
 }
 
-class CanvasClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path()
-      ..addOval(Rect.fromPoints(Offset(0, 0), Offset(60, 60)))
-      ..addOval(Rect.fromPoints(Offset(40, 40), Offset(160, 160)))
-      ..close();
+class _CanvasPainter extends CustomPainter {
+  final List<ShapeView> _shapes;
 
-    return path;
+  _CanvasPainter(this._shapes);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    _shapes.forEach((ShapeView shape) => shape.draw(canvas, size));
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
+  bool shouldRepaint(CustomPainter oldDelegate) {
+     return false;
   }
 }

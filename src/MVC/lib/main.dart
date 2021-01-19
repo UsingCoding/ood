@@ -19,7 +19,7 @@ class App extends StatelessWidget {
           appBar: AppBar(
             title: Text('MVC'),
           ),
-          body: Canvas(),
+          body: CanvasView(),
           bottomNavigationBar: Menu()
       ),
     );

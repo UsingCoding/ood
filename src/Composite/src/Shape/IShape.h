@@ -1,7 +1,7 @@
 #pragma once
-#include "CommonTypes.h"
+#include "Common/Types.h"
 #include "../Canvas/IDrawable.h"
-#include "IOutlineStyle.h"
+#include "Style/IOutlineStyle.h"
 #include "IStyle.h"
 #include <memory>
 
