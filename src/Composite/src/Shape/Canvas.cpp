@@ -1,33 +1,33 @@
 #include <iostream>
-#include "Canvas.h"
+#include "Canvas.hpp"
 
-CCanvas::CCanvas(std::ostream &output) : m_output(output) {}
+Canvas::Canvas(std::ostream &output) : m_output(output) {}
 
-void CCanvas::SetLineColor(RGBAColor color)
+void Canvas::SetLineColor(RGBAColor color)
 {
 	m_lineColor = color;
 }
 
-void CCanvas::SetFillColor(RGBAColor color)
+void Canvas::SetFillColor(RGBAColor color)
 {
 	m_fillColor = color;
 }
 
-void CCanvas::SetLineThickness(double thickness)
+void Canvas::SetLineThickness(double thickness)
 {
 	m_lineThickness = (float)thickness;
 }
 
-void CCanvas::DrawLine(PointD const& from, PointD const& to)
+void Canvas::DrawLine(PointD const& from, PointD const& to)
 {
     m_output <<
-             "<line color=" << m_lineColor << "lineThickness=" << m_lineThickness <<
+             "<line color=" << m_lineColor << " lineThickness=" << m_lineThickness <<
              " fromX=" << from.x << " fromY=" << from.y <<
              " toX=" << to.x << " toY=" << to.y << " />" <<
     std::endl;
 }
 
-void CCanvas::FillPolygon(std::vector<PointD> const& vertexes)
+void Canvas::FillPolygon(std::vector<PointD> const& vertexes)
 {
     m_output << "<polygon color=" << m_lineColor << "lineThickness=" << m_lineThickness << ">";
 
@@ -39,7 +39,7 @@ void CCanvas::FillPolygon(std::vector<PointD> const& vertexes)
     m_output << "</polygon>" << std::endl;
 }
 
-void CCanvas::DrawEllipse(double left, double top, double width, double height)
+void Canvas::DrawEllipse(double left, double top, double width, double height)
 {
     m_output <<
         "<ellipse color=" << m_lineColor << " leftTopX=" << left << "leftTopY=" << top <<
@@ -47,7 +47,7 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height)
     std::endl;
 }
 
-void CCanvas::FillEllipse(double left, double top, double width, double height)
+void Canvas::FillEllipse(double left, double top, double width, double height)
 {
     m_output <<
              "<ellipse color=" << m_lineColor << " leftTopX=" << left << "leftTopY=" << top <<

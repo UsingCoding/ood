@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ISlide.h"
+#include "ISlide.hpp"
 
 class CSlide : public ISlide
 {

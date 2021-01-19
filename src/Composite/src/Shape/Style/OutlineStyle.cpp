@@ -1,4 +1,4 @@
-#include "OutlineStyle.h"
+#include "OutlineStyle.hpp"
 
 COutlineStyle::COutlineStyle()
 	: m_color(0)

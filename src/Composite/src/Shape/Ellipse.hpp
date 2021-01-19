@@ -1,7 +1,7 @@
 #pragma once
-#include "SimpleShape.h"
+#include "Shape.hpp"
 
-class CEllipse : public CSimpleShape
+class CEllipse : public Shape
 {
 public:
 	CEllipse(PointD const& center, double horizontalRadius, double verticalRadius);

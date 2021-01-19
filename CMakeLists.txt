@@ -457,37 +457,37 @@ add_executable(factory src/Factory/src/main.cpp
 
 add_executable(composite
         src/Composite/src/Shape/Canvas.cpp
-        src/Composite/src/Shape/Canvas.h
-        src/Composite/src/Shape/Common/Types.h
+        src/Composite/src/Shape/Canvas.hpp
+        src/Composite/src/Shape/Common/Types.hpp
         src/Composite/src/Shape/Ellipse.cpp
-        src/Composite/src/Shape/Ellipse.h
+        src/Composite/src/Shape/Ellipse.hpp
         src/Composite/src/Shape/Style/FillStyle.cpp
-        src/Composite/src/Shape/Style/FillStyle.h
+        src/Composite/src/Shape/Style/FillStyle.hpp
         src/Composite/src/Shape/Style/GroupFillStyle.cpp
-        src/Composite/src/Shape/Style/GroupFillStyle.h
+        src/Composite/src/Shape/Style/GroupFillStyle.hpp
         src/Composite/src/Shape/Style/GroupOutlineStyle.cpp
-        src/Composite/src/Shape/Style/GroupOutlineStyle.h
-        src/Composite/src/Canvas/ICanvas.h
-        src/Composite/src/Canvas/IDrawable.h
-        src/Composite/src/Shape/Style/IOutlineStyle.h
-        src/Composite/src/Shape/IShapeGroup.h
-        src/Composite/src/Shape/IShape.h
-        src/Composite/src/Slide/ISlide.h
-        src/Composite/src/Shape/IStyle.h
+        src/Composite/src/Shape/Style/GroupOutlineStyle.hpp
+        src/Composite/src/Canvas/ICanvas.hpp
+        src/Composite/src/Canvas/IDrawable.hpp
+        src/Composite/src/Shape/Style/IOutlineStyle.hpp
+        src/Composite/src/Shape/IShapeGroup.hpp
+        src/Composite/src/Shape/IShape.hpp
+        src/Composite/src/Slide/ISlide.hpp
+        src/Composite/src/Shape/IStyle.hpp
         src/Composite/src/main.cpp
         src/Composite/src/Shape/Style/OutlineStyle.cpp
-        src/Composite/src/Shape/Style/OutlineStyle.h
+        src/Composite/src/Shape/Style/OutlineStyle.hpp
         src/Composite/src/Shape/Rectangle.cpp
-        src/Composite/src/Shape/Rectangle.h
+        src/Composite/src/Shape/Rectangle.hpp
         src/Composite/src/Shape
         src/Composite/src/Shape/ShapeGroup.cpp
-        src/Composite/src/Shape/ShapeGroup.h
-        src/Composite/src/Shape/SimpleShape.cpp
-        src/Composite/src/Shape/SimpleShape.h
+        src/Composite/src/Shape/ShapeGroup.hpp
+        src/Composite/src/Shape/Shape.cpp
+        src/Composite/src/Shape/Shape.hpp
         src/Composite/src/Slide/Slide.cpp
-        src/Composite/src/Slide/Slide.h
+        src/Composite/src/Slide/Slide.hpp
         src/Composite/src/Shape/Triangle.cpp
-        src/Composite/src/Shape/Triangle.h
+        src/Composite/src/Shape/Triangle.hpp
 )
 
 include_directories(src/Catch2)

@@ -1,5 +1,5 @@
 #pragma once
-#include "IOutlineStyle.h"
+#include "IOutlineStyle.hpp"
 
 class COutlineStyle : public IOutlineStyle
 {

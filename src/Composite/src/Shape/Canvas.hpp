@@ -1,11 +1,11 @@
 #pragma once
-#include "../Canvas/ICanvas.h"
+#include "../Canvas/ICanvas.hpp"
 
-class CCanvas : public ICanvas
+class Canvas : public ICanvas
 {
 public:
 
-    CCanvas(std::ostream &output);
+    Canvas(std::ostream &output);
 
     void SetLineColor(RGBAColor color) override;
 	void SetFillColor(RGBAColor color) override;

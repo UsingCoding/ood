@@ -1,9 +1,9 @@
-#include "Shape/Canvas.h"
-#include "Shape/Ellipse.h"
-#include "Shape/ShapeGroup.h"
-#include "Shape/Rectangle.h"
-#include "Slide/Slide.h"
-#include "Shape/Triangle.h"
+#include "Shape/Canvas.hpp"
+#include "Shape/Ellipse.hpp"
+#include "Shape/ShapeGroup.hpp"
+#include "Shape/Rectangle.hpp"
+#include "Slide/Slide.hpp"
+#include "Shape/Triangle.hpp"
 #include <iostream>
 
 const double SLIDE_WIDTH = 800;
@@ -114,7 +114,7 @@ std::shared_ptr<ISlide> CreateSlide()
 
 void Draw(std::shared_ptr<ISlide> slide)
 {
-    CCanvas canvas(std::cout);
+    Canvas canvas(std::cout);
 
     slide->Draw(canvas);
 }

@@ -1,7 +1,7 @@
 #pragma once
-#include "SimpleShape.h"
+#include "Shape.hpp"
 
-class CTriangle : public CSimpleShape
+class CTriangle : public Shape
 {
 public:
 	CTriangle(PointD const& vertex1, PointD const& vertex2, PointD const& vertex3);

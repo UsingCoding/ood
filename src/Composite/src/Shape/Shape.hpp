@@ -1,10 +1,10 @@
 #pragma once
-#include "IShape.h"
+#include "IShape.hpp"
 
-class CSimpleShape : public IShape
+class Shape : public IShape
 {
 public:
-	CSimpleShape();
+	Shape();
 	
 	std::shared_ptr<IStyle> GetFillStyle() override;
 	std::shared_ptr<const IStyle> GetFillStyle() const override;

@@ -1,4 +1,4 @@
-#include "GroupOutlineStyle.h"
+#include "GroupOutlineStyle.hpp"
 
 CGroupOutlineStyle::CGroupOutlineStyle(OutlineStyleEnumerator enumerator)
 	: m_enumerator(enumerator)

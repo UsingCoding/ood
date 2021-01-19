@@ -1,6 +1,6 @@
-#include "ShapeGroup.h"
-#include "Style/GroupFillStyle.h"
-#include "Style/GroupOutlineStyle.h"
+#include "ShapeGroup.hpp"
+#include "Style/GroupFillStyle.hpp"
+#include "Style/GroupOutlineStyle.hpp"
 #include <algorithm>
 #include <stdexcept>
 
@@ -14,13 +14,13 @@ CShapeGroup::CShapeGroup()
 	};
 	m_outlineStyle = std::make_shared<CGroupOutlineStyle>(enumerator1);
 
-	FillStyleEnumerator enumerator2 = [&](StyleCallback callback) {
+    CGroupFillStyle::FillStyleEnumerator enumerator = [&](IStyle::StyleCallback callback) {
 		for (auto& shape : m_shapes)
 		{
 			callback(*shape->GetFillStyle());
 		}
 	};
-	m_fillStyle = std::make_shared<CGroupFillStyle>(enumerator2);
+	m_fillStyle = std::make_shared<CGroupFillStyle>(enumerator);
 }
 
 void CShapeGroup::Draw(ICanvas& canvas)
@@ -107,7 +107,7 @@ std::shared_ptr<IOutlineStyle> CShapeGroup::GetOutlineStyle()
 {
 	if (m_outlineStyle == nullptr)
 	{
-		throw std::runtime_error("Outline style doesn't exist");
+		throw std::runtime_error("Outline style don`t exist");
 	}
 	return m_outlineStyle;
 }
@@ -116,7 +116,7 @@ std::shared_ptr<const IOutlineStyle> CShapeGroup::GetOutlineStyle() const
 {
 	if (m_outlineStyle == nullptr)
 	{
-		throw std::runtime_error("Outline style doesn't exist");
+		throw std::runtime_error("Outline style don`t exist");
 	}
 	return m_outlineStyle;
 }
@@ -125,7 +125,7 @@ std::shared_ptr<IStyle> CShapeGroup::GetFillStyle()
 {
 	if (m_fillStyle == nullptr)
 	{
-		throw std::runtime_error("Fill style doesn't exist");
+		throw std::runtime_error("Fill style don`t exist");
 	}
 	return m_fillStyle;
 }
@@ -134,7 +134,7 @@ std::shared_ptr<const IStyle> CShapeGroup::GetFillStyle() const
 {
 	if (m_fillStyle == nullptr)
 	{
-		throw std::runtime_error("Fill style doesn't exist");
+		throw std::runtime_error("Fill style don`t exist");
 	}
 	return m_fillStyle;
 }

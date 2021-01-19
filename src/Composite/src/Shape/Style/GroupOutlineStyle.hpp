@@ -1,5 +1,5 @@
 #pragma once
-#include "IOutlineStyle.h"
+#include "IOutlineStyle.hpp"
 
 typedef std::function<void(OutlineStyleCallback)> OutlineStyleEnumerator;
 

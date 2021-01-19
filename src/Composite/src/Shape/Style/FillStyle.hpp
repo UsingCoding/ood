@@ -1,5 +1,5 @@
 #pragma once
-#include "../IStyle.h"
+#include "../IStyle.hpp"
 
 class CFillStyle : public IStyle
 {

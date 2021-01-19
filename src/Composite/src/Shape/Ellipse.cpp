@@ -1,4 +1,4 @@
-#include "Ellipse.h"
+#include "Ellipse.hpp"
 
 CEllipse::CEllipse(PointD const& center, double horizontalRadius, double verticalRadius)
 	: m_center(center)

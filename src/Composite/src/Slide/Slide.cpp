@@ -1,4 +1,4 @@
-#include "Slide.h"
+#include "Slide.hpp"
 #include <stdexcept>
 
 CSlide::CSlide(double width, double height)

@@ -1,4 +1,4 @@
-#include "Triangle.h"
+#include "Triangle.hpp"
 #include <algorithm>
 
 CTriangle::CTriangle(PointD const& vertex1, PointD const& vertex2, PointD const& vertex3)

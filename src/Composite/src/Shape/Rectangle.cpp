@@ -1,4 +1,4 @@
-#include "Rectangle.h"
+#include "Rectangle.hpp"
 
 CRectangle::CRectangle(PointD const& leftTop, double width, double height)
 	: m_leftTop(leftTop)

@@ -1,7 +1,7 @@
 #pragma once
-#include "SimpleShape.h"
+#include "Shape.hpp"
 
-class CRectangle : public CSimpleShape
+class CRectangle : public Shape
 {
 public:
 	CRectangle(PointD const& leftTop, double width, double height);

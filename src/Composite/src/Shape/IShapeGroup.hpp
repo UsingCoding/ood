@@ -1,5 +1,5 @@
 #pragma once
-#include "IShape.h"
+#include "IShape.hpp"
 #include <memory>
 
 class IShapeGroup : public IShape

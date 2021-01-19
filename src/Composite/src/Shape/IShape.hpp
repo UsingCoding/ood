@@ -1,8 +1,8 @@
 #pragma once
-#include "Common/Types.h"
-#include "../Canvas/IDrawable.h"
-#include "Style/IOutlineStyle.h"
-#include "IStyle.h"
+#include "Common/Types.hpp"
+#include "../Canvas/IDrawable.hpp"
+#include "Style/IOutlineStyle.hpp"
+#include "IStyle.hpp"
 #include <memory>
 
 class IShapeGroup;

@@ -1,4 +1,4 @@
-#include "GroupFillStyle.h"
+#include "GroupFillStyle.hpp"
 
 CGroupFillStyle::CGroupFillStyle(FillStyleEnumerator enumerator)
 	: m_enumerator(enumerator)

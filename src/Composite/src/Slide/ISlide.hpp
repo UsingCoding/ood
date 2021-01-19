@@ -1,8 +1,8 @@
 #pragma once
-#include "../Shape/Common/Types.h"
-#include "../Canvas/IDrawable.h"
+#include "../Shape/Common/Types.hpp"
+#include "../Canvas/IDrawable.hpp"
 #include <optional>
-#include "../Shape/IShape.h"
+#include "../Shape/IShape.hpp"
 
 class ISlide : public IDrawable
 {

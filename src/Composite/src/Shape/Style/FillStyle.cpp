@@ -1,4 +1,4 @@
-#include "FillStyle.h"
+#include "FillStyle.hpp"
 
 CFillStyle::CFillStyle()
 	: m_color(0)

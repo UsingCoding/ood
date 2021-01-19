@@ -1,11 +1,13 @@
 #pragma once
-#include "Common/Types.h"
+#include "Common/Types.hpp"
 #include <functional>
 #include <optional>
 
 class IStyle
 {
 public:
+    typedef std::function<void(IStyle&)> StyleCallback;
+
 	virtual std::optional<bool> IsEnabled() const = 0;
 	virtual void Enable(bool enable) = 0;
 
@@ -14,5 +16,3 @@ public:
 
 	virtual ~IStyle() = default;
 };
-
-typedef std::function<void(IStyle&)> StyleCallback;

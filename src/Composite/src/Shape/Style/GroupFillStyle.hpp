@@ -1,12 +1,12 @@
 #pragma once
-#include "../IStyle.h"
+#include "../IStyle.hpp"
 #include <functional>
-
-typedef std::function<void(StyleCallback)> FillStyleEnumerator;
 
 class CGroupFillStyle : public IStyle
 {
 public:
+    typedef std::function<void(IStyle::StyleCallback)> FillStyleEnumerator;
+
 	CGroupFillStyle(FillStyleEnumerator enumerator);
 
 	std::optional<bool> IsEnabled() const override;

@@ -1,5 +1,5 @@
 #pragma once
-#include "IShapeGroup.h"
+#include "IShapeGroup.hpp"
 #include <vector>
 
 class CShapeGroup : public IShapeGroup, public std::enable_shared_from_this<CShapeGroup>

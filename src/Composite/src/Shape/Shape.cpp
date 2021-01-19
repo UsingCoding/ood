@@ -1,15 +1,15 @@
-#include "SimpleShape.h"
-#include "Style/FillStyle.h"
-#include "Style/OutlineStyle.h"
+#include "Shape.hpp"
+#include "Style/FillStyle.hpp"
+#include "Style/OutlineStyle.hpp"
 #include <memory>
 
-CSimpleShape::CSimpleShape()
+Shape::Shape()
 	: m_outlineStyle(std::make_shared<COutlineStyle>())
 	, m_fillStyle(std::make_shared<CFillStyle>())
 {
 }
 
-void CSimpleShape::Draw(ICanvas& canvas)
+void Shape::Draw(ICanvas& canvas)
 {
 	if (*m_fillStyle->IsEnabled())
 	{
@@ -25,32 +25,32 @@ void CSimpleShape::Draw(ICanvas& canvas)
     DoDraw(canvas);
 }
 
-std::shared_ptr<IStyle> CSimpleShape::GetFillStyle()
+std::shared_ptr<IStyle> Shape::GetFillStyle()
 {
 	return m_fillStyle;
 }
 
-std::shared_ptr<const IStyle> CSimpleShape::GetFillStyle() const
+std::shared_ptr<const IStyle> Shape::GetFillStyle() const
 {
 	return m_fillStyle;
 }
 
-std::shared_ptr<IOutlineStyle> CSimpleShape::GetOutlineStyle()
+std::shared_ptr<IOutlineStyle> Shape::GetOutlineStyle()
 {
 	return m_outlineStyle;
 }
 
-std::shared_ptr<const IOutlineStyle> CSimpleShape::GetOutlineStyle() const
+std::shared_ptr<const IOutlineStyle> Shape::GetOutlineStyle() const
 {
 	return m_outlineStyle;
 }
 
-std::shared_ptr<IShapeGroup> CSimpleShape::GetGroup()
+std::shared_ptr<IShapeGroup> Shape::GetGroup()
 {
 	return nullptr;
 }
 
-std::shared_ptr<const IShapeGroup> CSimpleShape::GetGroup() const
+std::shared_ptr<const IShapeGroup> Shape::GetGroup() const
 {
 	return nullptr;
 }
