@@ -102,8 +102,7 @@ SCENARIO("Using command history to undo commands and redo commands")
                                 REQUIRE(callStack.at(0) == "first");
                                 REQUIRE(callStack.at(1) == "third");
 
-                                REQUIRE(disposeStack.size() == 1);
-                                REQUIRE(disposeStack.at(0) == "second");
+                                REQUIRE(disposeStack.size() == 0);
                             }
                         }
                     }

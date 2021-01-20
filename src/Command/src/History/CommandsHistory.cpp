@@ -9,7 +9,7 @@ void CommandsHistory::AddAndExecuteCommand(std::unique_ptr<ICommand> command, ID
 {
     if (!AtTop() && m_commands.size() != 0)
     {
-        for (int i = m_commands.size() - 1; i >= m_topPtr; --i)
+        for (int i = m_commands.size() - 1; i > m_topPtr; --i)
         {
             m_commands[i]->Dispose();
 
